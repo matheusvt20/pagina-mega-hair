@@ -150,20 +150,18 @@ const benefitCards = benefitItems
   .join('')
 
 const forYouItems = [
-  'Você é cabeleireira ou profissional da beleza e quer adicionar um novo serviço ao seu portfólio',
-  'Você quer entrar na área de Mega Hair, mas ainda se sente insegura para começar',
-  'Você busca um serviço com maior percepção de valor e alto potencial de retorno',
-  'Você quer aprender Ponto Americano, Fita Adesiva e Cápsula de Queratina em um só treinamento',
-  'Você quer oferecer uma transformação mais completa para suas clientes',
-  'Você quer começar com um conteúdo prático, direto e acessível',
+  'É profissional da beleza',
+  'Quer começar no Mega Hair',
+  'Busca um serviço mais valorizado',
+  'Quer aprender 3 técnicas em um treinamento',
+  'Precisa de um conteúdo prático e direto',
 ]
 
 const notForYouItems = [
-  'Você quer resultado sem estudar, praticar e treinar',
-  'Você não tem interesse em atuar na área da beleza',
-  'Você procura uma formação presencial longa e avançada',
-  'Você quer aprender sem dedicar tempo para praticar as técnicas',
-  'Você não pretende oferecer novos serviços para suas clientes',
+  'Não quer estudar nem praticar',
+  'Não atua na área da beleza',
+  'Procura formação presencial longa',
+  'Não quer oferecer novos serviços',
 ]
 
 const listItems = (items, icon) =>
