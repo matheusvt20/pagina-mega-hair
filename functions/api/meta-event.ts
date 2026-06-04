@@ -4,24 +4,57 @@ interface Env {
   META_CAPI_TOKEN: string;
 }
 
+const corsHeaders = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+};
+
+interface MetaEventBody {
+  eventName: string;
+  eventId: string;
+  fbp?: string;
+  fbc?: string;
+}
+
 export async function onRequestPost(
   context: EventContext<Env, string, unknown>
 ) {
   const { request, env } = context;
 
   try {
-    const body = await request.json() as { eventName: string; eventId: string };
-    const { eventName, eventId } = body;
+    const body = await request.json() as MetaEventBody;
+    const { eventName, eventId, fbp, fbc } = body;
 
     if (!eventName || !eventId) {
       return new Response(JSON.stringify({ error: "Missing eventName or eventId" }), {
         status: 400,
-        headers: { "Content-Type": "application/json" },
+        headers: corsHeaders,
       });
     }
 
     const pixelId = "1545289270267098";
     const accessToken = env.META_CAPI_TOKEN;
+    const clientIpAddress =
+      request.headers.get("CF-Connecting-IP") ||
+      request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim();
+    const clientUserAgent = request.headers.get("User-Agent");
+    const userData: Record<string, string> = {};
+
+    if (clientIpAddress) {
+      userData.client_ip_address = clientIpAddress;
+    }
+
+    if (clientUserAgent) {
+      userData.client_user_agent = clientUserAgent;
+    }
+
+    if (fbp) {
+      userData.fbp = fbp;
+    }
+
+    if (fbc) {
+      userData.fbc = fbc;
+    }
 
     const payload = {
       data: [
@@ -30,6 +63,7 @@ export async function onRequestPost(
           event_time: Math.floor(Date.now() / 1000),
           event_id: eventId,
           action_source: "website",
+          user_data: userData,
         },
       ],
     };
@@ -48,22 +82,19 @@ export async function onRequestPost(
       console.error("Meta CAPI error:", error);
       return new Response(JSON.stringify({ error: "Meta CAPI request failed" }), {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: corsHeaders,
       });
     }
 
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
-      headers: { 
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: corsHeaders,
     });
   } catch (err) {
     console.error("Handler error:", err);
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: corsHeaders,
     });
   }
 }
