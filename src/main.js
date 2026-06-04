@@ -469,3 +469,13 @@ document.querySelector('#app').innerHTML = `
     </section>
   </main>
 `
+
+document.querySelector('.hero-button')?.addEventListener('click', function() {
+  if (typeof fbq !== 'undefined') {
+    fbq('trackCustom', 'CliqueHero', {
+      content_name: 'Cilios em 1 Hora',
+      value: 47.00,
+      currency: 'BRL'
+    });
+  }
+});
