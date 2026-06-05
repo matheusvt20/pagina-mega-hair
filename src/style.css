@@ -749,6 +749,20 @@ h1 span {
   margin: 0 auto;
 }
 
+.hero-cta.learning-cta {
+  grid-area: auto;
+  width: min(100%, 430px);
+  margin: 40px auto 0;
+}
+
+.learning-cta .hero-price strong {
+  color: rgba(32, 27, 21, 0.72);
+}
+
+.learning-cta .hero-microcopy {
+  color: rgba(32, 27, 21, 0.66);
+}
+
 .learning-card {
   overflow: hidden;
   border: 1px solid rgba(168, 121, 45, 0.2);

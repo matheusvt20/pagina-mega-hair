@@ -207,22 +207,6 @@ document.querySelector('#app').innerHTML = `
         </figure>
       </div>
 
-      <div class="hero-cta">
-        <a class="hero-button" href="#comprar" aria-label="Quero aprender Mega Hair 3 em 1 agora">
-          QUERO APRENDER AGORA
-          <span aria-hidden="true">→</span>
-        </a>
-
-        <div class="hero-price">
-          <span>12x de R$6,10</span>
-          <strong>ou R$59,00 à vista</strong>
-        </div>
-
-        <p class="hero-microcopy">
-          <span aria-hidden="true">✓</span>
-          Acesso imediato
-        </p>
-      </div>
     </section>
 
     <section class="techniques-section" aria-labelledby="techniques-title">
@@ -318,6 +302,23 @@ document.querySelector('#app').innerHTML = `
 
       <div class="learning-grid">
         ${learningCards}
+      </div>
+
+      <div class="hero-cta learning-cta">
+        <a class="hero-button" href="#comprar" aria-label="Quero aprender Mega Hair 3 em 1 agora">
+          QUERO APRENDER AGORA
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <div class="hero-price">
+          <span>12x de R$6,10</span>
+          <strong>ou R$59,00 à vista</strong>
+        </div>
+
+        <p class="hero-microcopy">
+          <span aria-hidden="true">✓</span>
+          Acesso imediato
+        </p>
       </div>
     </section>
 
