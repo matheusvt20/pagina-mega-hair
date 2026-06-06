@@ -381,15 +381,15 @@ h1 span {
   position: absolute;
   inset: 0;
   opacity: 0;
-  animation: hero-slide 6s infinite;
+  animation: hero-slide 12s infinite;
 }
 
 .hero-slide-2 {
-  animation-delay: 2s;
+  animation-delay: 4s;
 }
 
 .hero-slide-3 {
-  animation-delay: 4s;
+  animation-delay: 8s;
 }
 
 .hero-slide img {

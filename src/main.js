@@ -521,7 +521,7 @@ const setTechniqueIndex = (nextIndex) => {
 const startTechniqueAuto = () => {
   window.clearInterval(techniqueAutoTimer)
   if (!techniqueMedia.matches || reduceMotion.matches) return
-  techniqueAutoTimer = window.setInterval(() => setTechniqueIndex(techniqueIndex + 1), 3600)
+  techniqueAutoTimer = window.setInterval(() => setTechniqueIndex(techniqueIndex + 1), 6000)
 }
 
 techniquePrev?.addEventListener('click', () => {
