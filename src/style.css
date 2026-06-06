@@ -106,7 +106,7 @@ a {
   grid-template-columns: minmax(0, 1.12fr) minmax(390px, 0.82fr);
   grid-template-areas:
     "copy media"
-    "cta media";
+    "scroll scroll";
   column-gap: clamp(40px, 5.2vw, 78px);
   row-gap: 28px;
   align-items: start;
@@ -115,7 +115,7 @@ a {
 .hero-copy {
   grid-area: copy;
   max-width: 690px;
-  padding-top: clamp(32px, 4.5vh, 68px);
+  padding-top: clamp(74px, 10vh, 132px);
 }
 
 .hero-cta {
@@ -163,6 +163,18 @@ h1 {
 
 h1 span {
   display: block;
+}
+
+.hero-techniques {
+  max-width: 840px;
+  margin-top: 0.14em;
+  font-size: 0.78em;
+  line-height: 1.08;
+}
+
+.hero-techniques strong {
+  color: var(--gold);
+  font-weight: inherit;
 }
 
 .hero-subtitle {
@@ -272,11 +284,45 @@ h1 span {
   font-size: 0.9rem;
 }
 
+.hero-scroll-cue {
+  grid-area: scroll;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  width: fit-content;
+  margin: clamp(16px, 3vh, 42px) auto 0;
+  color: rgba(255, 249, 237, 0.68);
+  font-size: clamp(0.7rem, 0.86vw, 0.82rem);
+  font-weight: 650;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.hero-scroll-cue i {
+  width: 22px;
+  height: 22px;
+  border-right: 3px solid rgba(255, 249, 237, 0.72);
+  border-bottom: 3px solid rgba(255, 249, 237, 0.72);
+  transform: rotate(45deg);
+  animation: scroll-cue-bounce 1.55s ease-in-out infinite;
+}
+
+.hero-scroll-cue:hover {
+  color: var(--gold);
+}
+
+.hero-scroll-cue:hover i {
+  border-color: var(--gold);
+}
+
 .hero-media-wrap {
   grid-area: media;
   align-self: start;
   width: min(100%, 500px);
   justify-self: end;
+  padding-top: clamp(54px, 7.5vh, 98px);
 }
 
 .hero-badges {
@@ -331,14 +377,87 @@ h1 span {
   pointer-events: none;
 }
 
-.hero-card img {
+.hero-slide {
   position: absolute;
   inset: 0;
+  opacity: 0;
+  animation: hero-slide 6s infinite;
+}
+
+.hero-slide-2 {
+  animation-delay: 2s;
+}
+
+.hero-slide-3 {
+  animation-delay: 4s;
+}
+
+.hero-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 51% 35%;
   filter: saturate(0.96) contrast(1.01);
+}
+
+.hero-slide-1 img {
+  object-position: 50% 44%;
+}
+
+.hero-slide-2 img {
+  object-position: 50% 48%;
+}
+
+.hero-slide-3 img {
+  object-position: 50% 45%;
+}
+
+.hero-slide figcaption {
+  position: absolute;
+  left: clamp(16px, 2.4vw, 24px);
+  bottom: clamp(16px, 2.4vw, 24px);
+  z-index: 2;
+  max-width: calc(100% - 32px);
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 244, 198, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(11, 10, 8, 0.68), rgba(11, 10, 8, 0.58)),
+    rgba(11, 10, 8, 0.62);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  color: rgba(255, 244, 198, 0.92);
+  font-size: clamp(0.72rem, 0.86vw, 0.86rem);
+  font-weight: 760;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes hero-slide {
+  0%,
+  33% {
+    opacity: 1;
+  }
+
+  36%,
+  97% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(9px) rotate(45deg);
+  }
 }
 
 .techniques-section {
@@ -525,6 +644,10 @@ h1 span {
   color: #2c2b2b;
   font-size: clamp(0.98rem, 1.08vw, 1.1rem);
   line-height: 1.62;
+}
+
+.technique-carousel-controls {
+  display: none;
 }
 
 .technique-strip {
@@ -1767,7 +1890,7 @@ h1 span {
     grid-template-areas:
       "copy"
       "media"
-      "cta";
+      "scroll";
     gap: 48px;
     padding: 52px 28px 64px;
   }
@@ -1791,6 +1914,7 @@ h1 span {
   .hero-media-wrap {
     width: min(100%, 480px);
     justify-self: center;
+    padding-top: 0;
   }
 
   .techniques-section {
@@ -1798,9 +1922,75 @@ h1 span {
   }
 
   .technique-grid {
-    grid-template-columns: 1fr;
+    display: flex;
     width: min(100%, 620px);
     margin: 0 auto;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .technique-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .technique-card {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+  }
+
+  .technique-carousel-controls {
+    width: min(100%, 620px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 18px auto 0;
+  }
+
+  .technique-arrow {
+    width: 38px;
+    height: 38px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid rgba(168, 121, 45, 0.28);
+    border-radius: 50%;
+    background: rgba(255, 250, 240, 0.68);
+    box-shadow: 0 12px 28px rgba(85, 62, 27, 0.09);
+    color: #9f742b;
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    line-height: 0.8;
+    cursor: pointer;
+  }
+
+  .technique-arrow:focus-visible {
+    outline: 3px solid rgba(168, 121, 45, 0.28);
+    outline-offset: 3px;
+  }
+
+  .technique-dots {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .technique-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(168, 121, 45, 0.28);
+    transition:
+      width 180ms ease,
+      background 180ms ease;
+  }
+
+  .technique-dots span.is-active {
+    width: 22px;
+    border-radius: 999px;
+    background: rgba(168, 121, 45, 0.78);
   }
 
   .technique-strip {
@@ -1904,9 +2094,17 @@ h1 span {
   }
 
   .hero-section {
+    grid-template-areas:
+      "media"
+      "copy"
+      "scroll";
     min-height: auto;
     padding: 30px 18px 40px;
-    gap: 24px;
+    gap: 28px;
+  }
+
+  .hero-copy {
+    text-align: left;
   }
 
   .eyebrow {
@@ -1921,6 +2119,16 @@ h1 span {
     max-width: 100%;
     font-size: clamp(2rem, 8.7vw, 2.55rem);
     line-height: 1.08;
+  }
+
+  h1 span,
+  .hero-techniques {
+    display: inline;
+  }
+
+  .hero-techniques {
+    margin-top: 0;
+    font-size: 0.86em;
   }
 
   .hero-subtitle {
@@ -1970,8 +2178,21 @@ h1 span {
     white-space: nowrap;
   }
 
+  .hero-scroll-cue {
+    margin-top: 8px;
+    gap: 14px;
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+  }
+
+  .hero-scroll-cue i {
+    width: 18px;
+    height: 18px;
+    border-width: 2px;
+  }
+
   .hero-badges {
-    justify-content: flex-start;
+    justify-content: center;
     gap: 8px;
     margin-bottom: 10px;
     overflow-x: auto;
@@ -1987,14 +2208,17 @@ h1 span {
   }
 
   .hero-card {
-    width: min(100%, 430px);
+    width: min(100%, 620px);
     margin: 0 auto;
-    aspect-ratio: 0.92;
+    aspect-ratio: 1.62;
     border-radius: 16px;
   }
 
-  .hero-card img {
-    object-position: 50% 34%;
+  .hero-slide figcaption {
+    left: 14px;
+    bottom: 14px;
+    max-width: calc(100% - 28px);
+    text-align: left;
   }
 
   .techniques-section {
@@ -2547,11 +2771,11 @@ h1 span {
   }
 
   .hero-media-wrap {
-    width: 94%;
+    width: 100%;
   }
 
   .hero-badges {
-    justify-content: flex-start;
+    justify-content: center;
     scrollbar-width: none;
   }
 
@@ -2560,11 +2784,13 @@ h1 span {
   }
 
   .hero-card {
-    aspect-ratio: 0.94;
+    aspect-ratio: 1.55;
   }
 
-  .hero-card strong {
-    font-size: 2rem;
+  .hero-slide figcaption {
+    padding: 7px 10px;
+    font-size: 0.66rem;
+    letter-spacing: 0.035em;
   }
 
   .technique-grid,
@@ -2913,6 +3139,18 @@ h1 span {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    animation: none;
+  }
+
+  .hero-scroll-cue i {
+    animation: none;
+  }
+
+  .hero-slide-1 {
+    opacity: 1;
+  }
+
   .results-track {
     animation: none;
   }

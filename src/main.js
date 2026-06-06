@@ -1,5 +1,4 @@
 import './style.css'
-import megaHairImg from './assets/mega-hair.jpeg'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/2.webp'
 import capsulaImg from './assets/3.webp'
@@ -113,7 +112,7 @@ const benefitItems = [
   {
     number: '02',
     title: 'Comece mesmo do zero',
-    text: 'Um caminho prático para cabeleireiras e profissionais da beleza que querem entrar nessa área.',
+    text: 'Um caminho prático para iniciantes, cabeleireiras, profissionais da beleza e também para quem ainda não atua na área.',
   },
   {
     number: '03',
@@ -159,7 +158,6 @@ const forYouItems = [
 
 const notForYouItems = [
   'Não quer estudar nem praticar',
-  'Não atua na área da beleza',
   'Procura formação presencial longa',
   'Não quer oferecer novos serviços',
 ]
@@ -180,47 +178,38 @@ document.querySelector('#app').innerHTML = `
   <main class="page-shell">
     <section class="hero-section" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="eyebrow">
-          <span aria-hidden="true">✦</span>
-          TREINAMENTO ONLINE
-        </div>
-
         <h1 id="hero-title">
-          <span>Aprenda 3 técnicas</span>
-          <span>de Mega Hair</span>
+          <span>Aprenda 3 técnicas de Mega Hair:</span>
+          <span class="hero-techniques">
+            <strong>Ponto Americano</strong>, <strong>Fita Adesiva</strong> e <strong>Cápsula de Queratina</strong>
+          </span>
         </h1>
 
         <p class="hero-subtitle">
-          Domine Ponto Americano, Fita Adesiva e Cápsula de Queratina com um método prático e direto ao ponto.
+          Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.
         </p>
 
       </div>
 
-      <div class="hero-cta">
-        <a class="hero-button" href="#comprar" aria-label="Ir para a oferta do curso Mega Hair 3 em 1">
-          QUERO APRENDER AGORA
-          <span aria-hidden="true">→</span>
-        </a>
+      <a class="hero-scroll-cue" href="#techniques-title" aria-label="Rolar para saber mais sobre as técnicas">
+        <span>ROLE PARA SABER MAIS</span>
+        <i aria-hidden="true"></i>
+      </a>
 
-        <div class="hero-price">
-          <span>12x de R$6,10</span>
-          <strong>ou R$59,00 à vista</strong>
-        </div>
-
-        <p class="hero-microcopy">
-          <span aria-hidden="true">✓</span>
-          Acesso imediato
-        </p>
-      </div>
-
-      <div class="hero-media-wrap" aria-label="Anna Schossig segurando aplique de mega hair">
-        <div class="hero-badges" aria-hidden="true">
-          <span>ONLINE</span>
-          <span>3 TÉCNICAS</span>
-        </div>
-
+      <div class="hero-media-wrap" aria-label="Imagens das técnicas de Mega Hair do treinamento">
         <figure class="hero-card">
-          <img src="${megaHairImg}" alt="Anna Schossig segurando aplique de mega hair" />
+          <div class="hero-slide hero-slide-1">
+            <img src="${pontoAmericanoImg}" alt="Aplicação de Mega Hair com técnica Ponto Americano" />
+            <figcaption>Ponto Americano</figcaption>
+          </div>
+          <div class="hero-slide hero-slide-2">
+            <img src="${fitaAdesivaImg}" alt="Aplicação de Mega Hair com técnica Fita Adesiva" />
+            <figcaption>Fita Adesiva</figcaption>
+          </div>
+          <div class="hero-slide hero-slide-3">
+            <img src="${capsulaImg}" alt="Aplicação de Mega Hair com técnica Cápsula de Queratina" />
+            <figcaption>Cápsula de Queratina</figcaption>
+          </div>
         </figure>
       </div>
 
@@ -272,8 +261,18 @@ document.querySelector('#app').innerHTML = `
         </article>
       </div>
 
+      <div class="technique-carousel-controls" aria-label="Controle do carrossel de técnicas">
+        <button class="technique-arrow" type="button" data-technique-prev aria-label="Ver técnica anterior">‹</button>
+        <div class="technique-dots" aria-hidden="true">
+          <span class="is-active"></span>
+          <span></span>
+          <span></span>
+        </div>
+        <button class="technique-arrow" type="button" data-technique-next aria-label="Ver próxima técnica">›</button>
+      </div>
+
       <div class="technique-strip" aria-label="Benefícios da seção">
-        <span>Visual comparativo</span>
+        <span>Aulas práticas</span>
         <b aria-hidden="true"></b>
         <span>Explicação simples</span>
         <b aria-hidden="true"></b>
@@ -289,10 +288,6 @@ document.querySelector('#app').innerHTML = `
           <span></span>
         </div>
         <h2 id="results-title">Veja o resultado que uma boa técnica entrega</h2>
-        <p>
-          Mais do que alongar os fios, o mega hair bem aplicado precisa ter acabamento natural,
-          segurança na fixação e movimento bonito no resultado final.
-        </p>
       </div>
 
       <div class="results-marquee" aria-label="Galeria de resultados de mega hair">
@@ -311,31 +306,10 @@ document.querySelector('#app').innerHTML = `
       <div class="learning-header">
         <span class="learning-kicker">O que você vai aprender</span>
         <h2 id="learning-title">Mega Hair 3 em 1</h2>
-        <p>
-          Aprenda as principais diferenças, indicações e aplicações do Ponto Americano,
-          Fita Adesiva e Cápsula de Queratina para começar com mais segurança.
-        </p>
       </div>
 
       <div class="learning-grid">
         ${learningCards}
-      </div>
-
-      <div class="hero-cta learning-cta">
-        <a class="hero-button" href="#comprar" aria-label="Quero aprender Mega Hair 3 em 1 agora">
-          QUERO APRENDER AGORA
-          <span aria-hidden="true">→</span>
-        </a>
-
-        <div class="hero-price">
-          <span>12x de R$6,10</span>
-          <strong>ou R$59,00 à vista</strong>
-        </div>
-
-        <p class="hero-microcopy">
-          <span aria-hidden="true">✓</span>
-          Acesso imediato
-        </p>
       </div>
     </section>
 
@@ -400,35 +374,6 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="certificate-section" aria-labelledby="certificate-title">
-      <div class="certificate-content">
-        <div class="certificate-copy">
-          <span class="certificate-kicker">Certificado incluso</span>
-          <h2 id="certificate-title">Comprove sua evolução no Mega Hair</h2>
-          <p>
-            Ao concluir o treinamento Mega Hair 3 em 1, você recebe um certificado para
-            registrar sua jornada de aprendizado e reforçar sua apresentação profissional.
-          </p>
-          <ul>
-            <li>Certificado digital de conclusão</li>
-            <li>Ideal para apresentar no portfólio profissional</li>
-            <li>Mais confiança para divulgar seus novos serviços</li>
-          </ul>
-        </div>
-
-        <div class="certificate-mockup" aria-label="Mockup do certificado Mega Hair 3 em 1">
-          <div class="certificate-paper">
-            <span class="certificate-seal">AS</span>
-            <small>Certificado de Conclusão</small>
-            <strong>Mega Hair 3 em 1</strong>
-            <p>Concedido a aluna que concluiu o treinamento online com foco em Ponto Americano, Fita Adesiva e Cápsula de Queratina.</p>
-            <div class="certificate-line"></div>
-            <em>Anna Schossig</em>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
         <div class="offer-header">
@@ -480,9 +425,38 @@ document.querySelector('#app').innerHTML = `
 
           <div class="offer-timer">
             <span>Essa condição termina em</span>
-            <strong>03:47</strong>
+            <strong>30:00</strong>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="certificate-section" aria-labelledby="certificate-title">
+      <div class="certificate-content">
+        <div class="certificate-copy">
+          <span class="certificate-kicker">Certificado incluso</span>
+          <h2 id="certificate-title">Comprove sua evolução no Mega Hair</h2>
+          <p>
+            Ao concluir o treinamento Mega Hair 3 em 1, você recebe um certificado para
+            registrar sua jornada de aprendizado e reforçar sua apresentação profissional.
+          </p>
+          <ul>
+            <li>Certificado digital de conclusão</li>
+            <li>Ideal para apresentar no portfólio profissional</li>
+            <li>Mais confiança para divulgar seus novos serviços</li>
+          </ul>
+        </div>
+
+        <div class="certificate-mockup" aria-label="Mockup do certificado Mega Hair 3 em 1">
+          <div class="certificate-paper">
+            <span class="certificate-seal">AS</span>
+            <small>Certificado de Conclusão</small>
+            <strong>Mega Hair 3 em 1</strong>
+            <p>Concedido a aluna que concluiu o treinamento online com foco em Ponto Americano, Fita Adesiva e Cápsula de Queratina.</p>
+            <div class="certificate-line"></div>
+            <em>Anna Schossig</em>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -499,3 +473,78 @@ document.querySelectorAll('.hero-button').forEach((button) => {
     }
   });
 });
+
+const offerTimer = document.querySelector('.offer-timer strong')
+let offerTimeLeft = 30 * 60
+
+const renderOfferTimer = () => {
+  if (!offerTimer) return
+
+  const minutes = String(Math.floor(offerTimeLeft / 60)).padStart(2, '0')
+  const seconds = String(offerTimeLeft % 60).padStart(2, '0')
+  offerTimer.textContent = `${minutes}:${seconds}`
+}
+
+renderOfferTimer()
+
+if (offerTimer) {
+  window.setInterval(() => {
+    offerTimeLeft = Math.max(offerTimeLeft - 1, 0)
+    renderOfferTimer()
+  }, 1000)
+}
+
+const techniqueCarousel = document.querySelector('.technique-grid')
+const techniqueCards = [...document.querySelectorAll('.technique-card')]
+const techniqueDots = [...document.querySelectorAll('.technique-dots span')]
+const techniquePrev = document.querySelector('[data-technique-prev]')
+const techniqueNext = document.querySelector('[data-technique-next]')
+const techniqueMedia = window.matchMedia('(max-width: 1100px)')
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+let techniqueIndex = 0
+let techniqueAutoTimer
+
+const setTechniqueIndex = (nextIndex) => {
+  if (!techniqueCarousel || !techniqueCards.length) return
+
+  techniqueIndex = (nextIndex + techniqueCards.length) % techniqueCards.length
+  techniqueCarousel.scrollTo({
+    left: techniqueCards[techniqueIndex].offsetLeft - techniqueCarousel.offsetLeft,
+    behavior: reduceMotion.matches ? 'auto' : 'smooth',
+  })
+
+  techniqueDots.forEach((dot, index) => {
+    dot.classList.toggle('is-active', index === techniqueIndex)
+  })
+}
+
+const startTechniqueAuto = () => {
+  window.clearInterval(techniqueAutoTimer)
+  if (!techniqueMedia.matches || reduceMotion.matches) return
+  techniqueAutoTimer = window.setInterval(() => setTechniqueIndex(techniqueIndex + 1), 3600)
+}
+
+techniquePrev?.addEventListener('click', () => {
+  setTechniqueIndex(techniqueIndex - 1)
+  startTechniqueAuto()
+})
+
+techniqueNext?.addEventListener('click', () => {
+  setTechniqueIndex(techniqueIndex + 1)
+  startTechniqueAuto()
+})
+
+techniqueCarousel?.addEventListener('scroll', () => {
+  if (!techniqueMedia.matches) return
+  const nextIndex = Math.round(techniqueCarousel.scrollLeft / techniqueCarousel.clientWidth)
+  if (nextIndex !== techniqueIndex && techniqueCards[nextIndex]) {
+    techniqueIndex = nextIndex
+    techniqueDots.forEach((dot, index) => {
+      dot.classList.toggle('is-active', index === techniqueIndex)
+    })
+  }
+})
+
+techniqueMedia.addEventListener('change', startTechniqueAuto)
+reduceMotion.addEventListener('change', startTechniqueAuto)
+startTechniqueAuto()
