@@ -196,6 +196,23 @@ document.querySelector('#app').innerHTML = `
 
       </div>
 
+      <div class="hero-cta">
+        <a class="hero-button" href="#comprar" aria-label="Ir para a oferta do curso Mega Hair 3 em 1">
+          QUERO APRENDER AGORA
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <div class="hero-price">
+          <span>12x de R$6,10</span>
+          <strong>ou R$59,00 à vista</strong>
+        </div>
+
+        <p class="hero-microcopy">
+          <span aria-hidden="true">✓</span>
+          Acesso imediato
+        </p>
+      </div>
+
       <div class="hero-media-wrap" aria-label="Anna Schossig segurando aplique de mega hair">
         <div class="hero-badges" aria-hidden="true">
           <span>ONLINE</span>
@@ -471,12 +488,14 @@ document.querySelector('#app').innerHTML = `
   </main>
 `
 
-document.querySelector('.hero-button')?.addEventListener('click', function() {
-  if (typeof fbq !== 'undefined') {
-    fbq('trackCustom', 'CliqueHero', {
-      content_name: 'Cilios em 1 Hora',
-      value: 47.00,
-      currency: 'BRL'
-    });
-  }
+document.querySelectorAll('.hero-button').forEach((button) => {
+  button.addEventListener('click', function() {
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'CliqueHero', {
+        content_name: 'Mega Hair 3 em 1',
+        value: 59.00,
+        currency: 'BRL'
+      });
+    }
+  });
 });
