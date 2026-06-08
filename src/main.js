@@ -1,4 +1,5 @@
 import './style.css'
+import { getCheckoutUrl } from '@/lib/checkoutUrl'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/2.webp'
 import capsulaImg from './assets/3.webp'
@@ -190,7 +191,7 @@ document.querySelector('#app').innerHTML = `
         </p>
 
         <div class="hero-cta">
-          <a class="hero-button" href="https://pay.kiwify.com.br/UruirxE">
+          <a class="hero-button" href="${getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')}">
             Garantir acesso completo por R$59,00
           </a>
           <div class="hero-price">
@@ -427,7 +428,7 @@ document.querySelector('#app').innerHTML = `
             <del>R$ 529</del>
           </div>
 
-          <a class="offer-button" href="https://pay.kiwify.com.br/UruirxE">Garantir acesso completo por R$59,00</a>
+          <a class="offer-button" href="${getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')}">Garantir acesso completo por R$59,00</a>
 
           <div class="offer-timer">
             <span>Essa condição termina em</span>
