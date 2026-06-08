@@ -105,8 +105,7 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(390px, 0.82fr);
   grid-template-areas:
-    "copy media"
-    "scroll scroll";
+    "copy media";
   column-gap: clamp(40px, 5.2vw, 78px);
   row-gap: 28px;
   align-items: start;
@@ -284,39 +283,6 @@ h1 span {
   font-size: 0.9rem;
 }
 
-.hero-scroll-cue {
-  grid-area: scroll;
-  display: grid;
-  justify-items: center;
-  gap: 18px;
-  width: fit-content;
-  margin: clamp(16px, 3vh, 42px) auto 0;
-  color: rgba(255, 249, 237, 0.68);
-  font-size: clamp(0.7rem, 0.86vw, 0.82rem);
-  font-weight: 650;
-  letter-spacing: 0.22em;
-  line-height: 1;
-  text-align: center;
-  text-decoration: none;
-}
-
-.hero-scroll-cue i {
-  width: 22px;
-  height: 22px;
-  border-right: 3px solid rgba(255, 249, 237, 0.72);
-  border-bottom: 3px solid rgba(255, 249, 237, 0.72);
-  transform: rotate(45deg);
-  animation: scroll-cue-bounce 1.55s ease-in-out infinite;
-}
-
-.hero-scroll-cue:hover {
-  color: var(--gold);
-}
-
-.hero-scroll-cue:hover i {
-  border-color: var(--gold);
-}
-
 .hero-media-wrap {
   grid-area: media;
   align-self: start;
@@ -446,17 +412,6 @@ h1 span {
 
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes scroll-cue-bounce {
-  0%,
-  100% {
-    transform: translateY(0) rotate(45deg);
-  }
-
-  50% {
-    transform: translateY(9px) rotate(45deg);
   }
 }
 
@@ -1889,8 +1844,7 @@ h1 span {
     grid-template-columns: 1fr;
     grid-template-areas:
       "copy"
-      "media"
-      "scroll";
+      "media";
     gap: 48px;
     padding: 52px 28px 64px;
   }
@@ -2096,8 +2050,7 @@ h1 span {
   .hero-section {
     grid-template-areas:
       "media"
-      "copy"
-      "scroll";
+      "copy";
     min-height: auto;
     padding: 30px 18px 40px;
     gap: 28px;
@@ -2140,17 +2093,19 @@ h1 span {
 
   .hero-cta {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 12px;
-    align-items: end;
+    gap: 12px;
+    grid-template-columns: 1fr;
     width: 100%;
-    margin-top: 0;
+    margin-top: 22px;
   }
 
   .hero-price {
-    grid-column: 1;
-    margin-top: 14px;
-    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    justify-content: center;
+    margin-top: 0;
+    text-align: center;
   }
 
   .hero-price span {
@@ -2162,7 +2117,6 @@ h1 span {
   }
 
   .hero-button {
-    grid-column: 1 / -1;
     width: 100%;
     min-height: 56px;
     padding: 16px 18px;
@@ -2171,24 +2125,11 @@ h1 span {
   }
 
   .hero-microcopy {
-    grid-column: 2;
-    justify-content: flex-start;
-    margin-top: 14px;
-    font-size: 0.88rem;
-    white-space: nowrap;
-  }
-
-  .hero-scroll-cue {
-    margin-top: 8px;
-    gap: 14px;
-    font-size: 0.64rem;
-    letter-spacing: 0.18em;
-  }
-
-  .hero-scroll-cue i {
-    width: 18px;
-    height: 18px;
-    border-width: 2px;
+    justify-content: center;
+    margin-top: 0;
+    font-size: 0.86rem;
+    text-align: center;
+    white-space: normal;
   }
 
   .hero-badges {
@@ -3140,10 +3081,6 @@ h1 span {
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide {
-    animation: none;
-  }
-
-  .hero-scroll-cue i {
     animation: none;
   }
 

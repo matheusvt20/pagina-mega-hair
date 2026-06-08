@@ -202,11 +202,6 @@ document.querySelector('#app').innerHTML = `
 
       </div>
 
-      <a class="hero-scroll-cue" href="#techniques-title" aria-label="Rolar para saber mais sobre as técnicas">
-        <span>ROLE PARA SABER MAIS</span>
-        <i aria-hidden="true"></i>
-      </a>
-
       <div class="hero-media-wrap" aria-label="Imagens das técnicas de Mega Hair do treinamento">
         <figure class="hero-card">
           <div class="hero-slide hero-slide-1">
