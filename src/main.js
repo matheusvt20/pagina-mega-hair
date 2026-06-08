@@ -189,6 +189,17 @@ document.querySelector('#app').innerHTML = `
           Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.
         </p>
 
+        <div class="hero-cta">
+          <a class="hero-button" href="https://pay.kiwify.com.br/UruirxE">
+            Garantir acesso completo por R$59,00
+          </a>
+          <div class="hero-price">
+            <span>12x de R$ 6,10</span>
+            <strong>ou R$ 59,00 à vista</strong>
+          </div>
+          <p class="hero-microcopy"><span aria-hidden="true">✓</span> Acesso online por 1 ano com certificado</p>
+        </div>
+
       </div>
 
       <a class="hero-scroll-cue" href="#techniques-title" aria-label="Rolar para saber mais sobre as técnicas">
