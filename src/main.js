@@ -469,6 +469,27 @@ document.querySelector('#app').innerHTML = `
   </main>
 `
 
+const sendInitiateCheckout = () => {
+  const payload = JSON.stringify({
+    eventName: 'InitiateCheckout',
+    eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
+    eventData: {},
+  })
+
+  if (navigator.sendBeacon) {
+    const blob = new Blob([payload], { type: 'application/json' })
+    navigator.sendBeacon('/api/meta-event', blob)
+    return
+  }
+
+  fetch('/api/meta-event', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: payload,
+    keepalive: true,
+  }).catch(() => {})
+}
+
 document.querySelectorAll('.hero-button').forEach((button) => {
   button.addEventListener('click', function() {
     if (typeof fbq !== 'undefined') {
@@ -478,6 +499,22 @@ document.querySelectorAll('.hero-button').forEach((button) => {
         currency: 'BRL'
       });
     }
+
+    sendInitiateCheckout()
+  });
+});
+
+document.querySelectorAll('.offer-button').forEach((button) => {
+  button.addEventListener('click', function() {
+    if (typeof fbq !== 'undefined') {
+      fbq('trackCustom', 'CliqueOferta', {
+        content_name: 'Mega Hair 3 em 1',
+        value: 59.00,
+        currency: 'BRL'
+      });
+    }
+
+    sendInitiateCheckout()
   });
 });
 
