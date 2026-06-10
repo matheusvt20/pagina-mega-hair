@@ -14,6 +14,7 @@ interface MetaEventBody {
   eventId: string;
   fbp?: string;
   fbc?: string;
+  external_id?: string;
 }
 
 export async function onRequestPost(
@@ -23,7 +24,7 @@ export async function onRequestPost(
 
   try {
     const body = await request.json() as MetaEventBody;
-    const { eventName, eventId, fbp, fbc } = body;
+    const { eventName, eventId, fbp, fbc, external_id } = body;
 
     if (!eventName || !eventId) {
       return new Response(JSON.stringify({ error: "Missing eventName or eventId" }), {
@@ -54,6 +55,10 @@ export async function onRequestPost(
 
     if (fbc) {
       userData.fbc = fbc;
+    }
+
+    if (external_id) {
+      userData.external_id = external_id;
     }
 
     const payload = {

@@ -1,5 +1,5 @@
 import './style.css'
-import { getCheckoutUrl } from '@/lib/checkoutUrl'
+import { getCheckoutUrl, getCookie } from '@/lib/checkoutUrl'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/2.webp'
 import capsulaImg from './assets/3.webp'
@@ -191,7 +191,7 @@ document.querySelector('#app').innerHTML = `
         </p>
 
         <div class="hero-cta">
-          <a class="hero-button" href="${getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')}">
+          <a class="hero-button" href="https://pay.kiwify.com.br/UruirxE">
             Garantir acesso completo por R$59,00
           </a>
           <div class="hero-price">
@@ -428,7 +428,7 @@ document.querySelector('#app').innerHTML = `
             <del>R$ 529</del>
           </div>
 
-          <a class="offer-button" href="${getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')}">Garantir acesso completo por R$59,00</a>
+          <a class="offer-button" href="https://pay.kiwify.com.br/UruirxE">Garantir acesso completo por R$59,00</a>
 
           <div class="offer-timer">
             <span>Essa condição termina em</span>
@@ -470,11 +470,34 @@ document.querySelector('#app').innerHTML = `
 `
 
 const sendInitiateCheckout = () => {
-  const payload = JSON.stringify({
+  return sendMetaEvent({
     eventName: 'InitiateCheckout',
     eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
     eventData: {},
   })
+}
+
+const sha256 = async (value) => {
+  if (typeof crypto === 'undefined' || !crypto.subtle) return ''
+
+  const data = new TextEncoder().encode(value)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+const sendMetaEvent = async (event) => {
+  const fbp = getCookie('_fbp')
+  const fbc = getCookie('_fbc')
+  const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
+  const body = {
+    ...event,
+    ...(fbp ? { fbp } : {}),
+    ...(externalId ? { external_id: externalId } : {}),
+    ...(fbc ? { fbc } : {}),
+  }
+  const payload = JSON.stringify(body)
 
   if (navigator.sendBeacon) {
     const blob = new Blob([payload], { type: 'application/json' })
@@ -490,8 +513,15 @@ const sendInitiateCheckout = () => {
   }).catch(() => {})
 }
 
+const redirectToCheckout = async (baseUrl) => {
+  await sendInitiateCheckout().catch(() => {})
+  window.location.href = getCheckoutUrl(baseUrl)
+}
+
 document.querySelectorAll('.hero-button').forEach((button) => {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', function(event) {
+    event.preventDefault()
+
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueHero', {
         content_name: 'Mega Hair 3 em 1',
@@ -500,12 +530,16 @@ document.querySelectorAll('.hero-button').forEach((button) => {
       });
     }
 
-    sendInitiateCheckout()
+    window.setTimeout(() => {
+      redirectToCheckout('https://pay.kiwify.com.br/UruirxE')
+    }, 300)
   });
 });
 
 document.querySelectorAll('.offer-button').forEach((button) => {
-  button.addEventListener('click', function() {
+  button.addEventListener('click', function(event) {
+    event.preventDefault()
+
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
         content_name: 'Mega Hair 3 em 1',
@@ -514,7 +548,9 @@ document.querySelectorAll('.offer-button').forEach((button) => {
       });
     }
 
-    sendInitiateCheckout()
+    window.setTimeout(() => {
+      redirectToCheckout('https://pay.kiwify.com.br/UruirxE')
+    }, 300)
   });
 });
 
