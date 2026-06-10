@@ -469,12 +469,20 @@ document.querySelector('#app').innerHTML = `
   </main>
 `
 
-const sendInitiateCheckout = () => {
-  return sendMetaEvent({
+const sendInitiateCheckout = async () => {
+  const fbp = getCookie('_fbp')
+  const fbc = getCookie('_fbc')
+  const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
+  const payload = JSON.stringify({
     eventName: 'InitiateCheckout',
     eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
+    ...(fbp ? { fbp } : {}),
+    ...(fbc ? { fbc } : {}),
+    ...(externalId ? { external_id: externalId } : {}),
     eventData: {},
   })
+
+  return sendMetaEvent(payload)
 }
 
 const sha256 = async (value) => {
@@ -487,18 +495,7 @@ const sha256 = async (value) => {
     .join('')
 }
 
-const sendMetaEvent = async (event) => {
-  const fbp = getCookie('_fbp')
-  const fbc = getCookie('_fbc')
-  const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
-  const body = {
-    ...event,
-    ...(fbp ? { fbp } : {}),
-    ...(externalId ? { external_id: externalId } : {}),
-    ...(fbc ? { fbc } : {}),
-  }
-  const payload = JSON.stringify(body)
-
+const sendMetaEvent = (payload) => {
   if (navigator.sendBeacon) {
     const blob = new Blob([payload], { type: 'application/json' })
     navigator.sendBeacon('/api/meta-event', blob)
