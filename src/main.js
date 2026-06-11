@@ -528,7 +528,8 @@ document.querySelectorAll('.hero-button').forEach((button) => {
     }
 
     window.setTimeout(() => {
-      redirectToCheckout('https://pay.kiwify.com.br/UruirxE')
+      sendInitiateCheckout().catch(() => {})
+      window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
     }, 300)
   });
 });
@@ -546,7 +547,8 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     }
 
     window.setTimeout(() => {
-      redirectToCheckout('https://pay.kiwify.com.br/UruirxE')
+      sendInitiateCheckout().catch(() => {})
+      window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
     }, 300)
   });
 });
