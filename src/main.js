@@ -1,5 +1,6 @@
 import './style.css'
 import { getCheckoutUrl, getCookie } from '@/lib/checkoutUrl'
+import { trackFunnel } from '@/lib/funnelTrack'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/2.webp'
 import capsulaImg from './assets/3.webp'
@@ -528,6 +529,7 @@ document.querySelectorAll('.hero-button').forEach((button) => {
     }
 
     window.setTimeout(() => {
+      trackFunnel('InitiateCheckout')
       sendInitiateCheckout().catch(() => {})
       window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
     }, 300)
@@ -547,6 +549,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     }
 
     window.setTimeout(() => {
+      trackFunnel('InitiateCheckout')
       sendInitiateCheckout().catch(() => {})
       window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
     }, 300)

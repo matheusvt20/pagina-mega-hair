@@ -18,6 +18,10 @@
       fbq('init', '1545289270267098');
       fbq('track', 'PageView');
     </script>
+    <script type="module">
+      import { trackFunnel } from '/src/lib/funnelTrack.ts'
+      trackFunnel('PageView')
+    </script>
     <!-- End Meta Pixel Code -->
 
     <!-- UTMify -->
