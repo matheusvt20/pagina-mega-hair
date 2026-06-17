@@ -15,16 +15,462 @@ import resultado08Img from './assets/resultado-08.webp'
 import resultado09Img from './assets/resultado-09.webp'
 import professoraImg from './assets/anna-schossig-professora.webp'
 
+const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
+const checkoutUrl = isSpanishPage
+  ? 'https://pay.hotmart.com/M106369269V'
+  : 'https://pay.kiwify.com.br/UruirxE'
+
+document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
+document.title = isSpanishPage
+  ? 'Anna Schossig - Guía Práctica de Mega Hair'
+  : 'Anna Schossig - Mega Hair'
+
+const pageText = isSpanishPage
+  ? {
+      productName: 'Guía Práctica de Mega Hair 3 en 1',
+      checkoutContentName: 'Guía Práctica de Mega Hair 3 en 1',
+      resultAlt: [
+        'Antes y después de aplicación de mega hair en cabello negro con acabado natural',
+        'Antes y después de mega hair en cabello oscuro con movimiento ondulado',
+        'Antes y después de mega hair rizado con volumen natural',
+        'Antes y después de mega hair liso visto desde atrás con acabado alineado',
+        'Antes y después de extensión con mega hair en cabello castaño largo',
+        'Antes y después de mega hair en cabello negro con ondas naturales',
+        'Antes y después de mega hair largo en cabello oscuro',
+        'Antes y después de mega hair rubio largo con acabado natural',
+        'Antes y después de mega hair rubio con largo uniforme',
+      ],
+      learningModules: [
+        {
+          number: '01',
+          title: 'Fundamentos del Mega Hair',
+          text: 'Entiende cómo funcionan las extensiones capilares, qué cuidados observar y lo que toda profesional necesita saber antes de aplicar.',
+        },
+        {
+          number: '02',
+          title: 'Preparación del Cabello y Materiales',
+          text: 'Aprende cómo preparar el cabello, organizar los materiales y crear una base segura antes de iniciar cualquier aplicación.',
+        },
+        {
+          number: '03',
+          title: 'Punto Americano',
+          text: 'Aprende cómo funciona la técnica, su forma de fijación, cuándo indicarla y qué cuidados tener para entregar firmeza y durabilidad.',
+        },
+        {
+          number: '04',
+          title: 'Cinta Adhesiva',
+          text: 'Conoce una técnica práctica, discreta y muy buscada por clientas que desean un acabado natural.',
+        },
+        {
+          number: '05',
+          title: 'Cápsula de Queratina',
+          text: 'Mira cómo funciona la aplicación mechón por mechón y los cuidados para lograr más movimiento y naturalidad.',
+        },
+        {
+          number: '06',
+          title: 'Diferencias entre las Técnicas',
+          text: 'Entiende cuándo usar cada método, los puntos fuertes de cada técnica y cómo elegir la mejor opción para cada clienta.',
+        },
+        {
+          number: '07',
+          title: 'División y Posicionamiento',
+          text: 'Aprende cómo organizar los mechones, respetar la raíz y posicionar el mega hair para un resultado más bonito y cómodo.',
+        },
+        {
+          number: '08',
+          title: 'Cuidados y Mantenimiento',
+          text: 'Aprende los principales cuidados después de la aplicación y cómo orientar a la clienta para mantener el resultado bonito por más tiempo.',
+        },
+        {
+          number: '09',
+          title: 'Seguridad en la Aplicación',
+          text: 'Mira puntos importantes para evitar errores comunes, exceso de tensión, incomodidad y problemas en la fijación.',
+        },
+        {
+          number: '10',
+          title: 'Resultado Profesional',
+          text: 'Entiende cómo buscar un acabado más natural, alineado y seguro para entregar más valor en tu atención.',
+        },
+      ],
+      benefitItems: [
+        {
+          number: '01',
+          title: 'Agrega un nuevo servicio a tu portafolio',
+          text: 'Aprende Mega Hair para ofrecer una nueva opción de transformación a tus clientas.',
+        },
+        {
+          number: '02',
+          title: 'Empieza incluso desde cero',
+          text: 'Un camino práctico para principiantes, peluqueras, profesionales de belleza y también para quien todavía no trabaja en el área.',
+        },
+        {
+          number: '03',
+          title: 'Ofrece un servicio más valorizado',
+          text: 'Mega Hair es una atención con mayor percepción de valor y puede aumentar tu ticket.',
+        },
+        {
+          number: '04',
+          title: 'Atiende diferentes tipos de clientas',
+          text: 'Con 3 técnicas, aprendes a indicar la opción más adecuada para cada necesidad.',
+        },
+        {
+          number: '05',
+          title: 'Amplía tus posibilidades de ingresos',
+          text: 'Ten un servicio que puede ofrecerse en el salón, en casa o en atenciones particulares.',
+        },
+        {
+          number: '06',
+          title: 'Sé vista como una profesional más completa',
+          text: 'Cuantas más soluciones dominas, más confianza transmites a tus clientas.',
+        },
+      ],
+      forYouItems: [
+        'Eres profesional de belleza',
+        'Quieres empezar en Mega Hair',
+        'Buscas un servicio más valorizado',
+        'Quieres aprender 3 técnicas en una guía práctica',
+        'Necesitas un contenido práctico y directo',
+      ],
+      notForYouItems: [
+        'No quieres estudiar ni practicar',
+        'Buscas una formación presencial larga',
+        'No quieres ofrecer nuevos servicios',
+      ],
+      hero: {
+        titleIntro: 'Aprende 3 técnicas de Mega Hair:',
+        subtitle:
+          'Los mismos servicios que hoy me ayudan a facturar más de R$15 mil por mes, y que tú puedes empezar a ofrecer en tu estudio esta misma semana, incluso si eres principiante.',
+        button: 'Garantizar acceso completo por US$ 5,00',
+        installments: 'US$ 5,00',
+        fullPrice: 'pago único',
+        microcopy: 'Acceso online por 1 año con certificado',
+        mediaLabel: 'Imágenes de las técnicas de Mega Hair de la guía práctica',
+      },
+      techniques: {
+        title: 'Conoce las 3 técnicas',
+        subtitle: 'Entiende las diferencias de forma práctica y visual.',
+        cards: [
+          {
+            title: 'Punto Americano',
+            text: 'Fijación firme y estructurada, ideal para quien busca seguridad y durabilidad.',
+            alt: 'Aplicación de Mega Hair con técnica Punto Americano',
+          },
+          {
+            title: 'Cinta Adhesiva',
+            text: 'Aplicación práctica, discreta y cómoda, con acabado natural.',
+            alt: 'Aplicación de Mega Hair con técnica Cinta Adhesiva',
+          },
+          {
+            title: 'Cápsula de Queratina',
+            text: 'Mechón por mechón, con más movimiento y naturalidad en el resultado.',
+            alt: 'Aplicación de Mega Hair con técnica Cápsula de Queratina',
+          },
+        ],
+        controls: 'Control del carrusel de técnicas',
+        prev: 'Ver técnica anterior',
+        next: 'Ver siguiente técnica',
+        strip: ['Clases prácticas', 'Explicación simple', '3 técnicas en una sola guía'],
+      },
+      results: {
+        title: 'Mira el resultado que una buena técnica entrega',
+        label: 'Galería de resultados de mega hair',
+      },
+      learning: {
+        kicker: 'Lo que vas a aprender',
+        title: 'Guía práctica 3 en 1',
+      },
+      benefits: {
+        kicker: 'Lo que cambia para ti',
+        title: 'Entra en un área con alto potencial de retorno',
+      },
+      fit: {
+        kicker: 'Para quién es',
+        title: 'Esta guía práctica fue hecha para ti si...',
+        positiveTitle: 'Es para ti si:',
+        negativeTitle: 'No es para ti si:',
+      },
+      mentor: {
+        kicker: 'Quién te va a enseñar',
+        title: 'Anna Schossig',
+        paragraphs: [
+          'Especialista en Mega Hair y creadora de la Guía Práctica de Mega Hair 3 en 1, Anna enseña de forma práctica, clara y directa para profesionales que quieren empezar o ampliar sus servicios con más seguridad.',
+          'En esta guía práctica, ella reúne las técnicas Punto Americano, Cinta Adhesiva y Cápsula de Queratina para mostrar cómo construir una base profesional, elegir la mejor indicación y entregar un resultado más natural para la clienta.',
+        ],
+        alt: 'Anna Schossig, profesora de la Guía Práctica de Mega Hair 3 en 1',
+        caption: 'Guía Práctica 3 en 1',
+      },
+      offer: {
+        kicker: 'Lo que está incluido',
+        title: 'Todo lo que recibes hoy',
+        ribbon: 'Oferta completa',
+        badge: 'Más elegido',
+        label: 'Completo',
+        name: 'Guía Práctica de Mega Hair 3 en 1',
+        couponLabel: 'Cupón liberado',
+        couponTitle: 'Ganaste un cupón de descuento',
+        couponText: 'Tu condición especial ya está aplicada: US$ 5,00.',
+        summaryLabel: 'Resumen',
+        summaryText: 'Guía práctica online Mega Hair 3 en 1 con clases prácticas, certificado y bonos liberados.',
+        bonusLabel: 'Bonos liberados en el acceso',
+        bonuses: [
+          'App de Agenda',
+          'App de Agenda Automática para que tus clientas marquen horario solas',
+          'App de Control Financiero',
+          'Curso de Tráfico Pago para profesionales de belleza',
+        ],
+        free: 'Gratis',
+        total: 'Valor total:',
+        price: 'US$ 5,00',
+        priceText: 'Pago único de US$ 5,00',
+        access: 'Pago único · 1 año de acceso',
+        oldPrice: 'US$ 49',
+        button: 'Garantizar acceso completo por US$ 5,00',
+        timer: 'Esta condición termina en',
+      },
+      certificate: {
+        kicker: 'Certificado incluido',
+        title: 'Comprueba tu evolución en Mega Hair',
+        text:
+          'Al concluir la Guía Práctica de Mega Hair 3 en 1, recibes un certificado para registrar tu camino de aprendizaje y reforzar tu presentación profesional.',
+        items: [
+          'Certificado digital de conclusión',
+          'Ideal para presentar en el portafolio profesional',
+          'Más confianza para divulgar tus nuevos servicios',
+        ],
+        mockupLabel: 'Mockup del certificado Mega Hair 3 en 1',
+        small: 'Certificado de Conclusión',
+        certificateText:
+          'Concedido a la alumna que concluyó la guía práctica online con foco en Punto Americano, Cinta Adhesiva y Cápsula de Queratina.',
+      },
+    }
+  : {
+      productName: 'Mega Hair 3 em 1',
+      checkoutContentName: 'Mega Hair 3 em 1',
+      resultAlt: [
+        'Antes e depois de aplicação de mega hair em cabelo preto com acabamento natural',
+        'Antes e depois de mega hair em cabelo escuro com movimento ondulado',
+        'Antes e depois de mega hair cacheado com volume natural',
+        'Antes e depois de mega hair liso visto de costas com acabamento alinhado',
+        'Antes e depois de alongamento com mega hair em cabelo castanho longo',
+        'Antes e depois de mega hair em cabelo preto com ondas naturais',
+        'Antes e depois de mega hair longo em cabelo escuro',
+        'Antes e depois de mega hair loiro longo com acabamento natural',
+        'Antes e depois de mega hair loiro com comprimento uniforme',
+      ],
+      learningModules: [
+        {
+          number: '01',
+          title: 'Fundamentos do Mega Hair',
+          text: 'Entenda como funciona o alongamento capilar, quais cuidados observar e o que toda profissional precisa saber antes de aplicar.',
+        },
+        {
+          number: '02',
+          title: 'Preparação dos Fios e Materiais',
+          text: 'Veja como preparar o cabelo, organizar os materiais e criar uma base segura antes de iniciar qualquer aplicação.',
+        },
+        {
+          number: '03',
+          title: 'Ponto Americano',
+          text: 'Aprenda como funciona a técnica, sua forma de fixação, quando indicar e quais cuidados ter para entregar firmeza e durabilidade.',
+        },
+        {
+          number: '04',
+          title: 'Fita Adesiva',
+          text: 'Conheça uma técnica prática, discreta e procurada por clientes que desejam um acabamento natural.',
+        },
+        {
+          number: '05',
+          title: 'Cápsula de Queratina',
+          text: 'Veja como funciona a aplicação mecha a mecha e os cuidados para conquistar mais movimento e naturalidade.',
+        },
+        {
+          number: '06',
+          title: 'Diferenças entre as Técnicas',
+          text: 'Entenda quando usar cada método, os pontos fortes de cada técnica e como escolher a melhor opção para cada cliente.',
+        },
+        {
+          number: '07',
+          title: 'Divisão e Posicionamento',
+          text: 'Aprenda como organizar as mechas, respeitar a raiz e posicionar o mega hair para um resultado mais bonito e confortável.',
+        },
+        {
+          number: '08',
+          title: 'Cuidados e Manutenção',
+          text: 'Aprenda os principais cuidados após a aplicação e como orientar a cliente para manter o resultado bonito por mais tempo.',
+        },
+        {
+          number: '09',
+          title: 'Segurança na Aplicação',
+          text: 'Veja pontos importantes para evitar erros comuns, excesso de tensão, desconforto e problemas na fixação.',
+        },
+        {
+          number: '10',
+          title: 'Resultado Profissional',
+          text: 'Entenda como buscar um acabamento mais natural, alinhado e seguro para entregar mais valor no atendimento.',
+        },
+      ],
+      benefitItems: [
+        {
+          number: '01',
+          title: 'Adicione um novo serviço ao seu portfólio',
+          text: 'Aprenda Mega Hair para oferecer uma nova opção de transformação às suas clientes.',
+        },
+        {
+          number: '02',
+          title: 'Comece mesmo do zero',
+          text: 'Um caminho prático para iniciantes, cabeleireiras, profissionais da beleza e também para quem ainda não atua na área.',
+        },
+        {
+          number: '03',
+          title: 'Ofereça um serviço mais valorizado',
+          text: 'Mega Hair é um atendimento com maior percepção de valor e pode aumentar seu ticket.',
+        },
+        {
+          number: '04',
+          title: 'Atenda diferentes tipos de clientes',
+          text: 'Com 3 técnicas, você aprende a indicar a opção mais adequada para cada necessidade.',
+        },
+        {
+          number: '05',
+          title: 'Amplie suas possibilidades de renda',
+          text: 'Tenha um serviço que pode ser oferecido no salão, em casa ou no atendimento particular.',
+        },
+        {
+          number: '06',
+          title: 'Seja vista como uma profissional mais completa',
+          text: 'Quanto mais soluções você domina, mais confiança transmite para suas clientes.',
+        },
+      ],
+      forYouItems: [
+        'É profissional da beleza',
+        'Quer começar no Mega Hair',
+        'Busca um serviço mais valorizado',
+        'Quer aprender 3 técnicas em um treinamento',
+        'Precisa de um conteúdo prático e direto',
+      ],
+      notForYouItems: [
+        'Não quer estudar nem praticar',
+        'Procura formação presencial longa',
+        'Não quer oferecer novos serviços',
+      ],
+      hero: {
+        titleIntro: 'Aprenda 3 técnicas de Mega Hair:',
+        subtitle:
+          'Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.',
+        button: 'Garantir acesso completo por R$59,00',
+        installments: '12x de R$ 6,10',
+        fullPrice: 'ou R$ 59,00 à vista',
+        microcopy: 'Acesso online por 1 ano com certificado',
+        mediaLabel: 'Imagens das técnicas de Mega Hair do treinamento',
+      },
+      techniques: {
+        title: 'Conheça as 3 técnicas',
+        subtitle: 'Entenda as diferenças de forma prática e visual.',
+        cards: [
+          {
+            title: 'Ponto Americano',
+            text: 'Fixação firme e estruturada, ideal para quem busca segurança e durabilidade.',
+            alt: 'Aplicação de Mega Hair com técnica Ponto Americano',
+          },
+          {
+            title: 'Fita Adesiva',
+            text: 'Aplicação prática, discreta e confortável, com acabamento natural.',
+            alt: 'Aplicação de Mega Hair com técnica Fita Adesiva',
+          },
+          {
+            title: 'Cápsula de Queratina',
+            text: 'Mecha a mecha, com mais movimento e naturalidade no resultado.',
+            alt: 'Aplicação de Mega Hair com técnica Cápsula de Queratina',
+          },
+        ],
+        controls: 'Controle do carrossel de técnicas',
+        prev: 'Ver técnica anterior',
+        next: 'Ver próxima técnica',
+        strip: ['Aulas práticas', 'Explicação simples', '3 técnicas em um só treinamento'],
+      },
+      results: {
+        title: 'Veja o resultado que uma boa técnica entrega',
+        label: 'Galeria de resultados de mega hair',
+      },
+      learning: {
+        kicker: 'O que você vai aprender',
+        title: 'Mega Hair 3 em 1',
+      },
+      benefits: {
+        kicker: 'O que muda para você',
+        title: 'Entre para uma área com alto potencial de retorno',
+      },
+      fit: {
+        kicker: 'Para quem é',
+        title: 'Esse treinamento foi feito para você se...',
+        positiveTitle: 'É pra você se:',
+        negativeTitle: 'Não é pra você se:',
+      },
+      mentor: {
+        kicker: 'Quem vai te ensinar',
+        title: 'Anna Schossig',
+        paragraphs: [
+          'Especialista em Mega Hair e criadora do treinamento Mega Hair 3 em 1, Anna ensina de forma prática, clara e direta para profissionais que querem começar ou ampliar seus serviços com mais segurança.',
+          'Neste treinamento, ela reúne as técnicas Ponto Americano, Fita Adesiva e Cápsula de Queratina para mostrar como construir uma base profissional, escolher a melhor indicação e entregar um resultado mais natural para a cliente.',
+        ],
+        alt: 'Anna Schossig, professora do treinamento Mega Hair 3 em 1',
+        caption: 'Mega Hair 3 em 1',
+      },
+      offer: {
+        kicker: 'O que está incluído',
+        title: 'Tudo que você recebe hoje',
+        ribbon: 'Oferta completa',
+        badge: 'Mais escolhido',
+        label: 'Completo',
+        name: 'Mega Hair 3 em 1',
+        couponLabel: 'Cupom liberado',
+        couponTitle: 'Você ganhou um cupom de desconto',
+        couponText: 'Sua condição especial já está aplicada: 12x de R$ 6,10 ou R$ 59,00 à vista.',
+        summaryLabel: 'Resumo',
+        summaryText: 'Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.',
+        bonusLabel: 'Bônus liberados no acesso',
+        bonuses: [
+          'App de Agendamento',
+          'App de Agendamento Automático para suas clientes marcarem horário sozinhas',
+          'App de Controle Financeiro',
+          'Curso de Tráfego Pago para profissionais da beleza',
+        ],
+        free: 'Gratuito',
+        total: 'Valor total:',
+        price: 'R$ 59,00',
+        priceText: '12x de R$ 6,10 ou R$ 59,00 à vista',
+        access: 'Pagamento único · 1 ano de acesso',
+        oldPrice: 'R$ 529',
+        button: 'Garantir acesso completo por R$59,00',
+        timer: 'Essa condição termina em',
+      },
+      certificate: {
+        kicker: 'Certificado incluso',
+        title: 'Comprove sua evolução no Mega Hair',
+        text:
+          'Ao concluir o treinamento Mega Hair 3 em 1, você recebe um certificado para registrar sua jornada de aprendizado e reforçar sua apresentação profissional.',
+        items: [
+          'Certificado digital de conclusão',
+          'Ideal para apresentar no portfólio profissional',
+          'Mais confiança para divulgar seus novos serviços',
+        ],
+        mockupLabel: 'Mockup do certificado Mega Hair 3 em 1',
+        small: 'Certificado de Conclusão',
+        certificateText:
+          'Concedido a aluna que concluiu o treinamento online com foco em Ponto Americano, Fita Adesiva e Cápsula de Queratina.',
+      },
+    }
+
 const resultItems = [
-  { src: resultado01Img, alt: 'Antes e depois de aplicação de mega hair em cabelo preto com acabamento natural' },
-  { src: resultado02Img, alt: 'Antes e depois de mega hair em cabelo escuro com movimento ondulado' },
-  { src: resultado03Img, alt: 'Antes e depois de mega hair cacheado com volume natural' },
-  { src: resultado04Img, alt: 'Antes e depois de mega hair liso visto de costas com acabamento alinhado' },
-  { src: resultado05Img, alt: 'Antes e depois de alongamento com mega hair em cabelo castanho longo' },
-  { src: resultado06Img, alt: 'Antes e depois de mega hair em cabelo preto com ondas naturais' },
-  { src: resultado07Img, alt: 'Antes e depois de mega hair longo em cabelo escuro' },
-  { src: resultado08Img, alt: 'Antes e depois de mega hair loiro longo com acabamento natural' },
-  { src: resultado09Img, alt: 'Antes e depois de mega hair loiro com comprimento uniforme' },
+  { src: resultado01Img, alt: pageText.resultAlt[0] },
+  { src: resultado02Img, alt: pageText.resultAlt[1] },
+  { src: resultado03Img, alt: pageText.resultAlt[2] },
+  { src: resultado04Img, alt: pageText.resultAlt[3] },
+  { src: resultado05Img, alt: pageText.resultAlt[4] },
+  { src: resultado06Img, alt: pageText.resultAlt[5] },
+  { src: resultado07Img, alt: pageText.resultAlt[6] },
+  { src: resultado08Img, alt: pageText.resultAlt[7] },
+  { src: resultado09Img, alt: pageText.resultAlt[8] },
 ]
 
 const resultCards = resultItems
@@ -37,58 +483,7 @@ const resultCards = resultItems
   )
   .join('')
 
-const learningModules = [
-  {
-    number: '01',
-    title: 'Fundamentos do Mega Hair',
-    text: 'Entenda como funciona o alongamento capilar, quais cuidados observar e o que toda profissional precisa saber antes de aplicar.',
-  },
-  {
-    number: '02',
-    title: 'Preparação dos Fios e Materiais',
-    text: 'Veja como preparar o cabelo, organizar os materiais e criar uma base segura antes de iniciar qualquer aplicação.',
-  },
-  {
-    number: '03',
-    title: 'Ponto Americano',
-    text: 'Aprenda como funciona a técnica, sua forma de fixação, quando indicar e quais cuidados ter para entregar firmeza e durabilidade.',
-  },
-  {
-    number: '04',
-    title: 'Fita Adesiva',
-    text: 'Conheça uma técnica prática, discreta e procurada por clientes que desejam um acabamento natural.',
-  },
-  {
-    number: '05',
-    title: 'Cápsula de Queratina',
-    text: 'Veja como funciona a aplicação mecha a mecha e os cuidados para conquistar mais movimento e naturalidade.',
-  },
-  {
-    number: '06',
-    title: 'Diferenças entre as Técnicas',
-    text: 'Entenda quando usar cada método, os pontos fortes de cada técnica e como escolher a melhor opção para cada cliente.',
-  },
-  {
-    number: '07',
-    title: 'Divisão e Posicionamento',
-    text: 'Aprenda como organizar as mechas, respeitar a raiz e posicionar o mega hair para um resultado mais bonito e confortável.',
-  },
-  {
-    number: '08',
-    title: 'Cuidados e Manutenção',
-    text: 'Aprenda os principais cuidados após a aplicação e como orientar a cliente para manter o resultado bonito por mais tempo.',
-  },
-  {
-    number: '09',
-    title: 'Segurança na Aplicação',
-    text: 'Veja pontos importantes para evitar erros comuns, excesso de tensão, desconforto e problemas na fixação.',
-  },
-  {
-    number: '10',
-    title: 'Resultado Profissional',
-    text: 'Entenda como buscar um acabamento mais natural, alinhado e seguro para entregar mais valor no atendimento.',
-  },
-]
+const learningModules = pageText.learningModules
 
 const learningCards = learningModules
   .map(
@@ -105,38 +500,7 @@ const learningCards = learningModules
   )
   .join('')
 
-const benefitItems = [
-  {
-    number: '01',
-    title: 'Adicione um novo serviço ao seu portfólio',
-    text: 'Aprenda Mega Hair para oferecer uma nova opção de transformação às suas clientes.',
-  },
-  {
-    number: '02',
-    title: 'Comece mesmo do zero',
-    text: 'Um caminho prático para iniciantes, cabeleireiras, profissionais da beleza e também para quem ainda não atua na área.',
-  },
-  {
-    number: '03',
-    title: 'Ofereça um serviço mais valorizado',
-    text: 'Mega Hair é um atendimento com maior percepção de valor e pode aumentar seu ticket.',
-  },
-  {
-    number: '04',
-    title: 'Atenda diferentes tipos de clientes',
-    text: 'Com 3 técnicas, você aprende a indicar a opção mais adequada para cada necessidade.',
-  },
-  {
-    number: '05',
-    title: 'Amplie suas possibilidades de renda',
-    text: 'Tenha um serviço que pode ser oferecido no salão, em casa ou no atendimento particular.',
-  },
-  {
-    number: '06',
-    title: 'Seja vista como uma profissional mais completa',
-    text: 'Quanto mais soluções você domina, mais confiança transmite para suas clientes.',
-  },
-]
+const benefitItems = pageText.benefitItems
 
 const benefitCards = benefitItems
   .map(
@@ -150,19 +514,9 @@ const benefitCards = benefitItems
   )
   .join('')
 
-const forYouItems = [
-  'É profissional da beleza',
-  'Quer começar no Mega Hair',
-  'Busca um serviço mais valorizado',
-  'Quer aprender 3 técnicas em um treinamento',
-  'Precisa de um conteúdo prático e direto',
-]
+const forYouItems = pageText.forYouItems
 
-const notForYouItems = [
-  'Não quer estudar nem praticar',
-  'Procura formação presencial longa',
-  'Não quer oferecer novos serviços',
-]
+const notForYouItems = pageText.notForYouItems
 
 const listItems = (items, icon) =>
   items
@@ -181,42 +535,42 @@ document.querySelector('#app').innerHTML = `
     <section class="hero-section" aria-labelledby="hero-title">
       <div class="hero-copy">
         <h1 id="hero-title">
-          <span>Aprenda 3 técnicas de Mega Hair:</span>
+          <span>${pageText.hero.titleIntro}</span>
           <span class="hero-techniques">
-            <strong>Ponto Americano</strong>, <strong>Fita Adesiva</strong> e <strong>Cápsula de Queratina</strong>
+            <strong>${pageText.techniques.cards[0].title}</strong>, <strong>${pageText.techniques.cards[1].title}</strong> ${isSpanishPage ? 'y' : 'e'} <strong>${pageText.techniques.cards[2].title}</strong>
           </span>
         </h1>
 
         <p class="hero-subtitle">
-          Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.
+          ${pageText.hero.subtitle}
         </p>
 
         <div class="hero-cta">
-          <a class="hero-button" href="https://pay.kiwify.com.br/UruirxE">
-            Garantir acesso completo por R$59,00
+          <a class="hero-button" href="${checkoutUrl}">
+            ${pageText.hero.button}
           </a>
           <div class="hero-price">
-            <span>12x de R$ 6,10</span>
-            <strong>ou R$ 59,00 à vista</strong>
+            <span>${pageText.hero.installments}</span>
+            <strong>${pageText.hero.fullPrice}</strong>
           </div>
-          <p class="hero-microcopy"><span aria-hidden="true">✓</span> Acesso online por 1 ano com certificado</p>
+          <p class="hero-microcopy"><span aria-hidden="true">✓</span> ${pageText.hero.microcopy}</p>
         </div>
 
       </div>
 
-      <div class="hero-media-wrap" aria-label="Imagens das técnicas de Mega Hair do treinamento">
+      <div class="hero-media-wrap" aria-label="${pageText.hero.mediaLabel}">
         <figure class="hero-card">
           <div class="hero-slide hero-slide-1">
-            <img src="${pontoAmericanoImg}" alt="Aplicação de Mega Hair com técnica Ponto Americano" />
-            <figcaption>Ponto Americano</figcaption>
+            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" />
+            <figcaption>${pageText.techniques.cards[0].title}</figcaption>
           </div>
           <div class="hero-slide hero-slide-2">
-            <img src="${fitaAdesivaImg}" alt="Aplicação de Mega Hair com técnica Fita Adesiva" />
-            <figcaption>Fita Adesiva</figcaption>
+            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" />
+            <figcaption>${pageText.techniques.cards[1].title}</figcaption>
           </div>
           <div class="hero-slide hero-slide-3">
-            <img src="${capsulaImg}" alt="Aplicação de Mega Hair com técnica Cápsula de Queratina" />
-            <figcaption>Cápsula de Queratina</figcaption>
+            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" />
+            <figcaption>${pageText.techniques.cards[2].title}</figcaption>
           </div>
         </figure>
       </div>
@@ -230,61 +584,61 @@ document.querySelector('#app').innerHTML = `
           <i>✦</i>
           <span></span>
         </div>
-        <h2 id="techniques-title">Conheça as 3 técnicas</h2>
-        <p>Entenda as diferenças de forma prática e visual.</p>
+        <h2 id="techniques-title">${pageText.techniques.title}</h2>
+        <p>${pageText.techniques.subtitle}</p>
       </div>
 
       <div class="technique-grid">
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${pontoAmericanoImg}" alt="Aplicação de Mega Hair com técnica Ponto Americano" width="900" height="650" loading="lazy" />
+            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" />
             <span>01</span>
           </div>
           <div class="technique-content">
-            <h3>Ponto Americano</h3>
-            <p>Fixação firme e estruturada, ideal para quem busca segurança e durabilidade.</p>
+            <h3>${pageText.techniques.cards[0].title}</h3>
+            <p>${pageText.techniques.cards[0].text}</p>
           </div>
         </article>
 
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${fitaAdesivaImg}" alt="Aplicação de Mega Hair com técnica Fita Adesiva" width="900" height="650" loading="lazy" />
+            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="900" height="650" loading="lazy" />
             <span>02</span>
           </div>
           <div class="technique-content">
-            <h3>Fita Adesiva</h3>
-            <p>Aplicação prática, discreta e confortável, com acabamento natural.</p>
+            <h3>${pageText.techniques.cards[1].title}</h3>
+            <p>${pageText.techniques.cards[1].text}</p>
           </div>
         </article>
 
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${capsulaImg}" alt="Aplicação de Mega Hair com técnica Cápsula de Queratina" width="900" height="650" loading="lazy" />
+            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" width="900" height="650" loading="lazy" />
             <span>03</span>
           </div>
           <div class="technique-content">
-            <h3>Cápsula de Queratina</h3>
-            <p>Mecha a mecha, com mais movimento e naturalidade no resultado.</p>
+            <h3>${pageText.techniques.cards[2].title}</h3>
+            <p>${pageText.techniques.cards[2].text}</p>
           </div>
         </article>
       </div>
 
-      <div class="technique-carousel-controls" aria-label="Controle do carrossel de técnicas">
-        <button class="technique-arrow" type="button" data-technique-prev aria-label="Ver técnica anterior">‹</button>
+      <div class="technique-carousel-controls" aria-label="${pageText.techniques.controls}">
+        <button class="technique-arrow" type="button" data-technique-prev aria-label="${pageText.techniques.prev}">‹</button>
         <div class="technique-dots" aria-hidden="true">
           <span class="is-active"></span>
           <span></span>
           <span></span>
         </div>
-        <button class="technique-arrow" type="button" data-technique-next aria-label="Ver próxima técnica">›</button>
+        <button class="technique-arrow" type="button" data-technique-next aria-label="${pageText.techniques.next}">›</button>
       </div>
 
-      <div class="technique-strip" aria-label="Benefícios da seção">
-        <span>Aulas práticas</span>
+      <div class="technique-strip" aria-label="${isSpanishPage ? 'Beneficios de la sección' : 'Benefícios da seção'}">
+        <span>${pageText.techniques.strip[0]}</span>
         <b aria-hidden="true"></b>
-        <span>Explicação simples</span>
+        <span>${pageText.techniques.strip[1]}</span>
         <b aria-hidden="true"></b>
-        <span>3 técnicas em um só treinamento</span>
+        <span>${pageText.techniques.strip[2]}</span>
       </div>
     </section>
 
@@ -295,10 +649,10 @@ document.querySelector('#app').innerHTML = `
           <i>✦</i>
           <span></span>
         </div>
-        <h2 id="results-title">Veja o resultado que uma boa técnica entrega</h2>
+        <h2 id="results-title">${pageText.results.title}</h2>
       </div>
 
-      <div class="results-marquee" aria-label="Galeria de resultados de mega hair">
+      <div class="results-marquee" aria-label="${pageText.results.label}">
         <div class="results-track">
           <div class="results-set">
             ${resultCards}
@@ -312,8 +666,8 @@ document.querySelector('#app').innerHTML = `
 
     <section class="learning-section" aria-labelledby="learning-title">
       <div class="learning-header">
-        <span class="learning-kicker">O que você vai aprender</span>
-        <h2 id="learning-title">Mega Hair 3 em 1</h2>
+        <span class="learning-kicker">${pageText.learning.kicker}</span>
+        <h2 id="learning-title">${pageText.learning.title}</h2>
       </div>
 
       <div class="learning-grid">
@@ -323,8 +677,8 @@ document.querySelector('#app').innerHTML = `
 
     <section class="benefits-section" aria-labelledby="benefits-title">
       <div class="benefits-header">
-        <span class="benefits-kicker">O que muda para você</span>
-        <h2 id="benefits-title">Entre para uma área com alto potencial de retorno</h2>
+        <span class="benefits-kicker">${pageText.benefits.kicker}</span>
+        <h2 id="benefits-title">${pageText.benefits.title}</h2>
       </div>
 
       <div class="benefits-grid">
@@ -334,20 +688,20 @@ document.querySelector('#app').innerHTML = `
 
     <section class="fit-section" aria-labelledby="fit-title">
       <div class="fit-header">
-        <span class="fit-kicker">Para quem é</span>
-        <h2 id="fit-title">Esse treinamento foi feito para você se...</h2>
+        <span class="fit-kicker">${pageText.fit.kicker}</span>
+        <h2 id="fit-title">${pageText.fit.title}</h2>
       </div>
 
       <div class="fit-grid">
         <article class="fit-card fit-card-positive">
-          <h3>É pra você se:</h3>
+          <h3>${pageText.fit.positiveTitle}</h3>
           <ul>
             ${listItems(forYouItems, '✓')}
           </ul>
         </article>
 
         <article class="fit-card fit-card-muted">
-          <h3>Não é pra você se:</h3>
+          <h3>${pageText.fit.negativeTitle}</h3>
           <ul>
             ${listItems(notForYouItems, '×')}
           </ul>
@@ -358,25 +712,21 @@ document.querySelector('#app').innerHTML = `
     <section class="mentor-section" aria-labelledby="mentor-title">
       <div class="mentor-content">
         <div class="mentor-copy">
-          <span class="mentor-kicker">Quem vai te ensinar</span>
-          <h2 id="mentor-title">Anna Schossig</h2>
+          <span class="mentor-kicker">${pageText.mentor.kicker}</span>
+          <h2 id="mentor-title">${pageText.mentor.title}</h2>
           <p>
-            Especialista em Mega Hair e criadora do treinamento Mega Hair 3 em 1,
-            Anna ensina de forma prática, clara e direta para profissionais que querem
-            começar ou ampliar seus serviços com mais segurança.
+            ${pageText.mentor.paragraphs[0]}
           </p>
           <p>
-            Neste treinamento, ela reúne as técnicas Ponto Americano, Fita Adesiva e
-            Cápsula de Queratina para mostrar como construir uma base profissional,
-            escolher a melhor indicação e entregar um resultado mais natural para a cliente.
+            ${pageText.mentor.paragraphs[1]}
           </p>
         </div>
 
         <figure class="mentor-card">
-          <img src="${professoraImg}" alt="Anna Schossig, professora do treinamento Mega Hair 3 em 1" width="760" height="1140" loading="lazy" />
+          <img src="${professoraImg}" alt="${pageText.mentor.alt}" width="760" height="1140" loading="lazy" />
           <figcaption>
-            <strong>Anna Schossig</strong>
-            <span>Mega Hair 3 em 1</span>
+            <strong>${pageText.mentor.title}</strong>
+            <span>${pageText.mentor.caption}</span>
           </figcaption>
         </figure>
       </div>
@@ -385,54 +735,54 @@ document.querySelector('#app').innerHTML = `
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
         <div class="offer-header">
-          <span class="offer-kicker">O que está incluído</span>
-          <h2 id="offer-title">Tudo que você recebe hoje</h2>
+          <span class="offer-kicker">${pageText.offer.kicker}</span>
+          <h2 id="offer-title">${pageText.offer.title}</h2>
         </div>
 
         <article class="offer-card">
-          <div class="offer-ribbon">Oferta completa</div>
-          <div class="offer-badge">Mais escolhido</div>
+          <div class="offer-ribbon">${pageText.offer.ribbon}</div>
+          <div class="offer-badge">${pageText.offer.badge}</div>
 
           <div class="offer-name">
-            <span>Completo</span>
-            <h3>Mega Hair 3 em 1</h3>
+            <span>${pageText.offer.label}</span>
+            <h3>${pageText.offer.name}</h3>
           </div>
 
           <div class="offer-coupon">
-            <span>Cupom liberado</span>
-            <strong>Você ganhou um cupom de desconto</strong>
-            <p>Sua condição especial já está aplicada: 12x de R$ 6,10 ou R$ 59,00 à vista.</p>
+            <span>${pageText.offer.couponLabel}</span>
+            <strong>${pageText.offer.couponTitle}</strong>
+            <p>${pageText.offer.couponText}</p>
           </div>
 
           <div class="offer-summary">
-            <span>Resumo</span>
-            <p>Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.</p>
+            <span>${pageText.offer.summaryLabel}</span>
+            <p>${pageText.offer.summaryText}</p>
 
             <div class="offer-divider"></div>
 
-            <span>Bônus liberados no acesso</span>
+            <span>${pageText.offer.bonusLabel}</span>
             <ul>
-              <li><b aria-hidden="true">+</b><p>App de Agendamento</p><em>Gratuito</em></li>
-              <li><b aria-hidden="true">+</b><p>App de Agendamento Automático para suas clientes marcarem horário sozinhas</p><em>Gratuito</em></li>
-              <li><b aria-hidden="true">+</b><p>App de Controle Financeiro</p><em>Gratuito</em></li>
-              <li><b aria-hidden="true">+</b><p>Curso de Tráfego Pago para profissionais da beleza</p><em>Gratuito</em></li>
+              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[0]}</p><em>${pageText.offer.free}</em></li>
+              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[1]}</p><em>${pageText.offer.free}</em></li>
+              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[2]}</p><em>${pageText.offer.free}</em></li>
+              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[3]}</p><em>${pageText.offer.free}</em></li>
             </ul>
           </div>
 
           <div class="offer-price">
             <div>
-              <span>Valor total:</span>
-              <strong>R$ 59,00</strong>
-              <p>12x de R$ 6,10 ou R$ 59,00 à vista</p>
-              <small>Pagamento único · 1 ano de acesso</small>
+              <span>${pageText.offer.total}</span>
+              <strong>${pageText.offer.price}</strong>
+              <p>${pageText.offer.priceText}</p>
+              <small>${pageText.offer.access}</small>
             </div>
-            <del>R$ 529</del>
+            <del>${pageText.offer.oldPrice}</del>
           </div>
 
-          <a class="offer-button" href="https://pay.kiwify.com.br/UruirxE">Garantir acesso completo por R$59,00</a>
+          <a class="offer-button" href="${checkoutUrl}">${pageText.offer.button}</a>
 
           <div class="offer-timer">
-            <span>Essa condição termina em</span>
+            <span>${pageText.offer.timer}</span>
             <strong>30:00</strong>
           </div>
         </article>
@@ -442,27 +792,26 @@ document.querySelector('#app').innerHTML = `
     <section class="certificate-section" aria-labelledby="certificate-title">
       <div class="certificate-content">
         <div class="certificate-copy">
-          <span class="certificate-kicker">Certificado incluso</span>
-          <h2 id="certificate-title">Comprove sua evolução no Mega Hair</h2>
+          <span class="certificate-kicker">${pageText.certificate.kicker}</span>
+          <h2 id="certificate-title">${pageText.certificate.title}</h2>
           <p>
-            Ao concluir o treinamento Mega Hair 3 em 1, você recebe um certificado para
-            registrar sua jornada de aprendizado e reforçar sua apresentação profissional.
+            ${pageText.certificate.text}
           </p>
           <ul>
-            <li>Certificado digital de conclusão</li>
-            <li>Ideal para apresentar no portfólio profissional</li>
-            <li>Mais confiança para divulgar seus novos serviços</li>
+            <li>${pageText.certificate.items[0]}</li>
+            <li>${pageText.certificate.items[1]}</li>
+            <li>${pageText.certificate.items[2]}</li>
           </ul>
         </div>
 
-        <div class="certificate-mockup" aria-label="Mockup do certificado Mega Hair 3 em 1">
+        <div class="certificate-mockup" aria-label="${pageText.certificate.mockupLabel}">
           <div class="certificate-paper">
             <span class="certificate-seal">AS</span>
-            <small>Certificado de Conclusão</small>
-            <strong>Mega Hair 3 em 1</strong>
-            <p>Concedido a aluna que concluiu o treinamento online com foco em Ponto Americano, Fita Adesiva e Cápsula de Queratina.</p>
+            <small>${pageText.certificate.small}</small>
+            <strong>${pageText.learning.title}</strong>
+            <p>${pageText.certificate.certificateText}</p>
             <div class="certificate-line"></div>
-            <em>Anna Schossig</em>
+            <em>${pageText.mentor.title}</em>
           </div>
         </div>
       </div>
@@ -522,7 +871,7 @@ document.querySelectorAll('.hero-button').forEach((button) => {
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueHero', {
-        content_name: 'Mega Hair 3 em 1',
+        content_name: pageText.checkoutContentName,
         value: 59.00,
         currency: 'BRL'
       });
@@ -531,7 +880,7 @@ document.querySelectorAll('.hero-button').forEach((button) => {
     window.setTimeout(() => {
       trackFunnel('InitiateCheckout')
       sendInitiateCheckout().catch(() => {})
-      window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
+      window.location.href = getCheckoutUrl(checkoutUrl)
     }, 300)
   });
 });
@@ -542,7 +891,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
-        content_name: 'Mega Hair 3 em 1',
+        content_name: pageText.checkoutContentName,
         value: 59.00,
         currency: 'BRL'
       });
@@ -551,7 +900,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     window.setTimeout(() => {
       trackFunnel('InitiateCheckout')
       sendInitiateCheckout().catch(() => {})
-      window.location.href = getCheckoutUrl('https://pay.kiwify.com.br/UruirxE')
+      window.location.href = getCheckoutUrl(checkoutUrl)
     }, 300)
   });
 });
