@@ -32,7 +32,7 @@ export function trackFunnel(eventName: string): void {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         session_id: getSessionId(),
-        client: "anna",
+        client: window.location.pathname.split('/').filter(Boolean)[0] === 'es' ? 'anna-es' : 'anna',
         event_name: eventName,
         creative: utmContent,
         utm_source: getUtmValue(params, "utm_source"),

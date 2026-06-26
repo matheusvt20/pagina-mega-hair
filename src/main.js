@@ -19,6 +19,9 @@ const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] ===
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/UruirxE'
+const checkoutTracking = isSpanishPage
+  ? { value: 4.00, currency: 'USD' }
+  : { value: 59.00, currency: 'BRL' }
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
@@ -824,12 +827,17 @@ const sendInitiateCheckout = async () => {
   const fbc = getCookie('_fbc')
   const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
   const payload = JSON.stringify({
+    client: isSpanishPage ? 'anna-es' : 'anna',
     eventName: 'InitiateCheckout',
     eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
     ...(fbp ? { fbp } : {}),
     ...(fbc ? { fbc } : {}),
     ...(externalId ? { external_id: externalId } : {}),
-    eventData: {},
+    eventData: {
+      content_name: pageText.checkoutContentName,
+      value: checkoutTracking.value,
+      currency: checkoutTracking.currency,
+    },
   })
 
   return sendMetaEvent(payload)
@@ -872,8 +880,8 @@ document.querySelectorAll('.hero-button').forEach((button) => {
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueHero', {
         content_name: pageText.checkoutContentName,
-        value: 59.00,
-        currency: 'BRL'
+        value: checkoutTracking.value,
+        currency: checkoutTracking.currency
       });
     }
 
@@ -892,8 +900,8 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
         content_name: pageText.checkoutContentName,
-        value: 59.00,
-        currency: 'BRL'
+        value: checkoutTracking.value,
+        currency: checkoutTracking.currency
       });
     }
 

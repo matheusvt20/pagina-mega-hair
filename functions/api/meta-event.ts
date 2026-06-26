@@ -2,6 +2,7 @@ import type { EventContext } from "@cloudflare/workers-types";
 
 interface Env {
   META_CAPI_TOKEN: string;
+  META_CAPI_TOKEN_GRINGA: string;
 }
 
 const corsHeaders = {
@@ -10,11 +11,13 @@ const corsHeaders = {
 };
 
 interface MetaEventBody {
+  client?: string;
   eventName: string;
   eventId: string;
   fbp?: string;
   fbc?: string;
   external_id?: string;
+  eventData?: Record<string, unknown>;
 }
 
 export async function onRequestPost(
@@ -24,7 +27,7 @@ export async function onRequestPost(
 
   try {
     const body = await request.json() as MetaEventBody;
-    const { eventName, eventId, fbp, fbc, external_id } = body;
+    const { client, eventName, eventId, fbp, fbc, external_id, eventData } = body;
 
     if (!eventName || !eventId) {
       return new Response(JSON.stringify({ error: "Missing eventName or eventId" }), {
@@ -33,8 +36,8 @@ export async function onRequestPost(
       });
     }
 
-    const pixelId = "1545289270267098";
-    const accessToken = env.META_CAPI_TOKEN;
+    const pixelId = client === "anna-es" ? "1540863624345199" : "1545289270267098";
+    const accessToken = client === "anna-es" ? env.META_CAPI_TOKEN_GRINGA : env.META_CAPI_TOKEN;
     const clientIpAddress =
       request.headers.get("CF-Connecting-IP") ||
       request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim();
@@ -69,6 +72,7 @@ export async function onRequestPost(
           event_id: eventId,
           action_source: "website",
           user_data: userData,
+          ...(eventData ? { custom_data: eventData } : {}),
         },
       ],
     };
