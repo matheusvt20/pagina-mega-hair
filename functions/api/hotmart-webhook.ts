@@ -23,7 +23,7 @@ interface HotmartWebhookBody {
 
 const FUNNEL_ENDPOINT = "https://dugqmsclhybfxvrljemx.supabase.co/functions/v1/funnel-track";
 const META_PIXEL_ID = "1540863624345199";
-const META_CONTENT_NAME = "Guia Mega Hair ES";
+const META_CONTENT_NAME = "Guia Extensiones de Cabello ES";
 
 const jsonHeaders = {
   "Content-Type": "application/json",

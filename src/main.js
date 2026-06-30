@@ -25,28 +25,28 @@ const checkoutTracking = isSpanishPage
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
-  ? 'Anna Schossig - Guía Práctica de Mega Hair'
+  ? 'Anna Schossig - Guía Práctica de Extensiones de Cabello'
   : 'Anna Schossig - Mega Hair'
 
 const pageText = isSpanishPage
   ? {
-      productName: 'Guía Práctica de Mega Hair 3 en 1',
-      checkoutContentName: 'Guía Práctica de Mega Hair 3 en 1',
+      productName: 'Guía Práctica de Extensiones de Cabello 3 en 1',
+      checkoutContentName: 'Guía Práctica de Extensiones de Cabello 3 en 1',
       resultAlt: [
-        'Antes y después de aplicación de mega hair en cabello negro con acabado natural',
-        'Antes y después de mega hair en cabello oscuro con movimiento ondulado',
-        'Antes y después de mega hair rizado con volumen natural',
-        'Antes y después de mega hair liso visto desde atrás con acabado alineado',
-        'Antes y después de extensión con mega hair en cabello castaño largo',
-        'Antes y después de mega hair en cabello negro con ondas naturales',
-        'Antes y después de mega hair largo en cabello oscuro',
-        'Antes y después de mega hair rubio largo con acabado natural',
-        'Antes y después de mega hair rubio con largo uniforme',
+        'Antes y después de aplicación de extensiones de cabello negro con acabado natural',
+        'Antes y después de extensiones de cabello oscuro con movimiento ondulado',
+        'Antes y después de extensiones de cabello rizado con volumen natural',
+        'Antes y después de extensiones de cabello liso visto desde atrás con acabado alineado',
+        'Antes y después de extensiones en cabello castaño largo',
+        'Antes y después de extensiones de cabello negro con ondas naturales',
+        'Antes y después de extensiones de cabello largo y oscuro',
+        'Antes y después de extensiones de cabello rubio largo con acabado natural',
+        'Antes y después de extensiones de cabello rubio con largo uniforme',
       ],
       learningModules: [
         {
           number: '01',
-          title: 'Fundamentos del Mega Hair',
+          title: 'Fundamentos de las Extensiones de Cabello',
           text: 'Entiende cómo funcionan las extensiones capilares, qué cuidados observar y lo que toda profesional necesita saber antes de aplicar.',
         },
         {
@@ -61,8 +61,8 @@ const pageText = isSpanishPage
         },
         {
           number: '04',
-          title: 'Cinta Adhesiva',
-          text: 'Conoce una técnica práctica, discreta y muy buscada por clientas que desean un acabado natural.',
+          title: 'Extensiones Adhesivas',
+          text: 'Conoce el método adhesivo, una técnica práctica, discreta y muy buscada por clientas que desean un acabado natural.',
         },
         {
           number: '05',
@@ -77,7 +77,7 @@ const pageText = isSpanishPage
         {
           number: '07',
           title: 'División y Posicionamiento',
-          text: 'Aprende cómo organizar los mechones, respetar la raíz y posicionar el mega hair para un resultado más bonito y cómodo.',
+          text: 'Aprende cómo organizar los mechones, respetar la raíz y posicionar las extensiones para un resultado más bonito y cómodo.',
         },
         {
           number: '08',
@@ -99,7 +99,7 @@ const pageText = isSpanishPage
         {
           number: '01',
           title: 'Agrega un nuevo servicio a tu portafolio',
-          text: 'Aprende Mega Hair para ofrecer una nueva opción de transformación a tus clientas.',
+          text: 'Aprende extensiones de cabello para ofrecer una nueva opción de transformación a tus clientas.',
         },
         {
           number: '02',
@@ -109,7 +109,7 @@ const pageText = isSpanishPage
         {
           number: '03',
           title: 'Ofrece un servicio más valorizado',
-          text: 'Mega Hair es una atención con mayor percepción de valor y puede aumentar tu ticket.',
+          text: 'Las extensiones de cabello son una atención con mayor percepción de valor y pueden aumentar tu ticket.',
         },
         {
           number: '04',
@@ -129,7 +129,7 @@ const pageText = isSpanishPage
       ],
       forYouItems: [
         'Eres profesional de belleza',
-        'Quieres empezar en Mega Hair',
+        'Quieres empezar con extensiones de cabello',
         'Buscas un servicio más valorizado',
         'Quieres aprender 3 técnicas en una guía práctica',
         'Necesitas un contenido práctico y directo',
@@ -140,14 +140,14 @@ const pageText = isSpanishPage
         'No quieres ofrecer nuevos servicios',
       ],
       hero: {
-        titleIntro: 'Aprende 3 técnicas de Mega Hair:',
+        titleIntro: 'Aprende 3 técnicas de extensiones de cabello:',
         subtitle:
-          'Los mismos servicios que hoy me ayudan a facturar más de R$15 mil por mes, y que tú puedes empezar a ofrecer en tu estudio esta misma semana, incluso si eres principiante.',
+          'Los mismos servicios que hoy me ayudan a aumentar mis ingresos, y que tú puedes empezar a ofrecer en tu estudio esta misma semana, incluso si eres principiante.',
         button: 'Garantizar acceso ahora',
         installments: 'Últimas plazas a un precio especial',
         fullPrice: 'con certificado',
         microcopy: 'Acceso online por 1 año con certificado',
-        mediaLabel: 'Imágenes de las técnicas de Mega Hair de la guía práctica',
+        mediaLabel: 'Imágenes de las técnicas de extensiones de cabello de la guía práctica',
       },
       techniques: {
         title: 'Conoce las 3 técnicas',
@@ -156,17 +156,17 @@ const pageText = isSpanishPage
           {
             title: 'Punto Americano',
             text: 'Fijación firme y estructurada, ideal para quien busca seguridad y durabilidad.',
-            alt: 'Aplicación de Mega Hair con técnica Punto Americano',
+            alt: 'Aplicación de extensiones de cabello con técnica Punto Americano',
           },
           {
-            title: 'Cinta Adhesiva',
+            title: 'Extensiones Adhesivas',
             text: 'Aplicación práctica, discreta y cómoda, con acabado natural.',
-            alt: 'Aplicación de Mega Hair con técnica Cinta Adhesiva',
+            alt: 'Aplicación de extensiones adhesivas de cabello',
           },
           {
             title: 'Cápsula de Queratina',
             text: 'Mechón por mechón, con más movimiento y naturalidad en el resultado.',
-            alt: 'Aplicación de Mega Hair con técnica Cápsula de Queratina',
+            alt: 'Aplicación de extensiones de cabello con técnica Cápsula de Queratina',
           },
         ],
         controls: 'Control del carrusel de técnicas',
@@ -176,7 +176,7 @@ const pageText = isSpanishPage
       },
       results: {
         title: 'Mira el resultado que una buena técnica entrega',
-        label: 'Galería de resultados de mega hair',
+        label: 'Galería de resultados de extensiones de cabello',
       },
       learning: {
         kicker: 'Lo que vas a aprender',
@@ -196,10 +196,10 @@ const pageText = isSpanishPage
         kicker: 'Quién te va a enseñar',
         title: 'Anna Schossig',
         paragraphs: [
-          'Especialista en Mega Hair y creadora de la Guía Práctica de Mega Hair 3 en 1, Anna enseña de forma práctica, clara y directa para profesionales que quieren empezar o ampliar sus servicios con más seguridad.',
-          'En esta guía práctica, ella reúne las técnicas Punto Americano, Cinta Adhesiva y Cápsula de Queratina para mostrar cómo construir una base profesional, elegir la mejor indicación y entregar un resultado más natural para la clienta.',
+          'Especialista en extensiones de cabello y creadora de la Guía Práctica de Extensiones de Cabello 3 en 1, Anna enseña de forma práctica, clara y directa para profesionales que quieren empezar o ampliar sus servicios con más seguridad.',
+          'En esta guía práctica, ella reúne las técnicas Punto Americano, Extensiones Adhesivas y Cápsula de Queratina para mostrar cómo construir una base profesional, elegir la mejor indicación y entregar un resultado más natural para la clienta.',
         ],
-        alt: 'Anna Schossig, profesora de la Guía Práctica de Mega Hair 3 en 1',
+        alt: 'Anna Schossig, profesora de la Guía Práctica de Extensiones de Cabello 3 en 1',
         caption: 'Guía Práctica 3 en 1',
       },
       offer: {
@@ -208,12 +208,12 @@ const pageText = isSpanishPage
         ribbon: 'Oferta completa',
         badge: 'Más elegido',
         label: 'Completo',
-        name: 'Guía Práctica de Mega Hair 3 en 1',
+        name: 'Guía Práctica de Extensiones de Cabello 3 en 1',
         couponLabel: 'Cupón liberado',
         couponTitle: 'Ganaste un cupón de descuento',
         couponText: 'Últimas plazas a un precio especial – con certificado.',
         summaryLabel: 'Resumen',
-        summaryText: 'Guía práctica online Mega Hair 3 en 1 con clases prácticas, certificado y bonos liberados.',
+        summaryText: 'Guía práctica online de extensiones de cabello 3 en 1 con clases prácticas, certificado y bonos liberados.',
         bonusLabel: 'Bonos liberados en el acceso',
         bonuses: [
           'App de Agenda',
@@ -232,18 +232,18 @@ const pageText = isSpanishPage
       },
       certificate: {
         kicker: 'Certificado incluido',
-        title: 'Comprueba tu evolución en Mega Hair',
+        title: 'Comprueba tu evolución en extensiones de cabello',
         text:
-          'Al concluir la Guía Práctica de Mega Hair 3 en 1, recibes un certificado para registrar tu camino de aprendizaje y reforzar tu presentación profesional.',
+          'Al concluir la Guía Práctica de Extensiones de Cabello 3 en 1, recibes un certificado para registrar tu camino de aprendizaje y reforzar tu presentación profesional.',
         items: [
           'Certificado digital de conclusión',
           'Ideal para presentar en el portafolio profesional',
           'Más confianza para divulgar tus nuevos servicios',
         ],
-        mockupLabel: 'Mockup del certificado Mega Hair 3 en 1',
+        mockupLabel: 'Mockup del certificado Extensiones de Cabello 3 en 1',
         small: 'Certificado de Conclusión',
         certificateText:
-          'Concedido a la alumna que concluyó la guía práctica online con foco en Punto Americano, Cinta Adhesiva y Cápsula de Queratina.',
+          'Concedido a la alumna que concluyó la guía práctica online con foco en Punto Americano, Extensiones Adhesivas y Cápsula de Queratina.',
       },
     }
   : {
