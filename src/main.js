@@ -16,9 +16,11 @@ import resultado09Img from './assets/resultado-09.webp'
 import professoraImg from './assets/anna-schossig-professora.webp'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
+const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/UruirxE'
+const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 59.00, currency: 'BRL' }
@@ -579,6 +581,95 @@ const heroOfferItems = (items) =>
     )
     .join('')
 
+const renderFreeClassPage = () => {
+  document.documentElement.lang = 'pt-BR'
+  document.title = 'Aula Gratuita de Mega Hair - Anna Schossig'
+
+  document.querySelector('#app').innerHTML = `
+    <main class="free-class-page">
+      <section class="free-hero" aria-labelledby="free-hero-title">
+        <div class="free-hero-copy">
+          <span class="free-kicker">Aula gratuita no Instagram</span>
+          <h1 id="free-hero-title">
+            Aprenda 3 técnicas de Mega Hair ao vivo comigo
+          </h1>
+          <p>
+            Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês, e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.
+          </p>
+
+          <p class="free-class-time" aria-label="Data e horário da aula gratuita">
+            <span>Próxima segunda-feira</span>
+            <strong>20h no Instagram</strong>
+          </p>
+
+          <a class="free-button" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
+            Participar da aula gratuita
+          </a>
+
+          <small>Ao vivo, gratuito e com foco em aplicação prática.</small>
+        </div>
+
+        <figure class="free-hero-photo">
+          <img src="${professoraImg}" alt="Anna Schossig, professora de Mega Hair" width="760" height="1140" fetchpriority="high" />
+          <figcaption>
+            <strong>Anna Schossig</strong>
+            <span>Especialista em Mega Hair</span>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="free-details" aria-labelledby="free-details-title">
+        <div class="free-details-copy">
+          <span class="free-kicker">O que vai acontecer na aula</span>
+          <h2 id="free-details-title">Uma aula direta para você entender como começar no Mega Hair com mais segurança</h2>
+          <p>
+            Você vai ver como funcionam as técnicas Ponto Americano, Fita Adesiva e Cápsula de Queratina, quando indicar cada uma e quais cuidados fazem diferença para entregar um resultado natural.
+          </p>
+        </div>
+
+        <div class="free-details-list" aria-label="Conteúdo da aula gratuita">
+          <article>
+            <span>01</span>
+            <h3>3 técnicas em uma aula</h3>
+            <p>Entenda as diferenças entre Ponto Americano, Fita Adesiva e Cápsula de Queratina.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Indicação e acabamento</h3>
+            <p>Veja o que observar para escolher a técnica certa e buscar um resultado mais natural.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Próximo passo claro</h3>
+            <p>Saia sabendo como começar a estudar e praticar para oferecer esse serviço.</p>
+          </article>
+        </div>
+
+        <a class="free-button free-button-secondary" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
+          Entrar no grupo gratuito
+        </a>
+      </section>
+    </main>
+  `
+
+  document.querySelectorAll('.free-button').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (typeof fbq !== 'undefined') {
+        fbq('trackCustom', 'CliqueAulaGratuita', {
+          content_name: 'Aula Gratuita Mega Hair',
+          value: 0,
+          currency: 'BRL'
+        });
+      }
+
+      trackFunnel('Lead')
+    })
+  })
+}
+
+if (isFreeClassPage) {
+  renderFreeClassPage()
+} else {
 document.querySelector('#app').innerHTML = `
   <main class="page-shell">
     <section class="hero-section" aria-labelledby="hero-title">
@@ -1038,3 +1129,4 @@ techniqueCarousel?.addEventListener('scroll', () => {
 techniqueMedia.addEventListener('change', startTechniqueAuto)
 reduceMotion.addEventListener('change', startTechniqueAuto)
 startTechniqueAuto()
+}

@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
         es: fileURLToPath(new URL('./es/index.html', import.meta.url)),
+        aulaGratuita: fileURLToPath(new URL('./aula-gratuita/index.html', import.meta.url)),
       },
     },
   },
