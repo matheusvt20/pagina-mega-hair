@@ -594,7 +594,7 @@ const renderFreeClassPage = () => {
             Aprenda 3 técnicas de Mega Hair ao vivo comigo
           </h1>
           <p>
-            Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês, e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.
+            Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês e que você também pode começar a oferecer, mesmo sendo iniciante.
           </p>
 
           <p class="free-class-time" aria-label="Data e horário da aula gratuita">

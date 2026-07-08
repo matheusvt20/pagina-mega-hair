@@ -1869,6 +1869,7 @@ h1 span {
   font-size: clamp(1.02rem, 1.38vw, 1.28rem);
   font-weight: 680;
   line-height: 1.55;
+  text-align: left;
 }
 
 .free-class-time {
@@ -3512,6 +3513,10 @@ h1 span {
   .free-hero-copy small {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .free-hero-copy > p {
+    text-align: left;
   }
 
   .free-hero-photo {
