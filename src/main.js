@@ -603,7 +603,7 @@ const renderFreeClassPage = () => {
           </p>
 
           <a class="free-button" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
-            Participar da aula gratuita
+            Entre para o grupo de espera
           </a>
 
           <small>Ao vivo, gratuito e com foco em aplicação prática.</small>
@@ -646,7 +646,7 @@ const renderFreeClassPage = () => {
         </div>
 
         <a class="free-button free-button-secondary" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
-          Entrar no grupo gratuito
+          Entre para o grupo de espera
         </a>
       </section>
     </main>
