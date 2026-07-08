@@ -2,7 +2,7 @@ import './style.css'
 import { getCheckoutUrl, getCookie } from '@/lib/checkoutUrl'
 import { trackFunnel } from '@/lib/funnelTrack'
 import pontoAmericanoImg from './assets/1.webp'
-import fitaAdesivaImg from './assets/2.webp'
+import fitaAdesivaImg from './assets/fita-adesiva.webp'
 import capsulaImg from './assets/3.webp'
 import resultado01Img from './assets/resultado-01.webp'
 import resultado02Img from './assets/resultado-02.webp'
@@ -22,6 +22,8 @@ const checkoutUrl = isSpanishPage
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 59.00, currency: 'BRL' }
+const heroVideoUrl =
+  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea'
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
@@ -147,7 +149,23 @@ const pageText = isSpanishPage
         installments: 'Últimas plazas a un precio especial',
         fullPrice: 'con certificado',
         microcopy: 'Acceso online por 1 año con certificado',
-        mediaLabel: 'Imágenes de las técnicas de extensiones de cabello de la guía práctica',
+        mediaLabel: 'Video de presentación de la guía práctica',
+        videoTitle: 'Video de presentación de la guía práctica de extensiones de cabello',
+        oldPrice: 'R$397,00',
+        priceKicker: 'Por apenas',
+        price: 'R$59',
+        risk: 'Riesgo cero!',
+        urgency: 'Pero necesitas actuar rápido!',
+        bonuses: [
+          'Curso de Punto Americano, Extensiones Adhesivas y Cápsula de Queratina',
+        ],
+        includes: [
+          'Acceso por 1 año',
+          'Certificado',
+          'Lista de proveedores',
+          'Material de apoyo',
+        ],
+        limited: 'Oferta disponible por tiempo limitado',
       },
       techniques: {
         title: 'Conoce las 3 técnicas',
@@ -364,7 +382,23 @@ const pageText = isSpanishPage
         installments: '12x de R$ 6,10',
         fullPrice: 'ou R$ 59,00 à vista',
         microcopy: 'Acesso online por 1 ano com certificado',
-        mediaLabel: 'Imagens das técnicas de Mega Hair do treinamento',
+        mediaLabel: 'Vídeo de apresentação do treinamento',
+        videoTitle: 'Vídeo de apresentação do treinamento Mega Hair 3 em 1',
+        oldPrice: 'R$397,00',
+        priceKicker: 'Por apenas',
+        price: 'R$59',
+        risk: 'Risco zero!',
+        urgency: 'Mas você precisa agir rápido!',
+        bonuses: [
+          'Curso de Ponto Americano, Fita Adesiva e Cápsula de Queratina',
+        ],
+        includes: [
+          'Acesso por 1 ano',
+          'Certificado',
+          'Lista de fornecedores',
+          'Material de apoio',
+        ],
+        limited: 'Oferta disponível por tempo limitado',
       },
       techniques: {
         title: 'Conheça as 3 técnicas',
@@ -533,6 +567,18 @@ const listItems = (items, icon) =>
     )
     .join('')
 
+const heroOfferItems = (items) =>
+  items
+    .map(
+      (item) => `
+        <li>
+          <span aria-hidden="true">✓</span>
+          <p>${item}</p>
+        </li>
+      `,
+    )
+    .join('')
+
 document.querySelector('#app').innerHTML = `
   <main class="page-shell">
     <section class="hero-section" aria-labelledby="hero-title">
@@ -547,35 +593,41 @@ document.querySelector('#app').innerHTML = `
         <p class="hero-subtitle">
           ${pageText.hero.subtitle}
         </p>
-
-        <div class="hero-cta">
-          <a class="hero-button" href="${checkoutUrl}">
-            ${pageText.hero.button}
-          </a>
-          <div class="hero-price">
-            <span>${pageText.hero.installments}</span>
-            <strong>${pageText.hero.fullPrice}</strong>
-          </div>
-          <p class="hero-microcopy"><span aria-hidden="true">✓</span> ${pageText.hero.microcopy}</p>
-        </div>
-
       </div>
 
       <div class="hero-media-wrap" aria-label="${pageText.hero.mediaLabel}">
-        <figure class="hero-card">
-          <div class="hero-slide hero-slide-1">
-            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" />
-            <figcaption>${pageText.techniques.cards[0].title}</figcaption>
-          </div>
-          <div class="hero-slide hero-slide-2">
-            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" />
-            <figcaption>${pageText.techniques.cards[1].title}</figcaption>
-          </div>
-          <div class="hero-slide hero-slide-3">
-            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" />
-            <figcaption>${pageText.techniques.cards[2].title}</figcaption>
-          </div>
-        </figure>
+        <div class="hero-video-card">
+          <iframe
+            id="panda-f3e0efda-2ee5-4d2d-885b-963e8df062ea"
+            class="hero-video"
+            src="${heroVideoUrl}"
+            title="${pageText.hero.videoTitle}"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen
+            width="720"
+            height="360"
+            fetchpriority="high"
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="hero-cta hero-offer">
+        <div class="hero-offer-price">
+          <p class="hero-old-price">De <span>${pageText.hero.oldPrice}</span></p>
+          <p class="hero-price-kicker">${pageText.hero.priceKicker}</p>
+          <strong>${pageText.hero.price}</strong>
+          <p class="hero-risk">${pageText.hero.risk}</p>
+          <p class="hero-urgency">${pageText.hero.urgency}</p>
+        </div>
+
+        <ul class="hero-offer-list">
+          ${heroOfferItems([...pageText.hero.bonuses, ...pageText.hero.includes])}
+        </ul>
+
+        <a class="hero-button" href="${checkoutUrl}">
+          ${pageText.hero.button}
+        </a>
+        <p class="hero-microcopy">${pageText.hero.limited}</p>
       </div>
 
     </section>
@@ -738,7 +790,6 @@ document.querySelector('#app').innerHTML = `
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
         <div class="offer-header">
-          <span class="offer-kicker">${pageText.offer.kicker}</span>
           <h2 id="offer-title">${pageText.offer.title}</h2>
         </div>
 
