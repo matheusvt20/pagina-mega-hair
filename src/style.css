@@ -2175,61 +2175,63 @@ h1 span {
 
   .hero-cta.hero-offer {
     width: 100%;
-    gap: 10px;
+    gap: 14px;
     padding-top: 2px;
   }
 
   .hero-old-price {
-    font-size: clamp(0.95rem, 4.6vw, 1.25rem);
+    font-size: clamp(1.25rem, 6.2vw, 1.7rem);
   }
 
   .hero-price-kicker {
-    margin-top: 6px;
-    font-size: clamp(0.78rem, 3.8vw, 1rem);
+    margin-top: 8px;
+    font-size: clamp(1rem, 5vw, 1.28rem);
   }
 
   .hero-offer-price strong {
-    margin-top: 4px;
-    font-size: clamp(2.7rem, 11.5vw, 3.45rem);
+    margin-top: 6px;
+    font-size: clamp(3.8rem, 17vw, 5rem);
   }
 
   .hero-risk {
-    margin-top: 10px;
-    font-size: clamp(0.98rem, 4.5vw, 1.28rem);
+    margin-top: 12px;
+    font-size: clamp(1.32rem, 6.1vw, 1.76rem);
   }
 
   .hero-urgency {
-    margin-top: 6px;
-    font-size: 0.7rem;
+    margin-top: 8px;
+    font-size: 0.9rem;
   }
 
   .hero-offer-list {
-    gap: 6px;
+    width: 100%;
+    gap: 10px;
+    padding-inline: 8px;
   }
 
   .hero-offer-list li {
-    gap: 7px;
+    gap: 10px;
   }
 
   .hero-offer-list li span {
-    width: 18px;
-    height: 18px;
-    font-size: 0.66rem;
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
   }
 
   .hero-offer-list p {
-    font-size: 0.7rem;
+    font-size: 0.95rem;
   }
 
   .hero-offer .hero-button {
-    min-height: 48px;
-    font-size: 0.66rem;
+    min-height: 56px;
+    font-size: 0.78rem;
   }
 
   .hero-microcopy {
     justify-content: center;
     margin-top: 0;
-    font-size: 0.86rem;
+    font-size: 1rem;
     text-align: center;
     white-space: normal;
   }
