@@ -555,7 +555,7 @@ const pageText = isSpanishPage
         total: 'Valor total:',
         today: 'Hoje, pagamento único...',
         essentialPayment: 'Pagamento único',
-        essentialPrice: 'R$ 37,00',
+        essentialPrice: 'R$ 59,00',
         essentialAccess: '1 ano de acesso',
         price: 'R$ 197,00',
         priceText: '12x de R$ 20,37',
