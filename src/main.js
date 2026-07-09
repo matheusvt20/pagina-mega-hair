@@ -574,7 +574,7 @@ const pageText = isSpanishPage
           { included: false, text: 'Bônus 1: Curso de Acabamento Perfeito' },
           { included: false, text: 'Bônus 2: IA para Profissionais de Mega Hair' },
           { included: false, text: 'Bônus 3: Pack de Prompts Prontos' },
-          { included: false, text: 'Bônus 4: Lista de Fornecedores Confiáveis' },
+          { included: true, text: 'Bônus 4: Lista de Fornecedores Confiáveis' },
           { included: false, text: 'Bônus 5: Mentoria em Grupo' },
           { included: false, text: 'Bônus 6: Grupo de Alunas' },
           { included: false, text: 'Bônus extra: Guia para Cobrar Certo e Lucrar Mais' },
