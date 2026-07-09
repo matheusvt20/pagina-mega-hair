@@ -859,7 +859,7 @@ document.querySelector('#app').innerHTML = `
           ${heroOfferItems([...pageText.hero.bonuses, ...pageText.hero.includes])}
         </ul>
 
-        <a class="hero-button" href="${checkoutUrl}">
+        <a class="hero-button" href="#comprar">
           ${pageText.hero.button}
         </a>
         <p class="hero-microcopy">${pageText.hero.limited}</p>
@@ -1159,6 +1159,7 @@ const redirectToCheckout = async (baseUrl) => {
 document.querySelectorAll('.hero-button').forEach((button) => {
   button.addEventListener('click', function(event) {
     event.preventDefault()
+    const offerSection = document.querySelector('#comprar')
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueHero', {
@@ -1168,11 +1169,7 @@ document.querySelectorAll('.hero-button').forEach((button) => {
       });
     }
 
-    window.setTimeout(() => {
-      trackFunnel('InitiateCheckout')
-      sendInitiateCheckout().catch(() => {})
-      window.location.href = getCheckoutUrl(checkoutUrl)
-    }, 300)
+    offerSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   });
 });
 
