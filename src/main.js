@@ -21,12 +21,18 @@ const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] =
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/TR0aS19'
+const essentialCheckoutUrl = isSpanishPage
+  ? checkoutUrl
+  : 'https://pay.kiwify.com.br/UruirxE'
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 197.00, currency: 'BRL' }
+const essentialCheckoutTracking = isSpanishPage
+  ? checkoutTracking
+  : { value: 59.00, currency: 'BRL' }
 const heroVideoUrl =
-  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea'
+  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea&autoplay=true&preload=true'
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
@@ -837,10 +843,11 @@ document.querySelector('#app').innerHTML = `
             class="hero-video"
             src="${heroVideoUrl}"
             title="${pageText.hero.videoTitle}"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allow="accelerometer; autoplay; encrypted-media; fullscreen; gyroscope; picture-in-picture"
             allowfullscreen
+            loading="eager"
             width="720"
-            height="360"
+            height="1280"
             fetchpriority="high"
           ></iframe>
         </div>
@@ -1037,7 +1044,12 @@ document.querySelector('#app').innerHTML = `
               ${offerFeatureItems(pageText.offer.essentialFeatures)}
             </ul>
 
-            <a class="offer-button offer-button-muted" href="${checkoutUrl}">${pageText.offer.essentialButton}</a>
+            <a
+              class="offer-button offer-button-muted"
+              href="${essentialCheckoutUrl}"
+              data-checkout-value="${essentialCheckoutTracking.value}"
+              data-checkout-currency="${essentialCheckoutTracking.currency}"
+            >${pageText.offer.essentialButton}</a>
           </article>
 
           <article class="offer-card offer-card-complete">
@@ -1062,7 +1074,12 @@ document.querySelector('#app').innerHTML = `
               ${pageText.offer.priceAccess ? `<small>${pageText.offer.priceAccess}</small>` : ''}
             </div>
 
-            <a class="offer-button" href="${checkoutUrl}">${pageText.offer.button}</a>
+            <a
+              class="offer-button"
+              href="${checkoutUrl}"
+              data-checkout-value="${checkoutTracking.value}"
+              data-checkout-currency="${checkoutTracking.currency}"
+            >${pageText.offer.button}</a>
 
             <div class="offer-timer">
               <span>${pageText.offer.timer}</span>
@@ -1176,19 +1193,22 @@ document.querySelectorAll('.hero-button').forEach((button) => {
 document.querySelectorAll('.offer-button').forEach((button) => {
   button.addEventListener('click', function(event) {
     event.preventDefault()
+    const targetUrl = button.getAttribute('href') || checkoutUrl
+    const eventValue = Number(button.dataset.checkoutValue || checkoutTracking.value)
+    const eventCurrency = button.dataset.checkoutCurrency || checkoutTracking.currency
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
         content_name: pageText.checkoutContentName,
-        value: checkoutTracking.value,
-        currency: checkoutTracking.currency
+        value: eventValue,
+        currency: eventCurrency
       });
     }
 
     window.setTimeout(() => {
       trackFunnel('InitiateCheckout')
       sendInitiateCheckout().catch(() => {})
-      window.location.href = getCheckoutUrl(checkoutUrl)
+      window.location.href = getCheckoutUrl(targetUrl)
     }, 300)
   });
 });
