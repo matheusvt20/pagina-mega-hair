@@ -14,16 +14,17 @@ import resultado07Img from './assets/resultado-07.webp'
 import resultado08Img from './assets/resultado-08.webp'
 import resultado09Img from './assets/resultado-09.webp'
 import professoraImg from './assets/anna-schossig-professora.webp'
+import megaHairOfferImg from './assets/mega-hair-offer.png'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
-  : 'https://pay.kiwify.com.br/UruirxE'
+  : 'https://pay.kiwify.com.br/TR0aS19'
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
-  : { value: 59.00, currency: 'BRL' }
+  : { value: 197.00, currency: 'BRL' }
 const heroVideoUrl =
   'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea'
 
@@ -224,11 +225,18 @@ const pageText = isSpanishPage
       },
       offer: {
         kicker: 'Lo que está incluido',
-        title: 'Todo lo que recibes hoy',
+        title: 'Elige la mejor oferta para ti',
+        headline: 'Elige la mejor oferta para ti',
+        essentialTitle: 'Oferta esencial',
+        completeTitle: 'Oferta completa',
+        completeSubtitle: '(mejor opción)',
+        bestSeller: 'Más vendido',
+        stars: '★★★★★',
         ribbon: 'Oferta completa',
         badge: 'Más elegido',
         label: 'Completo',
         name: 'Guía Práctica de Extensiones de Cabello 3 en 1',
+        visualAlt: 'Material del entrenamiento de extensiones de cabello 3 en 1',
         couponLabel: 'Cupón liberado',
         couponTitle: 'Ganaste un cupón de descuento',
         couponText: 'Últimas plazas a un precio especial – con certificado.',
@@ -236,19 +244,73 @@ const pageText = isSpanishPage
         summaryText: 'Guía práctica online de extensiones de cabello 3 en 1 con clases prácticas, certificado y bonos liberados.',
         bonusLabel: 'Bonos liberados en el acceso',
         bonuses: [
-          'App de Agenda',
-          'App de Agenda Automática para que tus clientas marquen horario solas',
-          'App de Control Financiero',
-          'Curso de Tráfico Pago para profesionales de belleza',
+          'Curso de Acabado Perfecto',
+          'IA para Profesionales de Extensiones de Cabello',
+          'Pack de Prompts Listos',
+          'Lista de Proveedores Confiables',
+          'Mentoría en Grupo',
+          'Grupo de Alumnas',
+          'Guía para Cobrar Correcto y Ganar Más',
+          'App de Gestión y Agenda',
+          'Clientes con Anuncios para Extensiones de Cabello',
+          'Kit de Contratos y Documentos',
+          'Scripts Listos para Cerrar Clientas en WhatsApp',
+          'Calendario de Contenido para Instagram',
         ],
         free: 'Gratis',
         total: 'Valor total:',
+        today: 'Hoy, pago único...',
+        essentialPayment: 'Pago único',
+        essentialPrice: 'Precio especial',
+        essentialAccess: '1 año de acceso',
         price: 'Precio especial',
         priceText: 'Últimas plazas a un precio especial',
         access: 'Con certificado · 1 año de acceso',
         oldPrice: 'Precio regular',
+        essentialButton: 'Quiero esta opción',
         button: 'Garantizar acceso ahora',
+        warning: 'Aprovecha ahora: no encontrarás esta condición después.',
         timer: 'Esta condición termina en',
+        essentialFeatures: [
+          { included: true, text: 'Guía Práctica de Extensiones de Cabello 3 en 1' },
+          { included: true, text: 'Acceso al contenido por 1 año' },
+          { included: true, text: 'Garantía por 7 días' },
+          { included: true, text: 'Certificado de conclusión' },
+          { included: false, text: 'Bono 1: Curso de Acabado Perfecto' },
+          { included: false, text: 'Bono 2: IA para Profesionales de Extensiones de Cabello' },
+          { included: false, text: 'Bono 3: Pack de Prompts Listos' },
+          { included: false, text: 'Bono 4: Lista de Proveedores Confiables' },
+          { included: false, text: 'Bono 5: Mentoría en Grupo' },
+          { included: false, text: 'Bono 6: Grupo de Alumnas' },
+          { included: false, text: 'Bono extra: Guía para Cobrar Correcto y Ganar Más' },
+          { included: false, text: 'Bono extra: App gratuito de gestión para agendas, marcaciones automáticas y control financiero' },
+          { included: false, text: 'Bono extra: Clientes con Anuncios para Extensiones de Cabello' },
+          { included: false, text: 'Bono extra: Kit de Contratos y Documentos' },
+          { included: false, text: 'Bono extra: Scripts Listos para Cerrar Clientas en WhatsApp' },
+          { included: false, text: 'Bono extra: Calendario de Contenido para Instagram' },
+        ],
+        completeFeatures: [
+          { included: true, text: 'Guía Práctica de Extensiones de Cabello 3 en 1' },
+          { included: true, text: 'Acceso vitalicio' },
+          { included: true, text: 'Garantía por 7 días' },
+          { included: true, text: 'Certificado de conclusión' },
+          { included: true, text: 'Bono 1: Curso de Acabado Perfecto' },
+          { included: true, text: 'Bono 2: IA para Profesionales de Extensiones de Cabello' },
+          { included: true, text: 'Bono 3: Pack de Prompts Listos' },
+          { included: true, text: 'Bono 4: Lista de Proveedores Confiables' },
+          { included: true, text: 'Bono 5: Mentoría en Grupo' },
+          { included: true, text: 'Bono 6: Grupo de Alumnas' },
+          { included: true, extra: true, text: 'Bono extra: Guía para Cobrar Correcto y Ganar Más' },
+          {
+            included: true,
+            extra: true,
+            text: 'Bono extra: App gratuito de gestión para agendas, marcaciones automáticas y control financiero',
+          },
+          { included: true, extra: true, text: 'Bono extra: Clientes con Anuncios para Extensiones de Cabello' },
+          { included: true, extra: true, text: 'Bono extra: Kit de Contratos y Documentos' },
+          { included: true, extra: true, text: 'Bono extra: Scripts Listos para Cerrar Clientas en WhatsApp' },
+          { included: true, extra: true, text: 'Bono extra: Calendario de Contenido para Instagram' },
+        ],
       },
       certificate: {
         kicker: 'Certificado incluido',
@@ -457,31 +519,98 @@ const pageText = isSpanishPage
       },
       offer: {
         kicker: 'O que está incluído',
-        title: 'Tudo que você recebe hoje',
+        title: 'Escolha a melhor oferta para você',
+        headline: 'Escolha a melhor oferta para você',
+        essentialTitle: 'Oferta essencial',
+        completeTitle: 'Oferta completa',
+        completeSubtitle: '(melhor negócio)',
+        bestSeller: 'Mais vendido',
+        stars: '★★★★★',
         ribbon: 'Oferta completa',
         badge: 'Mais escolhido',
         label: 'Completo',
         name: 'Mega Hair 3 em 1',
+        visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
         couponLabel: 'Cupom liberado',
         couponTitle: 'Você ganhou um cupom de desconto',
-        couponText: 'Sua condição especial já está aplicada: 12x de R$ 6,10 ou R$ 59,00 à vista.',
+        couponText: 'Sua condição especial já está aplicada: 12x de R$ 20,37 ou R$ 197,00 à vista.',
         summaryLabel: 'Resumo',
         summaryText: 'Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.',
         bonusLabel: 'Bônus liberados no acesso',
         bonuses: [
-          'App de Agendamento',
-          'App de Agendamento Automático para suas clientes marcarem horário sozinhas',
-          'App de Controle Financeiro',
-          'Curso de Tráfego Pago para profissionais da beleza',
+          'Curso de Acabamento Perfeito',
+          'IA para Profissionais de Mega Hair',
+          'Pack de Prompts Prontos',
+          'Lista de Fornecedores Confiáveis',
+          'Mentoria em Grupo',
+          'Grupo de Alunas',
+          'Guia para Cobrar Certo e Lucrar Mais',
+          'App de Gestão e Agendamento',
+          'Clientes com Anúncios para Mega Hair',
+          'Kit de Contratos e Documentos',
+          'Scripts Prontos para Fechar Clientes no WhatsApp',
+          'Calendário de Conteúdo para Instagram',
         ],
         free: 'Gratuito',
         total: 'Valor total:',
-        price: 'R$ 59,00',
-        priceText: '12x de R$ 6,10 ou R$ 59,00 à vista',
+        today: 'Hoje, pagamento único...',
+        essentialPayment: 'Pagamento único',
+        essentialPrice: 'R$ 37,00',
+        essentialAccess: '1 ano de acesso',
+        price: 'R$ 197,00',
+        priceText: '12x de R$ 20,37',
+        priceAccess: 'Acesso vitalício',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
-        button: 'Garantir acesso completo por R$59,00',
+        essentialButton: 'Quero essa opção',
+        button: 'Garantir acesso completo por R$197,00',
+        warning: 'Aproveite agora: você não vai encontrar essa condição depois.',
         timer: 'Essa condição termina em',
+        essentialFeatures: [
+          { included: true, text: 'Treinamento Mega Hair 3 em 1' },
+          { included: true, text: 'Acesso ao conteúdo por 1 ano' },
+          { included: true, text: 'Garantia por 7 dias' },
+          { included: true, text: 'Certificado de conclusão' },
+          { included: false, text: 'Bônus 1: Curso de Acabamento Perfeito' },
+          { included: false, text: 'Bônus 2: IA para Profissionais de Mega Hair' },
+          { included: false, text: 'Bônus 3: Pack de Prompts Prontos' },
+          { included: false, text: 'Bônus 4: Lista de Fornecedores Confiáveis' },
+          { included: false, text: 'Bônus 5: Mentoria em Grupo' },
+          { included: false, text: 'Bônus 6: Grupo de Alunas' },
+          { included: false, text: 'Bônus extra: Guia para Cobrar Certo e Lucrar Mais' },
+          {
+            included: false,
+            text: 'Bônus extra: App gratuito de gestão para agendamentos, marcações automáticas e controle financeiro',
+          },
+          { included: false, text: 'Bônus extra: Clientes com Anúncios para Mega Hair' },
+          { included: false, text: 'Bônus extra: Kit de Contratos e Documentos' },
+          { included: false, text: 'Bônus extra: Scripts Prontos para Fechar Clientes no WhatsApp' },
+          { included: false, text: 'Bônus extra: Calendário de Conteúdo para Instagram' },
+          { included: false, text: 'Bônus extra: Guia de cuidados e manutenção' },
+        ],
+        completeFeatures: [
+          { included: true, text: 'Treinamento Mega Hair 3 em 1' },
+          { included: true, text: 'Acesso vitalício' },
+          { included: true, text: 'Garantia por 7 dias' },
+          { included: true, text: 'Certificado de conclusão' },
+          { included: true, text: 'Bônus 1: Curso de Acabamento Perfeito' },
+          { included: true, text: 'Bônus 2: IA para Profissionais de Mega Hair' },
+          { included: true, text: 'Bônus 3: Pack de Prompts Prontos' },
+          { included: true, text: 'Bônus 4: Lista de Fornecedores Confiáveis' },
+          { included: true, text: 'Bônus 5: Mentoria em Grupo' },
+          { included: true, text: 'Bônus 6: Grupo de Alunas' },
+          { included: true, extra: true, text: 'Bônus extra: Guia para Cobrar Certo e Lucrar Mais' },
+          {
+            included: true,
+            extra: true,
+            text: 'Bônus extra: App gratuito de gestão para agendamentos, marcações automáticas e controle financeiro',
+          },
+          { included: true, extra: true, text: 'Bônus extra: Clientes com Anúncios para Mega Hair' },
+          { included: true, extra: true, text: 'Bônus extra: Kit de Contratos e Documentos' },
+          { included: true, extra: true, text: 'Bônus extra: Scripts Prontos para Fechar Clientes no WhatsApp' },
+          { included: true, extra: true, text: 'Bônus extra: Calendário de Conteúdo para Instagram' },
+          { included: true, extra: true, text: 'Bônus extra: Guia de cuidados e manutenção' },
+        ],
       },
       certificate: {
         kicker: 'Certificado incluso',
@@ -576,6 +705,21 @@ const heroOfferItems = (items) =>
         <li>
           <span aria-hidden="true">✓</span>
           <p>${item}</p>
+        </li>
+      `,
+    )
+    .join('')
+
+const offerFeatureItems = (items) =>
+  items
+    .map(
+      (item) => `
+        <li class="${item.included ? 'is-included' : 'is-excluded'}${item.extra ? ' is-extra' : ''}">
+          <span aria-hidden="true">${item.included ? '✓' : '×'}</span>
+          <p>
+            ${item.text}
+            ${item.detail ? `<small>${item.detail}</small>` : ''}
+          </p>
         </li>
       `,
     )
@@ -880,57 +1024,54 @@ document.querySelector('#app').innerHTML = `
 
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
-        <div class="offer-header">
-          <h2 id="offer-title">${pageText.offer.title}</h2>
-        </div>
+        <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
-        <article class="offer-card">
-          <div class="offer-ribbon">${pageText.offer.ribbon}</div>
-          <div class="offer-badge">${pageText.offer.badge}</div>
+        <div class="offer-comparison">
+          <article class="offer-card offer-card-essential">
+            <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
+            <span class="offer-payment">${pageText.offer.essentialPayment}</span>
+            <strong class="offer-plan-price">${pageText.offer.essentialPrice}</strong>
+            <small>${pageText.offer.essentialAccess}</small>
 
-          <div class="offer-name">
-            <span>${pageText.offer.label}</span>
-            <h3>${pageText.offer.name}</h3>
-          </div>
-
-          <div class="offer-coupon">
-            <span>${pageText.offer.couponLabel}</span>
-            <strong>${pageText.offer.couponTitle}</strong>
-            <p>${pageText.offer.couponText}</p>
-          </div>
-
-          <div class="offer-summary">
-            <span>${pageText.offer.summaryLabel}</span>
-            <p>${pageText.offer.summaryText}</p>
-
-            <div class="offer-divider"></div>
-
-            <span>${pageText.offer.bonusLabel}</span>
-            <ul>
-              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[0]}</p><em>${pageText.offer.free}</em></li>
-              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[1]}</p><em>${pageText.offer.free}</em></li>
-              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[2]}</p><em>${pageText.offer.free}</em></li>
-              <li><b aria-hidden="true">+</b><p>${pageText.offer.bonuses[3]}</p><em>${pageText.offer.free}</em></li>
+            <ul class="offer-feature-list">
+              ${offerFeatureItems(pageText.offer.essentialFeatures)}
             </ul>
-          </div>
 
-          <div class="offer-price">
-            <div>
-              <span>${pageText.offer.total}</span>
+            <a class="offer-button offer-button-muted" href="${checkoutUrl}">${pageText.offer.essentialButton}</a>
+          </article>
+
+          <article class="offer-card offer-card-complete">
+            <div class="offer-bestseller">${pageText.offer.bestSeller}</div>
+            <div class="offer-stars" aria-label="${pageText.offer.badge}">${pageText.offer.stars}</div>
+            <div class="offer-plan-title offer-plan-title-featured">${pageText.offer.completeTitle}</div>
+            <strong class="offer-subtitle">${pageText.offer.completeSubtitle}</strong>
+
+            <figure class="offer-product-visual">
+              <img class="offer-product-image" src="${megaHairOfferImg}" alt="${pageText.offer.visualAlt}" width="1448" height="1086" loading="lazy" />
+            </figure>
+
+            <ul class="offer-feature-list">
+              ${offerFeatureItems(pageText.offer.completeFeatures)}
+            </ul>
+
+            <div class="offer-price">
+              <del>${pageText.offer.total} ${pageText.offer.oldPrice}</del>
+              <span>${pageText.offer.today}</span>
               <strong>${pageText.offer.price}</strong>
               <p>${pageText.offer.priceText}</p>
-              <small>${pageText.offer.access}</small>
+              ${pageText.offer.priceAccess ? `<small>${pageText.offer.priceAccess}</small>` : ''}
             </div>
-            <del>${pageText.offer.oldPrice}</del>
-          </div>
 
-          <a class="offer-button" href="${checkoutUrl}">${pageText.offer.button}</a>
+            <a class="offer-button" href="${checkoutUrl}">${pageText.offer.button}</a>
 
-          <div class="offer-timer">
-            <span>${pageText.offer.timer}</span>
-            <strong>30:00</strong>
-          </div>
-        </article>
+            <div class="offer-timer">
+              <span>${pageText.offer.timer}</span>
+              <strong>30:00</strong>
+            </div>
+
+            <p class="offer-warning"><b>${pageText.offer.couponLabel}:</b> ${pageText.offer.warning}</p>
+          </article>
+        </div>
       </div>
     </section>
 
