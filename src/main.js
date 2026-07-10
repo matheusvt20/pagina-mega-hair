@@ -32,7 +32,7 @@ const essentialCheckoutTracking = isSpanishPage
   ? checkoutTracking
   : { value: 59.00, currency: 'BRL' }
 const heroVideoUrl =
-  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea&autoplay=true&preload=true'
+  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea&autoplay=false&preload=true&controls=play-large,play,progress,current-time,volume,fullscreen'
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
