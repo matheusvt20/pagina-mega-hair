@@ -1,7 +1,14 @@
-import { buildCheckoutUrl, getCookie } from "./purchaseTracking"
+import {
+  buildCheckoutUrl,
+  getCookie,
+  type MetaTrackingSnapshot,
+} from "./purchaseTracking"
 
 export { getCookie }
 
-export function getCheckoutUrl(baseUrl: string): string {
-  return buildCheckoutUrl(baseUrl)
+export function getCheckoutUrl(
+  baseUrl: string,
+  identifiers?: MetaTrackingSnapshot
+): string {
+  return buildCheckoutUrl(baseUrl, identifiers)
 }

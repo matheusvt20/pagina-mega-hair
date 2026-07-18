@@ -1,4 +1,6 @@
 const SESSION_STORAGE_KEY = "_purchase_tracking_session"
+const FBC_STORAGE_KEY = "_lansar_fbc"
+const FBC_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000
 const FBP_PATTERN = /^fb\.1\.\d{10,13}\.\d{5,30}$/
 const FBC_PATTERN = /^fb\.1\.\d{10,13}\.[A-Za-z0-9_-]{8,250}$/
 const UTM_KEYS = [
@@ -9,7 +11,21 @@ const UTM_KEYS = [
   "utm_term",
 ] as const
 
-const endpoint = (import.meta.env.VITE_TRACKING_SESSION_ENDPOINT || "").trim()
+const endpoint = (import.meta.env?.VITE_TRACKING_SESSION_ENDPOINT || "").trim()
+
+export interface MetaTrackingSnapshot {
+  fbp: string
+  fbc: string
+}
+
+interface StoredFbc {
+  value: string
+  createdAt: number
+}
+
+let currentPageFbclid = ""
+let currentPageFbc = ""
+let currentPageFbcCreatedAt = 0
 
 function randomSessionId(): string {
   if (typeof crypto.randomUUID === "function") return crypto.randomUUID()
@@ -43,14 +59,121 @@ function validCookie(name: "_fbp" | "_fbc"): string {
   return valid ? value : ""
 }
 
+function getFbclid(): string {
+  if (typeof window === "undefined") return ""
+  return new URLSearchParams(window.location.search).get("fbclid") || ""
+}
+
+function readStoredFbc(): string {
+  try {
+    const raw = window.localStorage.getItem(FBC_STORAGE_KEY)
+    if (!raw) return ""
+
+    const stored = JSON.parse(raw) as Partial<StoredFbc>
+    const isFresh =
+      typeof stored.createdAt === "number" &&
+      Date.now() - stored.createdAt >= 0 &&
+      Date.now() - stored.createdAt <= FBC_MAX_AGE_MS
+    const isValid = typeof stored.value === "string" && FBC_PATTERN.test(stored.value)
+
+    if (isFresh && isValid) return stored.value as string
+    window.localStorage.removeItem(FBC_STORAGE_KEY)
+  } catch {
+    // localStorage may be unavailable or contain invalid data.
+  }
+
+  return ""
+}
+
+function persistFbcFromFbclid(fbclid: string): string {
+  if (!fbclid) return ""
+  const inMemoryAge = Date.now() - currentPageFbcCreatedAt
+  if (
+    currentPageFbclid === fbclid &&
+    currentPageFbc &&
+    inMemoryAge >= 0 &&
+    inMemoryAge <= FBC_MAX_AGE_MS
+  ) {
+    return currentPageFbc
+  }
+
+  const stored = readStoredFbc()
+  if (stored.endsWith(`.${fbclid}`)) {
+    currentPageFbclid = fbclid
+    currentPageFbc = stored
+    currentPageFbcCreatedAt = Number(stored.split(".")[2])
+    return stored
+  }
+
+  const createdAt = Date.now()
+  const value = `fb.1.${createdAt}.${fbclid}`
+  if (!FBC_PATTERN.test(value)) return ""
+
+  currentPageFbclid = fbclid
+  currentPageFbc = value
+  currentPageFbcCreatedAt = createdAt
+
+  try {
+    window.localStorage.setItem(FBC_STORAGE_KEY, JSON.stringify({ value, createdAt }))
+  } catch {
+    // The current-page value is still usable even if persistence is unavailable.
+  }
+
+  return value
+}
+
+function cookieMetaIdentifiers(): MetaTrackingSnapshot {
+  return {
+    fbp: validCookie("_fbp"),
+    fbc: validCookie("_fbc"),
+  }
+}
+
+export function initializeMetaTracking(): void {
+  if (typeof window === "undefined") return
+  const fbclid = getFbclid()
+  if (fbclid) persistFbcFromFbclid(fbclid)
+}
+
+export function resolveMetaIdentifiers(): MetaTrackingSnapshot {
+  if (typeof window === "undefined") return { fbp: "", fbc: "" }
+
+  const fbp = validCookie("_fbp")
+  const cookieFbc = validCookie("_fbc")
+  if (cookieFbc) return Object.freeze({ fbp, fbc: cookieFbc })
+
+  const storedFbc = readStoredFbc()
+  if (storedFbc) return Object.freeze({ fbp, fbc: storedFbc })
+
+  return Object.freeze({ fbp, fbc: persistFbcFromFbclid(getFbclid()) })
+}
+
+export async function resolveMetaIdentifiersAfterFbp(
+  timeoutMs = 1500,
+  intervalMs = 100
+): Promise<MetaTrackingSnapshot> {
+  const deadline = Date.now() + timeoutMs
+
+  while (!validCookie("_fbp") && Date.now() < deadline) {
+    const remainingMs = deadline - Date.now()
+    await new Promise((resolve) => window.setTimeout(resolve, Math.min(intervalMs, remainingMs)))
+  }
+
+  return resolveMetaIdentifiers()
+}
+
 function attribution() {
   const params = new URLSearchParams(window.location.search)
   return Object.fromEntries(UTM_KEYS.map((key) => [key, params.get(key) || ""]))
 }
 
-export function capturePurchaseSession(client: string): void {
+export function capturePurchaseSession(
+  client: string,
+  identifiers?: MetaTrackingSnapshot
+): void {
   if (!endpoint || typeof window === "undefined") return
   const params = new URLSearchParams(window.location.search)
+  const tracking = identifiers || cookieMetaIdentifiers()
   void fetch(endpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -58,8 +181,8 @@ export function capturePurchaseSession(client: string): void {
       session_id: getPurchaseSessionId(),
       client,
       event_source_url: window.location.href,
-      fbp: validCookie("_fbp"),
-      fbc: validCookie("_fbc"),
+      fbp: tracking.fbp,
+      fbc: tracking.fbc,
       fbclid: params.get("fbclid") || "",
       ...attribution(),
     }),
@@ -67,16 +190,18 @@ export function capturePurchaseSession(client: string): void {
   }).catch(() => {})
 }
 
-export function buildCheckoutUrl(baseUrl: string): string {
+export function buildCheckoutUrl(
+  baseUrl: string,
+  identifiers?: MetaTrackingSnapshot
+): string {
   try {
     const url = new URL(baseUrl)
-    const fbp = validCookie("_fbp")
-    const fbc = validCookie("_fbc")
 
     if (/(^|\.)kiwify\.com(\.br)?$/i.test(url.hostname)) {
-      if (fbp) url.searchParams.set("s1", fbp)
-      if (fbc) url.searchParams.set("s2", fbc)
-      url.searchParams.set("s3", getPurchaseSessionId())
+      const tracking = identifiers || resolveMetaIdentifiers()
+      if (tracking.fbp) url.searchParams.set("src", tracking.fbp)
+      if (tracking.fbc) url.searchParams.set("sck", tracking.fbc)
+      url.searchParams.set("s1", getPurchaseSessionId())
       for (const [key, value] of Object.entries(attribution())) {
         if (value) url.searchParams.set(key, value)
       }
@@ -86,8 +211,9 @@ export function buildCheckoutUrl(baseUrl: string): string {
     if (/(^|\.)hotmart\.com$/i.test(url.hostname)) {
       // Preserve the exact legacy Hotmart attribution contract. Additional
       // parameters require proof from a real masked webhook before inclusion.
-      if (fbp) url.searchParams.set("src", fbp)
-      if (fbc) url.searchParams.set("sck", fbc)
+      const tracking = identifiers || cookieMetaIdentifiers()
+      if (tracking.fbp) url.searchParams.set("src", tracking.fbp)
+      if (tracking.fbc) url.searchParams.set("sck", tracking.fbc)
       return url.toString()
     }
 

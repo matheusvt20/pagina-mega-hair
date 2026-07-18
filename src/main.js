@@ -1,7 +1,12 @@
 import './style.css'
 import { getCheckoutUrl, getCookie } from '@/lib/checkoutUrl'
 import { trackFunnel } from '@/lib/funnelTrack'
-import { capturePurchaseSession } from '@/lib/purchaseTracking'
+import {
+  capturePurchaseSession,
+  initializeMetaTracking,
+  resolveMetaIdentifiers,
+  resolveMetaIdentifiersAfterFbp,
+} from '@/lib/purchaseTracking'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/fita-adesiva.webp'
 import capsulaImg from './assets/3.webp'
@@ -19,7 +24,12 @@ import megaHairOfferImg from './assets/mega-hair-offer.png'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
-capturePurchaseSession(isSpanishPage ? 'anna-es' : 'anna')
+const isBrazilSalesPage = window.location.pathname.split('/').filter(Boolean).length === 0
+if (isBrazilSalesPage) initializeMetaTracking()
+capturePurchaseSession(
+  isSpanishPage ? 'anna-es' : 'anna',
+  isBrazilSalesPage ? resolveMetaIdentifiers() : undefined,
+)
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/TR0aS19'
@@ -1124,9 +1134,9 @@ document.querySelector('#app').innerHTML = `
   </main>
 `
 
-const sendInitiateCheckout = async () => {
-  const fbp = getCookie('_fbp')
-  const fbc = getCookie('_fbc')
+const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) => {
+  const fbp = identifiers?.fbp ?? getCookie('_fbp')
+  const fbc = identifiers?.fbc ?? getCookie('_fbc')
   const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
   const payload = JSON.stringify({
     client: isSpanishPage ? 'anna-es' : 'anna',
@@ -1137,8 +1147,8 @@ const sendInitiateCheckout = async () => {
     ...(externalId ? { external_id: externalId } : {}),
     eventData: {
       content_name: pageText.checkoutContentName,
-      value: checkoutTracking.value,
-      currency: checkoutTracking.currency,
+      value: tracking.value,
+      currency: tracking.currency,
     },
   })
 
@@ -1168,11 +1178,6 @@ const sendMetaEvent = (payload) => {
     body: payload,
     keepalive: true,
   }).catch(() => {})
-}
-
-const redirectToCheckout = async (baseUrl) => {
-  await sendInitiateCheckout().catch(() => {})
-  window.location.href = getCheckoutUrl(baseUrl)
 }
 
 document.querySelectorAll('.hero-button').forEach((button) => {
@@ -1205,6 +1210,18 @@ document.querySelectorAll('.offer-button').forEach((button) => {
         value: eventValue,
         currency: eventCurrency
       });
+    }
+
+    if (isBrazilSalesPage) {
+      resolveMetaIdentifiersAfterFbp()
+        .catch(() => Object.freeze({ fbp: '', fbc: '' }))
+        .then((identifiers) => {
+          const tracking = { value: eventValue, currency: eventCurrency }
+          trackFunnel('InitiateCheckout')
+          sendInitiateCheckout(identifiers, tracking).catch(() => {})
+          window.location.href = getCheckoutUrl(targetUrl, identifiers)
+        })
+      return
     }
 
     window.setTimeout(() => {
