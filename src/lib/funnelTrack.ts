@@ -1,20 +1,5 @@
 const FUNNEL_ENDPOINT = "https://dugqmsclhybfxvrljemx.supabase.co/functions/v1/funnel-track"
-const SESSION_STORAGE_KEY = "_lid"
-
-const getSessionId = (): string => {
-  const nextSessionId = `lid_${Date.now()}_${Math.random().toString(36).slice(2)}`
-
-  try {
-    const currentSessionId = window.localStorage[SESSION_STORAGE_KEY]
-    if (currentSessionId) return currentSessionId
-
-    window.localStorage[SESSION_STORAGE_KEY] = nextSessionId
-  } catch {
-    return nextSessionId
-  }
-
-  return nextSessionId
-}
+import { getPurchaseSessionId } from "./purchaseTracking"
 
 const getUtmValue = (params: URLSearchParams, name: string): string => {
   return params.get(name) || ""
@@ -31,13 +16,15 @@ export function trackFunnel(eventName: string): void {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        session_id: getSessionId(),
+        session_id: getPurchaseSessionId(),
         client: window.location.pathname.split('/').filter(Boolean)[0] === 'es' ? 'anna-es' : 'anna',
         event_name: eventName,
         creative: utmContent,
         utm_source: getUtmValue(params, "utm_source"),
+        utm_medium: getUtmValue(params, "utm_medium"),
         utm_campaign: getUtmValue(params, "utm_campaign"),
         utm_content: utmContent,
+        utm_term: getUtmValue(params, "utm_term"),
         page_url: window.location.href,
       }),
       keepalive: true,

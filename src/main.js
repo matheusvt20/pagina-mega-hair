@@ -1,6 +1,7 @@
 import './style.css'
 import { getCheckoutUrl, getCookie } from '@/lib/checkoutUrl'
 import { trackFunnel } from '@/lib/funnelTrack'
+import { capturePurchaseSession } from '@/lib/purchaseTracking'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/fita-adesiva.webp'
 import capsulaImg from './assets/3.webp'
@@ -18,6 +19,7 @@ import megaHairOfferImg from './assets/mega-hair-offer.png'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
+capturePurchaseSession(isSpanishPage ? 'anna-es' : 'anna')
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/TR0aS19'
