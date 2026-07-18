@@ -277,10 +277,11 @@ const pageText = isSpanishPage
         ],
         free: 'Gratis',
         total: 'Valor total:',
-        today: 'Hoy, pago único...',
-        essentialPayment: 'Pago único',
+        today: 'Pago único · no es una suscripción',
+        essentialPayment: 'Pago único · no es una suscripción',
         essentialPrice: 'Precio especial',
-        essentialAccess: '1 año de acceso',
+        essentialCashPrice: '',
+        essentialAccess: 'Pagas una sola vez · 1 año de acceso',
         price: 'Precio especial',
         priceText: 'Últimas plazas a un precio especial',
         access: 'Con certificado · 1 año de acceso',
@@ -463,6 +464,8 @@ const pageText = isSpanishPage
         button: 'Garantir acesso completo por R$59,00',
         installments: '12x de R$ 6,10',
         fullPrice: 'ou R$ 59,00 à vista',
+        paymentTitle: 'Não é mensalidade.',
+        paymentNote: 'Pague uma única vez e receba 3 cursos.',
         microcopy: 'Acesso online por 1 ano com certificado',
         mediaLabel: 'Vídeo de apresentação do treinamento',
         videoTitle: 'Vídeo de apresentação do treinamento Mega Hair 3 em 1',
@@ -571,13 +574,14 @@ const pageText = isSpanishPage
         ],
         free: 'Gratuito',
         total: 'Valor total:',
-        today: 'Hoje, pagamento único...',
-        essentialPayment: 'Pagamento único',
-        essentialPrice: 'R$ 59,00',
-        essentialAccess: '1 ano de acesso',
-        price: 'R$ 197,00',
-        priceText: '12x de R$ 20,37',
-        priceAccess: 'Acesso vitalício',
+        today: 'Pagamento único · não é mensalidade',
+        essentialPayment: 'Pagamento único · não é mensalidade',
+        essentialPrice: '12x de R$ 6,10',
+        essentialCashPrice: 'ou R$ 59,00 à vista',
+        essentialAccess: 'Você paga apenas uma vez · 1 ano de acesso',
+        price: '12x de R$ 20,37',
+        priceText: 'ou R$ 197,00 à vista',
+        priceAccess: 'Você paga apenas uma vez · acesso vitalício',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
         essentialButton: 'Quero essa opção',
@@ -870,6 +874,13 @@ document.querySelector('#app').innerHTML = `
           <p class="hero-old-price">De <span>${pageText.hero.oldPrice}</span></p>
           <p class="hero-price-kicker">${pageText.hero.priceKicker}</p>
           <strong>${pageText.hero.price}</strong>
+          ${pageText.hero.paymentTitle ? `
+            <div class="hero-payment-details">
+              <p>${pageText.hero.installments}</p>
+              <span>${pageText.hero.fullPrice}</span>
+              <small><b>${pageText.hero.paymentTitle}</b> ${pageText.hero.paymentNote}</small>
+            </div>
+          ` : ''}
           <p class="hero-risk">${pageText.hero.risk}</p>
           <p class="hero-urgency">${pageText.hero.urgency}</p>
         </div>
@@ -1050,6 +1061,7 @@ document.querySelector('#app').innerHTML = `
             <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
             <span class="offer-payment">${pageText.offer.essentialPayment}</span>
             <strong class="offer-plan-price">${pageText.offer.essentialPrice}</strong>
+            ${pageText.offer.essentialCashPrice ? `<p class="offer-plan-cash">${pageText.offer.essentialCashPrice}</p>` : ''}
             <small>${pageText.offer.essentialAccess}</small>
 
             <ul class="offer-feature-list">

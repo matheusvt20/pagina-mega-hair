@@ -297,6 +297,49 @@ h1 span {
   line-height: 0.88;
 }
 
+.hero-payment-details {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.hero-payment-details p,
+.hero-payment-details span,
+.hero-payment-details small {
+  margin: 0;
+}
+
+.hero-payment-details p {
+  color: #17120f;
+  font-size: clamp(1.18rem, 1.8vw, 1.65rem);
+  font-weight: 950;
+  line-height: 1.1;
+}
+
+.hero-payment-details span {
+  color: rgba(23, 18, 15, 0.7);
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  font-weight: 800;
+}
+
+.hero-payment-details small {
+  margin-top: 7px;
+  padding: 8px 12px;
+  border: 1px solid rgba(63, 131, 88, 0.32);
+  border-radius: 8px;
+  background: rgba(63, 131, 88, 0.08);
+  color: #355f42;
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.hero-payment-details small b {
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
 .hero-risk {
   margin: 12px 0 0;
   color: #17120f;
@@ -3825,19 +3868,30 @@ h1 span {
 .offer-payment {
   display: block;
   margin: 4px 0 22px;
-  color: #746f68;
+  color: #3f8358;
   font-size: 0.95rem;
+  font-weight: 950;
   line-height: 1.35;
   text-align: center;
+  text-transform: uppercase;
 }
 
 .offer-plan-price {
   display: block;
   color: #59b747;
   font-family: var(--sans);
-  font-size: clamp(2.7rem, 5.2vw, 4.2rem);
+  font-size: clamp(2rem, 3.6vw, 2.65rem);
   font-weight: 950;
   line-height: 0.95;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.offer-plan-cash {
+  margin: 10px 0 0;
+  color: #5e5952;
+  font-size: 0.92rem;
+  font-weight: 800;
   text-align: center;
 }
 
@@ -3972,9 +4026,10 @@ h1 span {
   margin-top: 10px;
   color: #59b747;
   font-family: var(--sans);
-  font-size: clamp(3.4rem, 6.2vw, 5rem);
+  font-size: clamp(2rem, 3.6vw, 2.65rem);
   font-weight: 950;
   line-height: 0.9;
+  white-space: nowrap;
 }
 
 .offer-price p {
@@ -4139,11 +4194,11 @@ h1 span {
   }
 
   .offer-plan-price {
-    font-size: clamp(2.45rem, 13vw, 3.35rem);
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
   }
 
   .offer-price strong {
-    font-size: clamp(2.8rem, 14vw, 3.8rem);
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
   }
 
   .offer-button {
