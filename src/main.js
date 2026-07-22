@@ -39,7 +39,7 @@ const essentialCheckoutUrl = isSpanishPage
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
-  : { value: 197.00, currency: 'BRL' }
+  : { value: 97.00, currency: 'BRL' }
 const essentialCheckoutTracking = isSpanishPage
   ? checkoutTracking
   : { value: 59.00, currency: 'BRL' }
@@ -556,7 +556,7 @@ const pageText = isSpanishPage
         visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
         couponLabel: 'Cupom liberado',
         couponTitle: 'Você ganhou um cupom de desconto',
-        couponText: 'Sua condição especial já está aplicada: 12x de R$ 20,37 ou R$ 197,00 à vista.',
+        couponText: 'Sua condição especial já está aplicada: 12x de R$ 10,03 ou R$ 97,00 à vista.',
         summaryLabel: 'Resumo',
         summaryText: 'Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.',
         bonusLabel: 'Bônus liberados no acesso',
@@ -581,13 +581,13 @@ const pageText = isSpanishPage
         essentialPrice: '12x de R$ 6,10',
         essentialCashPrice: 'ou R$ 59,00 à vista',
         essentialAccess: '',
-        price: '12x de R$ 20,37',
-        priceText: 'ou R$ 197,00 à vista',
+        price: '12x de R$ 10,03',
+        priceText: 'ou R$ 97,00 à vista',
         priceAccess: 'Você paga apenas uma vez · acesso vitalício',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
         essentialButton: 'Quero essa opção',
-        button: 'Garantir acesso completo por R$197,00',
+        button: 'Garantir acesso completo por R$97,00',
         warning: 'Aproveite agora: você não vai encontrar essa condição depois.',
         timer: 'Essa condição termina em',
         essentialFeatures: [
