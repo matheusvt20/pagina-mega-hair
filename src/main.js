@@ -20,7 +20,9 @@ import resultado07Img from './assets/resultado-07.webp'
 import resultado08Img from './assets/resultado-08.webp'
 import resultado09Img from './assets/resultado-09.webp'
 import professoraImg from './assets/anna-schossig-professora.webp'
-import megaHairOfferImg from './assets/mega-hair-offer.png'
+import megaHairOfferImg from './assets/mega-hair-offer.webp'
+import heroTechCompositeImg from './assets/hero-tech-composite.webp'
+import heroTechCompositeMobileImg from './assets/hero-tech-composite-mobile.webp'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
@@ -45,8 +47,6 @@ const essentialCheckoutTracking = isSpanishPage
   : { value: 59.00, currency: 'BRL' }
 const whatsappSupportMessage = 'Olá, preciso de ajuda sobre o curso de Mega Hair.'
 const whatsappSupportUrl = `https://wa.me/5521990481222?text=${encodeURIComponent(whatsappSupportMessage)}`
-const heroVideoUrl =
-  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=f3e0efda-2ee5-4d2d-885b-963e8df062ea&autoplay=false&preload=true&controls=play-large,play,progress,current-time,volume,fullscreen'
 
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
@@ -172,8 +172,8 @@ const pageText = isSpanishPage
         installments: 'Últimas plazas a un precio especial',
         fullPrice: 'con certificado',
         microcopy: 'Acceso online por 1 año con certificado',
-        mediaLabel: 'Video de presentación de la guía práctica',
-        videoTitle: 'Video de presentación de la guía práctica de extensiones de cabello',
+        mediaLabel:
+          'Anna Schossig con demostraciones profesionales de técnicas de extensiones de cabello',
         oldPrice: 'R$397,00',
         priceKicker: 'Por apenas',
         price: 'R$59',
@@ -469,8 +469,8 @@ const pageText = isSpanishPage
         paymentTitle: 'Não é mensalidade.',
         paymentNote: 'Pague uma única vez e receba 3 cursos.',
         microcopy: 'Acesso online por 1 ano com certificado',
-        mediaLabel: 'Vídeo de apresentação do treinamento',
-        videoTitle: 'Vídeo de apresentação do treinamento Mega Hair 3 em 1',
+        mediaLabel:
+          'Anna Schossig com demonstrações profissionais de técnicas de Mega Hair',
         oldPrice: 'R$397,00',
         priceKicker: 'Por apenas',
         price: 'R$59',
@@ -583,7 +583,6 @@ const pageText = isSpanishPage
         essentialAccess: '',
         price: '12x de R$ 10,03',
         priceText: 'ou R$ 97,00 à vista',
-        priceAccess: 'Você paga apenas uma vez · acesso vitalício',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
         essentialButton: 'Quero essa opção',
@@ -658,7 +657,7 @@ const resultCards = resultItems
   .map(
     (item) => `
       <figure class="result-card">
-        <img src="${item.src}" alt="${item.alt}" width="760" height="760" loading="lazy" />
+        <img src="${item.src}" alt="${item.alt}" width="760" height="760" loading="lazy" decoding="async" fetchpriority="low" />
       </figure>
     `,
   )
@@ -861,19 +860,18 @@ document.querySelector('#app').innerHTML = `
       </div>
 
       <div class="hero-media-wrap" aria-label="${pageText.hero.mediaLabel}">
-        <div class="hero-video-card">
-          <iframe
-            id="panda-f3e0efda-2ee5-4d2d-885b-963e8df062ea"
-            class="hero-video"
-            src="${heroVideoUrl}"
-            title="${pageText.hero.videoTitle}"
-            allow="accelerometer; autoplay; encrypted-media; fullscreen; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="eager"
-            width="720"
-            height="1280"
-            fetchpriority="high"
-          ></iframe>
+        <div class="hero-visual-card">
+          <picture>
+            <source media="(max-width: 700px)" srcset="${heroTechCompositeMobileImg}" />
+            <img
+              class="hero-visual"
+              src="${heroTechCompositeImg}"
+              alt="${pageText.hero.mediaLabel}"
+              width="1672"
+              height="941"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
       </div>
 
@@ -924,7 +922,7 @@ document.querySelector('#app').innerHTML = `
       <div class="technique-grid">
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" />
+            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
             <span>01</span>
           </div>
           <div class="technique-content">
@@ -935,7 +933,7 @@ document.querySelector('#app').innerHTML = `
 
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="900" height="650" loading="lazy" />
+            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="480" height="640" loading="lazy" decoding="async" fetchpriority="low" />
             <span>02</span>
           </div>
           <div class="technique-content">
@@ -946,7 +944,7 @@ document.querySelector('#app').innerHTML = `
 
         <article class="technique-card">
           <div class="technique-image">
-            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" width="900" height="650" loading="lazy" />
+            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
             <span>03</span>
           </div>
           <div class="technique-content">
@@ -1056,7 +1054,7 @@ document.querySelector('#app').innerHTML = `
         </div>
 
         <figure class="mentor-card">
-          <img src="${professoraImg}" alt="${pageText.mentor.alt}" width="760" height="1140" loading="lazy" />
+          <img src="${professoraImg}" alt="${pageText.mentor.alt}" width="760" height="1140" loading="lazy" decoding="async" fetchpriority="low" />
           <figcaption>
             <strong>${pageText.mentor.title}</strong>
             <span>${pageText.mentor.caption}</span>
@@ -1096,7 +1094,7 @@ document.querySelector('#app').innerHTML = `
             <strong class="offer-subtitle">${pageText.offer.completeSubtitle}</strong>
 
             <figure class="offer-product-visual">
-              <img class="offer-product-image" src="${megaHairOfferImg}" alt="${pageText.offer.visualAlt}" width="1448" height="1086" loading="lazy" />
+              <img class="offer-product-image" src="${megaHairOfferImg}" alt="${pageText.offer.visualAlt}" width="1000" height="750" loading="lazy" decoding="async" fetchpriority="low" />
             </figure>
 
             <ul class="offer-feature-list">
@@ -1108,7 +1106,6 @@ document.querySelector('#app').innerHTML = `
               ${pageText.offer.today ? `<span>${pageText.offer.today}</span>` : ''}
               <strong>${pageText.offer.price}</strong>
               <p>${pageText.offer.priceText}</p>
-              ${pageText.offer.priceAccess ? `<small>${pageText.offer.priceAccess}</small>` : ''}
             </div>
 
             <a
@@ -1219,7 +1216,7 @@ document.querySelectorAll('.hero-button').forEach((button) => {
       });
     }
 
-    offerSection?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    offerSection?.scrollIntoView({ block: 'start' })
   });
 });
 
@@ -1259,7 +1256,20 @@ document.querySelectorAll('.offer-button').forEach((button) => {
 });
 
 const offerTimer = document.querySelector('.offer-timer strong')
+const resultsMarquee = document.querySelector('.results-marquee')
 let offerTimeLeft = 30 * 60
+
+if (resultsMarquee) {
+  if ('IntersectionObserver' in window) {
+    const resultsObserver = new IntersectionObserver(([entry]) => {
+      resultsMarquee.classList.toggle('is-visible', entry.isIntersecting)
+    }, { rootMargin: '160px 0px' })
+
+    resultsObserver.observe(resultsMarquee)
+  } else {
+    resultsMarquee.classList.add('is-visible')
+  }
+}
 
 const renderOfferTimer = () => {
   if (!offerTimer) return
@@ -1287,6 +1297,7 @@ const techniqueMedia = window.matchMedia('(max-width: 1100px)')
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 let techniqueIndex = 0
 let techniqueAutoTimer
+let techniqueInView = !('IntersectionObserver' in window)
 
 const setTechniqueIndex = (nextIndex) => {
   if (!techniqueCarousel || !techniqueCards.length) return
@@ -1304,7 +1315,7 @@ const setTechniqueIndex = (nextIndex) => {
 
 const startTechniqueAuto = () => {
   window.clearInterval(techniqueAutoTimer)
-  if (!techniqueMedia.matches || reduceMotion.matches) return
+  if (!techniqueInView || document.hidden || !techniqueMedia.matches || reduceMotion.matches) return
   techniqueAutoTimer = window.setInterval(() => setTechniqueIndex(techniqueIndex + 1), 6000)
 }
 
@@ -1331,5 +1342,16 @@ techniqueCarousel?.addEventListener('scroll', () => {
 
 techniqueMedia.addEventListener('change', startTechniqueAuto)
 reduceMotion.addEventListener('change', startTechniqueAuto)
+document.addEventListener('visibilitychange', startTechniqueAuto)
+
+if ('IntersectionObserver' in window && techniqueCarousel) {
+  const techniqueObserver = new IntersectionObserver(([entry]) => {
+    techniqueInView = entry.isIntersecting
+    startTechniqueAuto()
+  }, { rootMargin: '160px 0px' })
+
+  techniqueObserver.observe(techniqueCarousel)
+}
+
 startTechniqueAuto()
 }
