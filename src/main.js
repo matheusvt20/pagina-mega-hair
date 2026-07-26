@@ -5,7 +5,6 @@ import {
   capturePurchaseSession,
   initializeMetaTracking,
   resolveMetaIdentifiers,
-  resolveMetaIdentifiersAfterFbp,
 } from '@/lib/purchaseTracking'
 import pontoAmericanoImg from './assets/1.webp'
 import fitaAdesivaImg from './assets/fita-adesiva.webp'
@@ -641,6 +640,225 @@ const pageText = isSpanishPage
       },
     }
 
+const conversionText = isSpanishPage
+  ? {
+      resultsSubtitle:
+        'Observa aplicaciones y acabados para visualizar el estándar de resultado trabajado en las clases.',
+      resultsNote:
+        'Los resultados dependen de la práctica, los materiales y la correcta evaluación de cada clienta.',
+      ctas: [
+        {
+          kicker: 'Tu próximo paso',
+          title: 'Aprende las 3 técnicas en un solo entrenamiento',
+          text: 'Empieza por la base, entiende cuándo indicar cada técnica y avanza con más seguridad en tus aplicaciones.',
+          button: 'Ver opciones de acceso',
+          position: 'resultados',
+        },
+        {
+          kicker: '¿Te identificas?',
+          title: 'Empieza ahora, incluso si todavía eres principiante',
+          text: 'Accede a clases prácticas, material de apoyo y certificado para organizar tu aprendizaje paso a paso.',
+          button: 'Quiero conocer las ofertas',
+          position: 'perfil',
+        },
+      ],
+      method: {
+        label: 'Método de enseñanza',
+        items: [
+          'Explicación directa y visual',
+          '3 técnicas en una ruta organizada',
+          'Indicación, aplicación y cuidados',
+        ],
+      },
+      guarantee: {
+        kicker: 'Compra protegida',
+        title: 'Tienes 7 días para conocer el entrenamiento',
+        text:
+          'Después de inscribirte, puedes acceder al contenido y evaluar la propuesta con calma. Si entiendes que no es para ti, puedes solicitar el reembolso dentro del plazo de garantía.',
+        items: ['Acceso liberado después del pago', '7 días de garantía', 'Pago procesado en un entorno seguro'],
+        button: 'Elegir mi acceso',
+      },
+      faq: {
+        kicker: 'Preguntas frecuentes',
+        title: 'Aclara tus dudas antes de inscribirte',
+        items: [
+          {
+            question: '¿Es adecuado para quien nunca ha trabajado con extensiones?',
+            answer:
+              'Sí. El contenido comienza por los fundamentos, la preparación y los materiales antes de avanzar a las técnicas. Como en toda formación práctica, será necesario estudiar y practicar.',
+          },
+          {
+            question: '¿Qué técnicas se enseñan?',
+            answer:
+              'Punto Americano, Extensiones Adhesivas y Cápsula de Queratina, además de preparación, posicionamiento, seguridad, cuidados y mantenimiento.',
+          },
+          {
+            question: '¿Puedo ver las clases desde el celular?',
+            answer:
+              'Sí. El acceso es online y puedes estudiar desde el celular, tableta u ordenador con conexión a internet.',
+          },
+          {
+            question: '¿Cuándo recibo el acceso?',
+            answer:
+              'El acceso se libera después de la confirmación del pago y se envía al correo utilizado en la compra.',
+          },
+          {
+            question: '¿Cuál es la diferencia entre las dos ofertas?',
+            answer:
+              'La oferta esencial incluye las 3 técnicas, certificado y acceso por 1 año. La oferta completa añade acceso vitalicio y materiales para acabado, captación de clientes, ventas y gestión.',
+          },
+          {
+            question: '¿Cómo funciona la garantía?',
+            answer:
+              'Tienes 7 días después de la compra para conocer el entrenamiento. Dentro de ese plazo, puedes solicitar el reembolso por los canales de soporte de la plataforma de pago.',
+          },
+        ],
+      },
+      offerIntro:
+        'Elige la opción esencial o lleva el paquete completo con acceso vitalicio y materiales adicionales.',
+      offerTrust: ['Acceso después del pago', '7 días de garantía', 'Pago seguro'],
+      finalCta: {
+        kicker: 'Lista para empezar',
+        title: 'Da el próximo paso en extensiones de cabello',
+        text: 'Elige tu opción de acceso y empieza a estudiar las 3 técnicas.',
+        button: 'Ver opciones de acceso',
+      },
+    }
+  : {
+      resultsSubtitle:
+        'Veja aplicações e acabamentos para visualizar o padrão de resultado trabalhado nas aulas.',
+      resultsNote:
+        'Os resultados dependem da prática, dos materiais e da avaliação correta de cada cliente.',
+      ctas: [
+        {
+          kicker: 'Seu próximo passo',
+          title: 'Aprenda as 3 técnicas em um único treinamento',
+          text: 'Comece pela base, entenda quando indicar cada técnica e avance com mais segurança nas aplicações.',
+          button: 'Ver opções de acesso',
+          position: 'resultados',
+        },
+        {
+          kicker: 'Se identificou?',
+          title: 'Comece agora, mesmo que você ainda seja iniciante',
+          text: 'Tenha aulas práticas, material de apoio e certificado para organizar seu aprendizado passo a passo.',
+          button: 'Quero conhecer as ofertas',
+          position: 'perfil',
+        },
+      ],
+      method: {
+        label: 'Como a Anna ensina',
+        items: [
+          'Explicação direta e visual',
+          '3 técnicas em uma trilha organizada',
+          'Indicação, aplicação e cuidados',
+        ],
+      },
+      guarantee: {
+        kicker: 'Compra protegida',
+        title: 'Você tem 7 dias para conhecer o treinamento',
+        text:
+          'Depois da inscrição, você pode acessar o conteúdo e avaliar a proposta com calma. Se entender que o treinamento não é para você, poderá solicitar o reembolso dentro do prazo de garantia.',
+        items: ['Acesso liberado após o pagamento', '7 dias de garantia', 'Pagamento processado em ambiente seguro'],
+        button: 'Escolher meu acesso',
+      },
+      faq: {
+        kicker: 'Perguntas frequentes',
+        title: 'Tire suas dúvidas antes de se inscrever',
+        items: [
+          {
+            question: 'É indicado para quem nunca trabalhou com Mega Hair?',
+            answer:
+              'Sim. O conteúdo começa pelos fundamentos, preparação e materiais antes de avançar para as técnicas. Como em toda formação prática, será necessário estudar e praticar.',
+          },
+          {
+            question: 'Quais técnicas são ensinadas?',
+            answer:
+              'Ponto Americano, Fita Adesiva e Microcápsula de Queratina, além de preparação, posicionamento, segurança, cuidados e manutenção.',
+          },
+          {
+            question: 'Consigo assistir às aulas pelo celular?',
+            answer:
+              'Sim. O acesso é online e você pode estudar pelo celular, tablet ou computador conectado à internet.',
+          },
+          {
+            question: 'Quando recebo o acesso?',
+            answer:
+              'O acesso é liberado após a confirmação do pagamento e enviado para o e-mail informado na compra.',
+          },
+          {
+            question: 'Qual é a diferença entre as duas ofertas?',
+            answer:
+              'A oferta essencial inclui as 3 técnicas, certificado e acesso por 1 ano. A oferta completa acrescenta acesso vitalício e materiais para acabamento, captação de clientes, vendas e gestão.',
+          },
+          {
+            question: 'Como funciona a garantia?',
+            answer:
+              'Você tem 7 dias após a compra para conhecer o treinamento. Dentro desse prazo, pode solicitar o reembolso pelos canais de suporte da plataforma de pagamento.',
+          },
+          {
+            question: 'Preciso comprar materiais para acompanhar?',
+            answer:
+              'Você pode começar estudando a parte teórica com o que já tem. Para praticar as aplicações, precisará dos materiais correspondentes à técnica escolhida.',
+          },
+          {
+            question: 'O certificado é enviado como?',
+            answer:
+              'Após concluir o treinamento, o certificado digital fica disponível para registrar sua formação e complementar seu portfólio profissional.',
+          },
+        ],
+      },
+      offerIntro:
+        'Escolha a opção essencial por R$59 ou leve o pacote completo por R$97, com acesso vitalício e materiais extras.',
+      offerTrust: ['Acesso após o pagamento', '7 dias de garantia', 'Pagamento seguro'],
+      finalCta: {
+        kicker: 'Pronta para começar',
+        title: 'Dê o próximo passo no Mega Hair',
+        text: 'Escolha sua opção de acesso e comece a estudar as 3 técnicas.',
+        button: 'Ver opções de acesso',
+      },
+    }
+
+const completeOfferFeatures = isSpanishPage
+  ? pageText.offer.completeFeatures
+  : [
+      {
+        included: true,
+        text: 'Formação completa nas 3 técnicas',
+        detail: 'Ponto Americano, Fita Adesiva e Microcápsula de Queratina',
+      },
+      { included: true, text: 'Acesso vitalício às aulas' },
+      { included: true, text: 'Certificado de conclusão + garantia de 7 dias' },
+      {
+        included: true,
+        extra: true,
+        text: 'Execução e acabamento profissional',
+        detail: 'Curso de Acabamento Perfeito + guia de cuidados e manutenção',
+      },
+      {
+        included: true,
+        extra: true,
+        text: 'Captação e fechamento de clientes',
+        detail: 'Anúncios, scripts de WhatsApp e calendário para Instagram',
+      },
+      {
+        included: true,
+        extra: true,
+        text: 'Precificação, gestão e produtividade',
+        detail: 'IA para Mega Hair, guia de cobrança e app de gestão',
+      },
+      {
+        included: true,
+        extra: true,
+        text: 'Materiais prontos para o negócio',
+        detail: 'Prompts, contratos, documentos e lista de fornecedores',
+      },
+      {
+        included: true,
+        extra: true,
+        text: 'Mentoria em grupo + comunidade de alunas',
+      },
+    ]
+
 const resultItems = [
   { src: resultado01Img, alt: pageText.resultAlt[0] },
   { src: resultado02Img, alt: pageText.resultAlt[1] },
@@ -658,6 +876,7 @@ const resultCards = resultItems
     (item) => `
       <figure class="result-card">
         <img src="${item.src}" alt="${item.alt}" width="760" height="760" loading="lazy" decoding="async" fetchpriority="low" />
+        <figcaption>${isSpanishPage ? 'Antes y después · Resultado de aplicación' : 'Antes e depois · Resultado de aplicação'}</figcaption>
       </figure>
     `,
   )
@@ -736,6 +955,62 @@ const offerFeatureItems = (items) =>
       `,
     )
     .join('')
+
+const conversionCta = (cta) => `
+  <section class="conversion-cta" aria-label="${cta.kicker}">
+    <div class="conversion-cta-content">
+      <span>${cta.kicker}</span>
+      <h2>${cta.title}</h2>
+      <p>${cta.text}</p>
+      <a
+        class="conversion-cta-button js-scroll-offer"
+        href="#comprar"
+        data-cta-position="${cta.position}"
+      >${cta.button}</a>
+      <small>${conversionText.offerTrust.join(' · ')}</small>
+    </div>
+  </section>
+`
+
+const methodItems = conversionText.method.items
+  .map(
+    (item) => `
+      <li>
+        <span aria-hidden="true">✓</span>
+        <p>${item}</p>
+      </li>
+    `,
+  )
+  .join('')
+
+const guaranteeItems = conversionText.guarantee.items
+  .map(
+    (item) => `
+      <li>
+        <span aria-hidden="true">✓</span>
+        <p>${item}</p>
+      </li>
+    `,
+  )
+  .join('')
+
+const faqItems = conversionText.faq.items
+  .map(
+    (item) => `
+      <details class="faq-item">
+        <summary>
+          <span>${item.question}</span>
+          <i aria-hidden="true"></i>
+        </summary>
+        <p>${item.answer}</p>
+      </details>
+    `,
+  )
+  .join('')
+
+const offerTrustItems = conversionText.offerTrust
+  .map((item) => `<span><b aria-hidden="true">✓</b>${item}</span>`)
+  .join('')
 
 const whatsappSupportButton = () => `
   <a
@@ -900,7 +1175,11 @@ document.querySelector('#app').innerHTML = `
           </ul>
         ` : ''}
 
-        <a class="hero-button${!isSpanishPage ? ' hero-button-prominent' : ''}" href="#comprar">
+        <a
+          class="hero-button${!isSpanishPage ? ' hero-button-prominent' : ''} js-scroll-offer"
+          href="#comprar"
+          data-cta-position="hero"
+        >
           ${pageText.hero.button}
         </a>
         <p class="hero-microcopy">${pageText.hero.limited}</p>
@@ -981,6 +1260,7 @@ document.querySelector('#app').innerHTML = `
           <span></span>
         </div>
         <h2 id="results-title">${pageText.results.title}</h2>
+        <p>${conversionText.resultsSubtitle}</p>
       </div>
 
       <div class="results-marquee" aria-label="${pageText.results.label}">
@@ -993,7 +1273,10 @@ document.querySelector('#app').innerHTML = `
           </div>
         </div>
       </div>
+      <p class="results-note">${conversionText.resultsNote}</p>
     </section>
+
+    ${conversionCta(conversionText.ctas[0])}
 
     <section class="learning-section" aria-labelledby="learning-title">
       <div class="learning-header">
@@ -1040,6 +1323,8 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
+    ${conversionCta(conversionText.ctas[1])}
+
     <section class="mentor-section" aria-labelledby="mentor-title">
       <div class="mentor-content">
         <div class="mentor-copy">
@@ -1051,6 +1336,10 @@ document.querySelector('#app').innerHTML = `
           <p>
             ${pageText.mentor.paragraphs[1]}
           </p>
+          <strong class="mentor-method-label">${conversionText.method.label}</strong>
+          <ul class="mentor-method-list">
+            ${methodItems}
+          </ul>
         </div>
 
         <figure class="mentor-card">
@@ -1063,9 +1352,28 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
+    <section class="guarantee-section" aria-labelledby="guarantee-title">
+      <div class="guarantee-card">
+        <div class="guarantee-seal" aria-hidden="true">
+          <strong>7</strong>
+          <span>${isSpanishPage ? 'días' : 'dias'}</span>
+        </div>
+        <div class="guarantee-copy">
+          <span class="guarantee-kicker">${conversionText.guarantee.kicker}</span>
+          <h2 id="guarantee-title">${conversionText.guarantee.title}</h2>
+          <p>${conversionText.guarantee.text}</p>
+          <ul>${guaranteeItems}</ul>
+          <a class="guarantee-button js-scroll-offer" href="#comprar" data-cta-position="garantia">
+            ${conversionText.guarantee.button}
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
+        <p class="offer-intro">${conversionText.offerIntro}</p>
 
         <div class="offer-comparison">
           <article class="offer-card offer-card-essential">
@@ -1098,7 +1406,7 @@ document.querySelector('#app').innerHTML = `
             </figure>
 
             <ul class="offer-feature-list">
-              ${offerFeatureItems(pageText.offer.completeFeatures)}
+              ${offerFeatureItems(completeOfferFeatures)}
             </ul>
 
             <div class="offer-price">
@@ -1115,12 +1423,11 @@ document.querySelector('#app').innerHTML = `
               data-checkout-currency="${checkoutTracking.currency}"
             >${pageText.offer.button}</a>
 
-            <div class="offer-timer">
-              <span>${pageText.offer.timer}</span>
-              <strong>30:00</strong>
+            <div class="offer-trust" aria-label="${isSpanishPage ? 'Seguridad de la compra' : 'Segurança da compra'}">
+              ${offerTrustItems}
             </div>
 
-            <p class="offer-warning"><b>${pageText.offer.couponLabel}:</b> ${pageText.offer.warning}</p>
+            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Escolha a opção que faz mais sentido para o seu momento.'}</p>
           </article>
         </div>
       </div>
@@ -1151,6 +1458,30 @@ document.querySelector('#app').innerHTML = `
             <em>${pageText.mentor.title}</em>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="faq-section" aria-labelledby="faq-title">
+      <div class="faq-shell">
+        <div class="faq-header">
+          <span>${conversionText.faq.kicker}</span>
+          <h2 id="faq-title">${conversionText.faq.title}</h2>
+        </div>
+        <div class="faq-list">
+          ${faqItems}
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="final-cta-title">
+      <div>
+        <span>${conversionText.finalCta.kicker}</span>
+        <h2 id="final-cta-title">${conversionText.finalCta.title}</h2>
+        <p>${conversionText.finalCta.text}</p>
+        <a class="final-cta-button js-scroll-offer" href="#comprar" data-cta-position="final">
+          ${conversionText.finalCta.button}
+        </a>
+        <small>${conversionText.offerTrust.join(' · ')}</small>
       </div>
     </section>
   </main>
@@ -1203,29 +1534,39 @@ const sendMetaEvent = (payload) => {
   }).catch(() => {})
 }
 
-document.querySelectorAll('.hero-button').forEach((button) => {
+document.querySelectorAll('.js-scroll-offer').forEach((button) => {
   button.addEventListener('click', function(event) {
     event.preventDefault()
     const offerSection = document.querySelector('#comprar')
+    const position = button.dataset.ctaPosition || 'pagina'
 
     if (typeof fbq !== 'undefined') {
-      fbq('trackCustom', 'CliqueHero', {
+      fbq('trackCustom', 'CliqueCTA', {
         content_name: pageText.checkoutContentName,
+        position,
         value: checkoutTracking.value,
         currency: checkoutTracking.currency
       });
     }
 
-    offerSection?.scrollIntoView({ block: 'start' })
+    offerSection?.scrollIntoView({ block: 'start', behavior: 'smooth' })
   });
 });
 
 document.querySelectorAll('.offer-button').forEach((button) => {
-  button.addEventListener('click', function(event) {
+  button.addEventListener('click', async function(event) {
     event.preventDefault()
+    if (button.dataset.navigating === 'true') return
+
+    button.dataset.navigating = 'true'
+    button.classList.add('is-loading')
+    button.setAttribute('aria-busy', 'true')
+    button.textContent = isSpanishPage ? 'Abriendo checkout...' : 'Abrindo checkout...'
+
     const targetUrl = button.getAttribute('href') || checkoutUrl
     const eventValue = Number(button.dataset.checkoutValue || checkoutTracking.value)
     const eventCurrency = button.dataset.checkoutCurrency || checkoutTracking.currency
+    const tracking = { value: eventValue, currency: eventCurrency }
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
@@ -1236,28 +1577,28 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     }
 
     if (isBrazilSalesPage) {
-      resolveMetaIdentifiersAfterFbp()
-        .catch(() => Object.freeze({ fbp: '', fbc: '' }))
-        .then((identifiers) => {
-          const tracking = { value: eventValue, currency: eventCurrency }
-          trackFunnel('InitiateCheckout')
-          sendInitiateCheckout(identifiers, tracking).catch(() => {})
-          window.location.href = getCheckoutUrl(targetUrl, identifiers)
-        })
+      const identifiers = resolveMetaIdentifiers()
+      trackFunnel('InitiateCheckout')
+
+      await Promise.race([
+        sendInitiateCheckout(identifiers, tracking).catch(() => {}),
+        new Promise((resolve) => window.setTimeout(resolve, 180)),
+      ])
+
+      window.location.href = getCheckoutUrl(targetUrl, identifiers)
       return
     }
 
-    window.setTimeout(() => {
-      trackFunnel('InitiateCheckout')
-      sendInitiateCheckout().catch(() => {})
-      window.location.href = getCheckoutUrl(targetUrl)
-    }, 300)
+    trackFunnel('InitiateCheckout')
+    await Promise.race([
+      sendInitiateCheckout(undefined, tracking).catch(() => {}),
+      new Promise((resolve) => window.setTimeout(resolve, 180)),
+    ])
+    window.location.href = getCheckoutUrl(targetUrl)
   });
 });
 
-const offerTimer = document.querySelector('.offer-timer strong')
 const resultsMarquee = document.querySelector('.results-marquee')
-let offerTimeLeft = 30 * 60
 
 if (resultsMarquee) {
   if ('IntersectionObserver' in window) {
@@ -1269,23 +1610,6 @@ if (resultsMarquee) {
   } else {
     resultsMarquee.classList.add('is-visible')
   }
-}
-
-const renderOfferTimer = () => {
-  if (!offerTimer) return
-
-  const minutes = String(Math.floor(offerTimeLeft / 60)).padStart(2, '0')
-  const seconds = String(offerTimeLeft % 60).padStart(2, '0')
-  offerTimer.textContent = `${minutes}:${seconds}`
-}
-
-renderOfferTimer()
-
-if (offerTimer) {
-  window.setInterval(() => {
-    offerTimeLeft = Math.max(offerTimeLeft - 1, 0)
-    renderOfferTimer()
-  }, 1000)
 }
 
 const techniqueCarousel = document.querySelector('.technique-grid')
