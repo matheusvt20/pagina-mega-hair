@@ -164,6 +164,7 @@ const pageText = isSpanishPage
         'No quieres ofrecer nuevos servicios',
       ],
       hero: {
+        onlineBadge: 'Curso 100% online',
         titleIntro: 'Aprende 3 técnicas de extensiones de cabello:',
         subtitle:
           'Los mismos servicios que hoy me ayudan a aumentar mis ingresos, y que tú puedes empezar a ofrecer en tu estudio esta misma semana, incluso si eres principiante.',
@@ -459,6 +460,7 @@ const pageText = isSpanishPage
         'Não quer oferecer novos serviços',
       ],
       hero: {
+        onlineBadge: 'Curso 100% online',
         titleIntro: 'Aprenda 3 técnicas de Mega Hair:',
         subtitle:
           'Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.',
@@ -1122,6 +1124,17 @@ document.querySelector('#app').innerHTML = `
   <main class="page-shell">
     <section class="hero-section" aria-labelledby="hero-title">
       <div class="hero-copy">
+        <div class="hero-online-badge">
+          <span class="hero-online-badge-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+              <path d="M9 21h6M12 17v4"></path>
+              <path class="hero-online-badge-play" d="m10 8 5 2.5-5 2.5Z"></path>
+            </svg>
+          </span>
+          <span>${pageText.hero.onlineBadge}</span>
+        </div>
+
         <h1 id="hero-title">
           <span>${pageText.hero.titleIntro}</span>
           <span class="hero-techniques">
