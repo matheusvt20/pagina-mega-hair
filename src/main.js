@@ -716,8 +716,6 @@ const conversionText = isSpanishPage
           },
         ],
       },
-      offerIntro:
-        'Elige la opción esencial o lleva el paquete completo con acceso vitalicio y materiales adicionales.',
       offerTrust: ['Acceso después del pago', '7 días de garantía', 'Pago seguro'],
       finalCta: {
         kicker: 'Lista para empezar',
@@ -809,8 +807,6 @@ const conversionText = isSpanishPage
           },
         ],
       },
-      offerIntro:
-        'Escolha a opção essencial por R$59 ou leve o pacote completo por R$97, com acesso vitalício e materiais extras.',
       offerTrust: ['Acesso após o pagamento', '7 dias de garantia', 'Pagamento seguro'],
       finalCta: {
         kicker: 'Pronta para começar',
@@ -820,46 +816,7 @@ const conversionText = isSpanishPage
       },
     }
 
-const completeOfferFeatures = isSpanishPage
-  ? pageText.offer.completeFeatures
-  : [
-      {
-        included: true,
-        text: 'Formação completa nas 3 técnicas',
-        detail: 'Ponto Americano, Fita Adesiva e Microcápsula de Queratina',
-      },
-      { included: true, text: 'Acesso vitalício às aulas' },
-      { included: true, text: 'Certificado de conclusão + garantia de 7 dias' },
-      {
-        included: true,
-        extra: true,
-        text: 'Execução e acabamento profissional',
-        detail: 'Curso de Acabamento Perfeito + guia de cuidados e manutenção',
-      },
-      {
-        included: true,
-        extra: true,
-        text: 'Captação e fechamento de clientes',
-        detail: 'Anúncios, scripts de WhatsApp e calendário para Instagram',
-      },
-      {
-        included: true,
-        extra: true,
-        text: 'Precificação, gestão e produtividade',
-        detail: 'IA para Mega Hair, guia de cobrança e app de gestão',
-      },
-      {
-        included: true,
-        extra: true,
-        text: 'Materiais prontos para o negócio',
-        detail: 'Prompts, contratos, documentos e lista de fornecedores',
-      },
-      {
-        included: true,
-        extra: true,
-        text: 'Mentoria em grupo + comunidade de alunas',
-      },
-    ]
+const completeOfferFeatures = pageText.offer.completeFeatures
 
 const resultItems = [
   { src: resultado01Img, alt: pageText.resultAlt[0] },
@@ -943,20 +900,50 @@ const heroOfferItems = (items) =>
     )
     .join('')
 
-const offerFeatureItems = (items) =>
-  items
-    .map(
-      (item) => `
-        <li class="${item.included ? 'is-included' : 'is-excluded'}${item.extra ? ' is-extra' : ''}">
+const offerFeatureGroupLabels = isSpanishPage
+  ? {
+      training: 'Formación incluida',
+      bonus: 'Bonos incluidos',
+      extra: 'Bonos extra incluidos',
+    }
+  : {
+      training: 'Formação incluída',
+      bonus: 'Bônus inclusos',
+      extra: 'Bônus extra inclusos',
+    }
+
+const getOfferFeatureGroup = (item) => {
+  if (item.extra) return 'extra'
+  if (/^(Bônus|Bono)\b/.test(item.text)) return 'bonus'
+  return 'training'
+}
+
+const offerFeatureItems = (items, { grouped = false } = {}) => {
+  let currentGroup = ''
+
+  return items
+    .map((item) => {
+      const group = getOfferFeatureGroup(item)
+      const groupHeading =
+        grouped && group !== currentGroup
+          ? `<li class="offer-feature-group offer-feature-group-${group}">${offerFeatureGroupLabels[group]}</li>`
+          : ''
+
+      currentGroup = group
+
+      return `
+        ${groupHeading}
+        <li class="${item.included ? 'is-included' : 'is-excluded'}${group === 'bonus' ? ' is-bonus' : ''}${item.extra ? ' is-extra' : ''}">
           <span aria-hidden="true">${item.included ? '✓' : '×'}</span>
           <p>
             ${item.text}
             ${item.detail ? `<small>${item.detail}</small>` : ''}
           </p>
         </li>
-      `,
-    )
+      `
+    })
     .join('')
+}
 
 const conversionCta = (cta) => `
   <section class="conversion-cta" aria-label="${cta.kicker}">
@@ -1386,7 +1373,6 @@ document.querySelector('#app').innerHTML = `
     <section class="offer-section" id="comprar" aria-labelledby="offer-title">
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
-        <p class="offer-intro">${conversionText.offerIntro}</p>
 
         <div class="offer-comparison">
           <article class="offer-card offer-card-essential">
@@ -1419,7 +1405,7 @@ document.querySelector('#app').innerHTML = `
             </figure>
 
             <ul class="offer-feature-list">
-              ${offerFeatureItems(completeOfferFeatures)}
+              ${offerFeatureItems(completeOfferFeatures, { grouped: true })}
             </ul>
 
             <div class="offer-price">

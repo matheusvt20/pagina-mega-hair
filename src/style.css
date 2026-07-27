@@ -4143,6 +4143,36 @@ h1 span {
   border-bottom: 1px solid #dedbd4;
 }
 
+.offer-feature-list .offer-feature-group {
+  display: block;
+  min-height: 0;
+  margin: 16px 0 3px;
+  padding: 9px 11px;
+  border: 0;
+  border-radius: 6px;
+  background: #e9f4eb;
+  color: #337249;
+  font-size: 0.72rem;
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.offer-feature-list .offer-feature-group:first-child {
+  margin-top: 0;
+}
+
+.offer-feature-list .offer-feature-group-bonus {
+  background: #fff4d7;
+  color: #8a6413;
+}
+
+.offer-feature-list .offer-feature-group-extra {
+  background: #eaf1ff;
+  color: #285fbf;
+}
+
 .offer-feature-list li:last-child {
   border-bottom: 0;
 }
@@ -4178,6 +4208,11 @@ h1 span {
 
 .offer-feature-list .is-included span {
   background: #3f8358;
+}
+
+.offer-feature-list .is-bonus span {
+  background: #d39d24;
+  box-shadow: 0 5px 14px rgba(211, 157, 36, 0.2);
 }
 
 .offer-feature-list .is-excluded span {
@@ -4384,6 +4419,12 @@ h1 span {
     gap: 9px;
     min-height: 38px;
     padding: 8px 0;
+  }
+
+  .offer-feature-list .offer-feature-group {
+    margin-top: 14px;
+    padding: 8px 10px;
+    font-size: 0.66rem;
   }
 
   .offer-feature-list span {
