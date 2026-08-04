@@ -946,7 +946,7 @@ const offerFeatureItems = (items, { grouped = false } = {}) => {
 }
 
 const conversionCta = (cta) => `
-  <section class="conversion-cta" aria-label="${cta.kicker}">
+  <section class="conversion-cta" data-lansar-section="cta-${cta.position}" aria-label="${cta.kicker}">
     <div class="conversion-cta-content">
       <span>${cta.kicker}</span>
       <h2>${cta.title}</h2>
@@ -1109,7 +1109,7 @@ if (isFreeClassPage) {
 } else {
 document.querySelector('#app').innerHTML = `
   <main class="page-shell">
-    <section class="hero-section" aria-labelledby="hero-title">
+    <section class="hero-section" data-lansar-section="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <div class="hero-online-badge">
           <span class="hero-online-badge-icon" aria-hidden="true">
@@ -1187,7 +1187,7 @@ document.querySelector('#app').innerHTML = `
 
     </section>
 
-    <section class="techniques-section" aria-labelledby="techniques-title">
+    <section class="techniques-section" data-lansar-section="tecnicas" aria-labelledby="techniques-title">
       <div class="techniques-header">
         <div class="section-ornament" aria-hidden="true">
           <span></span>
@@ -1252,7 +1252,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="results-section" aria-labelledby="results-title">
+    <section class="results-section" data-lansar-section="resultados" aria-labelledby="results-title">
       <div class="results-header">
         <div class="section-ornament" aria-hidden="true">
           <span></span>
@@ -1278,7 +1278,7 @@ document.querySelector('#app').innerHTML = `
 
     ${conversionCta(conversionText.ctas[0])}
 
-    <section class="learning-section" aria-labelledby="learning-title">
+    <section class="learning-section" data-lansar-section="conteudo" aria-labelledby="learning-title">
       <div class="learning-header">
         <span class="learning-kicker">${pageText.learning.kicker}</span>
         <h2 id="learning-title">${pageText.learning.title}</h2>
@@ -1289,7 +1289,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="benefits-section" aria-labelledby="benefits-title">
+    <section class="benefits-section" data-lansar-section="beneficios" aria-labelledby="benefits-title">
       <div class="benefits-header">
         <span class="benefits-kicker">${pageText.benefits.kicker}</span>
         <h2 id="benefits-title">${pageText.benefits.title}</h2>
@@ -1300,7 +1300,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="fit-section" aria-labelledby="fit-title">
+    <section class="fit-section" data-lansar-section="para-quem" aria-labelledby="fit-title">
       <div class="fit-header">
         <span class="fit-kicker">${pageText.fit.kicker}</span>
         <h2 id="fit-title">${pageText.fit.title}</h2>
@@ -1325,7 +1325,7 @@ document.querySelector('#app').innerHTML = `
 
     ${conversionCta(conversionText.ctas[1])}
 
-    <section class="mentor-section" aria-labelledby="mentor-title">
+    <section class="mentor-section" data-lansar-section="mentora" aria-labelledby="mentor-title">
       <div class="mentor-content">
         <div class="mentor-copy">
           <span class="mentor-kicker">${pageText.mentor.kicker}</span>
@@ -1352,7 +1352,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="guarantee-section" aria-labelledby="guarantee-title">
+    <section class="guarantee-section" data-lansar-section="garantia" aria-labelledby="guarantee-title">
       <div class="guarantee-card">
         <div class="guarantee-seal" aria-hidden="true">
           <strong>7</strong>
@@ -1370,7 +1370,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="offer-section" id="comprar" aria-labelledby="offer-title">
+    <section class="offer-section" id="comprar" data-lansar-section="oferta" aria-labelledby="offer-title">
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
@@ -1389,6 +1389,7 @@ document.querySelector('#app').innerHTML = `
             <a
               class="offer-button offer-button-muted"
               href="${essentialCheckoutUrl}"
+              data-lansar-event="checkout-essencial"
               data-checkout-value="${essentialCheckoutTracking.value}"
               data-checkout-currency="${essentialCheckoutTracking.currency}"
             >${pageText.offer.essentialButton}</a>
@@ -1418,6 +1419,7 @@ document.querySelector('#app').innerHTML = `
             <a
               class="offer-button"
               href="${checkoutUrl}"
+              data-lansar-event="checkout-completo"
               data-checkout-value="${checkoutTracking.value}"
               data-checkout-currency="${checkoutTracking.currency}"
             >${pageText.offer.button}</a>
@@ -1432,7 +1434,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="certificate-section" aria-labelledby="certificate-title">
+    <section class="certificate-section" data-lansar-section="certificado" aria-labelledby="certificate-title">
       <div class="certificate-content">
         <div class="certificate-copy">
           <span class="certificate-kicker">${pageText.certificate.kicker}</span>
@@ -1460,7 +1462,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="faq-section" aria-labelledby="faq-title">
+    <section class="faq-section" data-lansar-section="faq" aria-labelledby="faq-title">
       <div class="faq-shell">
         <div class="faq-header">
           <span>${conversionText.faq.kicker}</span>
@@ -1472,7 +1474,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
 
-    <section class="final-cta" aria-labelledby="final-cta-title">
+    <section class="final-cta" data-lansar-section="cta-final" aria-labelledby="final-cta-title">
       <div>
         <span>${conversionText.finalCta.kicker}</span>
         <h2 id="final-cta-title">${conversionText.finalCta.title}</h2>
