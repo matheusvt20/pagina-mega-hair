@@ -44,9 +44,6 @@ const checkoutTracking = isSpanishPage
 const essentialCheckoutTracking = isSpanishPage
   ? checkoutTracking
   : { value: 59.00, currency: 'BRL' }
-const whatsappSupportMessage = 'Olá, preciso de ajuda sobre o curso de Mega Hair.'
-const whatsappSupportUrl = `https://wa.me/5521990481222?text=${encodeURIComponent(whatsappSupportMessage)}`
-
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
   ? 'Anna Schossig - Guía Práctica de Extensiones de Cabello'
@@ -1001,22 +998,6 @@ const offerTrustItems = conversionText.offerTrust
   .map((item) => `<span><b aria-hidden="true">✓</b>${item}</span>`)
   .join('')
 
-const whatsappSupportButton = () => `
-  <a
-    class="whatsapp-support"
-    href="${whatsappSupportUrl}"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Falar no WhatsApp sobre o curso de Mega Hair"
-  >
-    <span class="whatsapp-support-icon" aria-hidden="true">
-      <svg viewBox="0 0 32 32" role="img">
-        <path d="M16.03 3.2A12.74 12.74 0 0 0 5.2 22.64L3.5 28.8l6.3-1.65A12.75 12.75 0 1 0 16.03 3.2Zm0 22.96a10.2 10.2 0 0 1-5.2-1.42l-.37-.22-3.74.98 1-3.64-.24-.38a10.2 10.2 0 1 1 8.55 4.68Zm5.6-7.64c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.15-.7.16-.2.3-.79 1-1 1.2-.18.2-.36.23-.67.08-.3-.16-1.3-.48-2.47-1.53a9.27 9.27 0 0 1-1.7-2.12c-.18-.3-.02-.47.14-.62.14-.14.3-.36.46-.54.15-.18.2-.3.3-.51.1-.2.05-.39-.02-.54-.08-.15-.7-1.68-.95-2.3-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.28.3-1.08 1.05-1.08 2.57s1.1 2.98 1.26 3.19c.15.2 2.18 3.33 5.28 4.67.74.32 1.31.5 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.82-.75 2.08-1.47.25-.72.25-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z" />
-      </svg>
-    </span>
-  </a>
-`
-
 const renderFreeClassPage = () => {
   document.documentElement.lang = 'pt-BR'
   document.title = 'Aula Gratuita de Mega Hair - Anna Schossig'
@@ -1086,7 +1067,6 @@ const renderFreeClassPage = () => {
         </a>
       </section>
     </main>
-    ${whatsappSupportButton()}
   `
 
   document.querySelectorAll('.free-button').forEach((button) => {
@@ -1486,7 +1466,6 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
   </main>
-  ${whatsappSupportButton()}
 `
 
 const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) => {
