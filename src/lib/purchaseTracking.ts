@@ -2,7 +2,7 @@ const SESSION_STORAGE_KEY = "_purchase_tracking_session"
 const FBC_STORAGE_KEY = "_lansar_fbc"
 const FBC_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000
 const FBP_PATTERN = /^fb\.1\.\d{10,13}\.\d{5,30}$/
-const FBC_PATTERN = /^fb\.1\.\d{10,13}\.[A-Za-z0-9_-]{8,250}$/
+const FBC_PATTERN = /^fb\.1\.\d{10,13}\..+$/
 const UTM_KEYS = [
   "utm_source",
   "utm_medium",
@@ -11,7 +11,9 @@ const UTM_KEYS = [
   "utm_term",
 ] as const
 
-const endpoint = (import.meta.env?.VITE_TRACKING_SESSION_ENDPOINT || "").trim()
+const endpoint = ((import.meta as ImportMeta & {
+  env?: Record<string, string | undefined>
+}).env?.VITE_TRACKING_SESSION_ENDPOINT || "").trim()
 
 export interface MetaTrackingSnapshot {
   fbp: string
