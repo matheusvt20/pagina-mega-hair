@@ -48,6 +48,7 @@ import studentProofStudentsImg from './assets/prova-social-alunas.webp'
 import studentProofClassImg from './assets/prova-social-turma.webp'
 import annaResultadosVideo from './assets/anna-resultados-meta.mp4'
 import annaResultadosPoster from './assets/anna-resultados-meta-poster.jpg'
+import freeMembersLessonVideo from './assets/aula-gratuita-mapa-decisao.mp4'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
@@ -63,7 +64,6 @@ const checkoutUrl = isSpanishPage
 const essentialCheckoutUrl = isSpanishPage
   ? checkoutUrl
   : 'https://pay.kiwify.com.br/UruirxE'
-const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 197.00, currency: 'BRL' }
@@ -753,8 +753,6 @@ const conversionText = isSpanishPage
       },
     }
   : {
-      resultsSubtitle:
-        'Veja aplicações e acabamentos para visualizar o padrão de resultado trabalhado nas aulas.',
       resultsNote:
         'Os resultados dependem da prática, dos materiais e da avaliação correta de cada cliente.',
       ctas: [
@@ -1211,87 +1209,198 @@ const thirdHeroCardColumn = heroLearningCards.slice(6)
 
 const renderFreeClassPage = () => {
   document.documentElement.lang = 'pt-BR'
-  document.title = 'Aula Gratuita de Mega Hair - Anna Schossig'
+  document.title = 'Aula Gratuita | Mega Hair 3 em 1 - Anna Schossig'
 
   document.querySelector('#app').innerHTML = `
-    <main class="free-class-page">
-      <section class="free-hero" aria-labelledby="free-hero-title">
-        <div class="free-hero-copy">
-          <span class="free-kicker">Aula gratuita no Instagram</span>
-          <h1 id="free-hero-title">
-            Aprenda 3 técnicas de Mega Hair ao vivo comigo
-          </h1>
-          <p>
-            Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês e que você também pode começar a oferecer, mesmo sendo iniciante.
-          </p>
-
-          <p class="free-class-time" aria-label="Data e horário da aula gratuita">
-            <span>Próxima segunda-feira</span>
-            <strong>20h no Instagram</strong>
-          </p>
-
-          <a class="free-button" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
-            Entre para o grupo de espera
-          </a>
-
-          <small>Ao vivo, gratuito e com foco em aplicação prática.</small>
-        </div>
-
-        <figure class="free-hero-photo">
-          <img src="${professoraImg}" alt="Anna Schossig, professora de Mega Hair" width="760" height="1140" fetchpriority="high" />
-          <figcaption>
+    <main class="free-members-page">
+      <header class="free-members-topbar">
+        <a class="free-members-brand" href="/" aria-label="Página inicial Mega Hair 3 em 1">
+          <span class="free-members-brand-mark" aria-hidden="true">AS</span>
+          <span>
             <strong>Anna Schossig</strong>
-            <span>Especialista em Mega Hair</span>
-          </figcaption>
-        </figure>
+            <small>Mega Hair 3 em 1</small>
+          </span>
+        </a>
+        <div class="free-members-status"><span aria-hidden="true">●</span> Aula demonstrativa</div>
+      </header>
+
+      <section class="free-members-layout" aria-label="Área de membros demonstrativa">
+        <aside class="free-members-sidebar" aria-label="Conteúdo do treinamento">
+          <div class="free-members-course">
+            <span>CURSO ONLINE</span>
+            <strong>Mega Hair<br />3 em 1</strong>
+            <div class="free-members-progress" aria-label="Progresso do curso: 1 de 10 aulas liberada"><i></i></div>
+            <small>1 de 10 aulas liberada</small>
+          </div>
+
+          <nav class="free-members-module-list" aria-label="Módulos da formação">
+            <button class="free-members-lesson is-active" type="button" data-free-lesson="Aula demonstrativa: mapa de decisão das técnicas">
+              <span class="free-members-lesson-icon" aria-hidden="true">▶</span>
+              <span><small>AULA LIBERADA</small>Mapa de decisão das técnicas</span>
+              <time>Grátis</time>
+            </button>
+            <button class="free-members-lesson is-locked" type="button" data-open-unlock>
+              <span class="free-members-lock" aria-hidden="true">⌁</span>
+              <span><small>MÓDULO 01</small>Fundamentos do Mega Hair</span>
+              <b aria-label="Conteúdo bloqueado">🔒</b>
+            </button>
+            <button class="free-members-lesson is-locked" type="button" data-open-unlock>
+              <span class="free-members-lock" aria-hidden="true">⌁</span>
+              <span><small>MÓDULO 02</small>Preparação e materiais</span>
+              <b aria-label="Conteúdo bloqueado">🔒</b>
+            </button>
+            <button class="free-members-lesson is-locked" type="button" data-open-unlock>
+              <span class="free-members-lock" aria-hidden="true">⌁</span>
+              <span><small>MÓDULO 03</small>Ponto Americano na prática</span>
+              <b aria-label="Conteúdo bloqueado">🔒</b>
+            </button>
+            <button class="free-members-lesson is-locked" type="button" data-open-unlock>
+              <span class="free-members-lock" aria-hidden="true">⌁</span>
+              <span><small>MÓDULO 04</small>Fita Adesiva na prática</span>
+              <b aria-label="Conteúdo bloqueado">🔒</b>
+            </button>
+            <button class="free-members-lesson is-locked" type="button" data-open-unlock>
+              <span class="free-members-lock" aria-hidden="true">⌁</span>
+              <span><small>MÓDULO 05</small>Microcápsula de Queratina</span>
+              <b aria-label="Conteúdo bloqueado">🔒</b>
+            </button>
+          </nav>
+
+          <button class="free-members-sidebar-cta" type="button" data-open-unlock>
+            <span>✦</span> Desbloquear formação
+          </button>
+        </aside>
+
+        <section class="free-members-content" aria-labelledby="free-members-title">
+          <div class="free-members-breadcrumb"><span>Início</span><i>›</i><span>Aula demonstrativa</span></div>
+          <div class="free-members-title-row">
+            <div>
+              <span class="free-members-kicker">AULA 01 · LIBERADA PARA VOCÊ</span>
+              <h1 id="free-members-title">Mapa de decisão: quando usar Ponto, Fita ou Microcápsula</h1>
+            </div>
+            <span class="free-members-free-badge">GRATUITA</span>
+          </div>
+
+          <div class="free-members-player-shell">
+            <video class="free-members-player" preload="metadata" playsinline controls width="608" height="1080" aria-label="Aula demonstrativa: mapa de decisão entre Ponto Americano, Fita Adesiva e Microcápsula">
+              <source src="${freeMembersLessonVideo}" type="video/mp4" />
+            </video>
+            <div class="free-members-player-copy" aria-hidden="true">
+              <span>ÁREA DE MEMBROS</span>
+              <strong>Mapa de decisão das técnicas</strong>
+            </div>
+          </div>
+
+          <div class="free-members-intro">
+            <div>
+              <span>VOCÊ ESTÁ NA AULA DEMONSTRATIVA</span>
+              <h2>Veja como as técnicas podem abrir novas possibilidades para o seu atendimento.</h2>
+              <p>Nesta aula, Anna apresenta o caminho que você vai aprofundar dentro da formação completa: avaliação, indicação e aplicação das três técnicas mais procuradas de Mega Hair.</p>
+            </div>
+            <button class="free-members-unlock-inline" type="button" data-open-unlock>Quero desbloquear as próximas aulas <span aria-hidden="true">→</span></button>
+          </div>
+
+          <section class="free-members-next" aria-labelledby="free-members-next-title">
+            <div class="free-members-section-heading">
+              <div>
+                <span>PRÓXIMAS AULAS</span>
+                <h2 id="free-members-next-title">Seu caminho dentro da formação</h2>
+              </div>
+              <button type="button" data-open-unlock>Ver tudo <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="free-members-preview-grid">
+              <button class="free-members-preview-card" type="button" data-open-unlock>
+                <img src="${moduleCard01Img}" alt="Prévia do módulo Fundamentos do Mega Hair" width="1600" height="900" loading="lazy" />
+                <span class="free-members-preview-lock" aria-hidden="true">🔒</span>
+                <strong>Fundamentos do Mega Hair</strong>
+                <small>Módulo 01 · Bloqueado</small>
+              </button>
+              <button class="free-members-preview-card" type="button" data-open-unlock>
+                <img src="${moduleCard04Img}" alt="Prévia do módulo Ponto Americano" width="1600" height="900" loading="lazy" />
+                <span class="free-members-preview-lock" aria-hidden="true">🔒</span>
+                <strong>Ponto Americano na prática</strong>
+                <small>Módulo 03 · Bloqueado</small>
+              </button>
+              <button class="free-members-preview-card" type="button" data-open-unlock>
+                <img src="${moduleCard08Img}" alt="Prévia do módulo Fita Adesiva" width="1600" height="900" loading="lazy" />
+                <span class="free-members-preview-lock" aria-hidden="true">🔒</span>
+                <strong>Fita Adesiva na prática</strong>
+                <small>Módulo 04 · Bloqueado</small>
+              </button>
+            </div>
+          </section>
+        </section>
       </section>
 
-      <section class="free-details" aria-labelledby="free-details-title">
-        <div class="free-details-copy">
-          <span class="free-kicker">O que vai acontecer na aula</span>
-          <h2 id="free-details-title">Uma aula direta para você entender como começar no Mega Hair com mais segurança</h2>
-          <p>
-            Você vai ver como funcionam as técnicas Ponto Americano, Fita Adesiva e Cápsula de Queratina, quando indicar cada uma e quais cuidados fazem diferença para entregar um resultado natural.
-          </p>
-        </div>
-
-        <div class="free-details-list" aria-label="Conteúdo da aula gratuita">
-          <article>
-            <span>01</span>
-            <h3>3 técnicas em uma aula</h3>
-            <p>Entenda as diferenças entre Ponto Americano, Fita Adesiva e Cápsula de Queratina.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Indicação e acabamento</h3>
-            <p>Veja o que observar para escolher a técnica certa e buscar um resultado mais natural.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Próximo passo claro</h3>
-            <p>Saia sabendo como começar a estudar e praticar para oferecer esse serviço.</p>
-          </article>
-        </div>
-
-        <a class="free-button free-button-secondary" href="${freeClassCtaUrl}" target="_blank" rel="noopener noreferrer">
-          Entre para o grupo de espera
-        </a>
+      <section class="free-members-bottom-cta" aria-labelledby="free-members-bottom-title">
+        <span>QUER CONTINUAR APRENDENDO?</span>
+        <h2 id="free-members-bottom-title">Escolha como quer liberar a sua formação.</h2>
+        <p>Você já começou. Agora, escolha a oferta que faz mais sentido para o seu momento e tenha acesso às próximas aulas.</p>
+        <button type="button" data-open-unlock>Ver opções de acesso <span aria-hidden="true">→</span></button>
       </section>
     </main>
+
+    <div class="free-members-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="free-members-modal-title">
+      <div class="free-members-modal-backdrop" data-close-unlock></div>
+      <div class="free-members-modal-card">
+        <button class="free-members-modal-close" type="button" aria-label="Fechar opções de acesso" data-close-unlock>×</button>
+        <span class="free-members-modal-kicker">CONTEÚDO BLOQUEADO</span>
+        <h2 id="free-members-modal-title">Escolha como quer desbloquear sua formação.</h2>
+        <p>As próximas aulas, materiais e técnicas estão prontas para você. Escolha uma das opções abaixo para liberar seu acesso.</p>
+        <div class="free-members-plan-grid">
+          <article class="free-members-plan">
+            <span>OFERTA ESSENCIAL</span>
+            <h3>Comece pelas 3 técnicas</h3>
+            <ul>
+              <li>✓ Ponto Americano</li>
+              <li>✓ Fita Adesiva</li>
+              <li>✓ Microcápsula de Queratina</li>
+              <li>✓ 1 ano de acesso + certificado</li>
+            </ul>
+            <strong>12x de R$ 6,10</strong>
+            <small>ou R$ 59,00 à vista</small>
+            <a href="${essentialCheckoutUrl}" data-lansar-event="checkout-essencial" data-checkout-value="${essentialCheckoutTracking.value}" data-checkout-currency="${essentialCheckoutTracking.currency}">Escolher essencial</a>
+          </article>
+          <article class="free-members-plan is-featured">
+            <span>OFERTA COMPLETA · MAIS ESCOLHIDA</span>
+            <h3>Acesse tudo e os bônus</h3>
+            <ul>
+              <li>✓ As 3 técnicas completas</li>
+              <li>✓ Acesso vitalício + certificado</li>
+              <li>✓ 7 bônus, incluindo Tráfego Pago</li>
+              <li>✓ Bônus extras de vendas e gestão</li>
+            </ul>
+            <strong>12x de R$ 20,37</strong>
+            <small>ou R$ 197,00 à vista</small>
+            <a href="${checkoutUrl}" data-lansar-event="checkout-completo" data-checkout-value="${checkoutTracking.value}" data-checkout-currency="${checkoutTracking.currency}">Quero acesso completo</a>
+          </article>
+        </div>
+        <small class="free-members-modal-trust">Pagamento seguro · 7 dias de garantia · acesso após o pagamento</small>
+      </div>
+    </div>
+    ${whatsappSupportButton()}
   `
 
-  document.querySelectorAll('.free-button').forEach((button) => {
-    button.addEventListener('click', () => {
-      if (typeof fbq !== 'undefined') {
-        fbq('trackCustom', 'CliqueAulaGratuita', {
-          content_name: 'Aula Gratuita Mega Hair',
-          value: 0,
-          currency: 'BRL'
-        });
-      }
+  const unlockModal = document.querySelector('.free-members-modal')
+  const openUnlockModal = () => {
+    unlockModal?.classList.add('is-open')
+    unlockModal?.setAttribute('aria-hidden', 'false')
+    document.body.classList.add('has-free-members-modal')
+    trackFunnel('ViewContent')
+  }
+  const closeUnlockModal = () => {
+    unlockModal?.classList.remove('is-open')
+    unlockModal?.setAttribute('aria-hidden', 'true')
+    document.body.classList.remove('has-free-members-modal')
+  }
 
-      trackFunnel('Lead')
-    })
+  document.querySelectorAll('[data-open-unlock]').forEach((button) => button.addEventListener('click', openUnlockModal))
+  document.querySelectorAll('[data-close-unlock]').forEach((button) => button.addEventListener('click', closeUnlockModal))
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeUnlockModal()
+  })
+  document.querySelectorAll('.free-members-modal a[data-lansar-event]').forEach((button) => {
+    button.addEventListener('click', () => trackFunnel('InitiateCheckout'))
   })
 }
 
@@ -1525,7 +1634,7 @@ document.querySelector('#app').innerHTML = `
           <span></span>
         </div>
         <h2 id="results-title">${pageText.results.title}</h2>
-        <p>${conversionText.resultsSubtitle}</p>
+        ${conversionText.resultsSubtitle ? `<p>${conversionText.resultsSubtitle}</p>` : ''}
       </div>
 
       <div class="results-marquee" aria-label="${pageText.results.label}">
