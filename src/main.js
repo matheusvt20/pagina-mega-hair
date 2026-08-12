@@ -20,8 +20,34 @@ import resultado08Img from './assets/resultado-08.webp'
 import resultado09Img from './assets/resultado-09.webp'
 import professoraImg from './assets/anna-schossig-professora.webp'
 import megaHairOfferImg from './assets/mega-hair-offer.webp'
-import heroTechCompositeImg from './assets/hero-tech-composite.webp'
-import heroTechCompositeMobileImg from './assets/hero-tech-composite-mobile.webp'
+import aluna1Img from './assets/aluna-1.jpeg'
+import aluna3Img from './assets/aluna-3.jpeg'
+import aluno2Img from './assets/aluno-2.jpeg'
+import aluno4Img from './assets/aluno-4.jpeg'
+import heroCard01Img from './assets/hero-card-01.webp'
+import heroCard02Img from './assets/hero-card-02.webp'
+import heroCard03Img from './assets/hero-card-03.webp'
+import heroCard04Img from './assets/hero-card-04.webp'
+import heroCard05Img from './assets/hero-card-05.webp'
+import heroCard06Img from './assets/hero-card-06.webp'
+import heroCard07Img from './assets/hero-card-07.webp'
+import heroCard08Img from './assets/hero-card-08.webp'
+import moduleCard01Img from './assets/module-card-01.webp'
+import moduleCard02Img from './assets/module-card-02.webp'
+import moduleCard03Img from './assets/module-card-03.webp'
+import moduleCard04Img from './assets/module-card-04.webp'
+import moduleCard05Img from './assets/module-card-05.webp'
+import moduleCard06Img from './assets/module-card-06.webp'
+import moduleCard07Img from './assets/module-card-07.webp'
+import moduleCard08Img from './assets/module-card-08.webp'
+import moduleCard09Img from './assets/module-card-09.webp'
+import moduleCard10Img from './assets/module-card-10.webp'
+import professionalJourneyImg from './assets/professional-journey.webp'
+import studentProofCertifiedImg from './assets/prova-social-certificada.webp'
+import studentProofStudentsImg from './assets/prova-social-alunas.webp'
+import studentProofClassImg from './assets/prova-social-turma.webp'
+import annaResultadosVideo from './assets/anna-resultados-meta.mp4'
+import annaResultadosPoster from './assets/anna-resultados-meta-poster.jpg'
 
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
@@ -500,9 +526,9 @@ const pageText = isSpanishPage
             alt: 'Aplicação de Mega Hair com técnica Fita Adesiva',
           },
           {
-            title: 'Cápsula de Queratina',
+            title: 'Microcápsula de Queratina',
             text: 'Mecha a mecha, com mais movimento e naturalidade no resultado.',
-            alt: 'Aplicação de Mega Hair com técnica Cápsula de Queratina',
+            alt: 'Aplicação de Mega Hair com técnica Microcápsula de Queratina',
           },
         ],
         controls: 'Controle do carrossel de técnicas',
@@ -832,7 +858,6 @@ const resultCards = resultItems
     (item) => `
       <figure class="result-card">
         <img src="${item.src}" alt="${item.alt}" width="760" height="760" loading="lazy" decoding="async" fetchpriority="low" />
-        <figcaption>${isSpanishPage ? 'Antes y después · Resultado de aplicación' : 'Antes e depois · Resultado de aplicação'}</figcaption>
       </figure>
     `,
   )
@@ -854,6 +879,77 @@ const learningCards = learningModules
     `,
   )
   .join('')
+
+const moduleShowcaseItems = [
+  { src: moduleCard01Img, alt: 'Módulo de Ponto Americano' },
+  { src: moduleCard02Img, alt: 'Módulo de Fita Adesiva' },
+  { src: moduleCard03Img, alt: 'Módulo de Microcápsula de Queratina' },
+  { src: moduleCard04Img, alt: 'Módulo de Acabamento Perfeito' },
+  { src: moduleCard05Img, alt: 'Módulo de Tráfego Pago' },
+  { src: moduleCard06Img, alt: 'Módulo Guia de Cuidados e Manutenção' },
+  { src: moduleCard07Img, alt: 'Módulo Clientes com Anúncios para Mega Hair' },
+  { src: moduleCard08Img, alt: 'Módulo Guia para Cobrar Certo e Lucrar Mais' },
+  { src: moduleCard09Img, alt: 'Módulo IA para Profissionais de Mega Hair' },
+  { src: moduleCard10Img, alt: 'Módulo Scripts Prontos para Fechar Clientes no WhatsApp' },
+]
+
+const moduleShowcaseSet = (items, duplicate = false) => `
+  <div class="module-showcase-set"${duplicate ? ' aria-hidden="true"' : ''}>
+    ${items
+      .map(
+        (item) => `
+          <figure class="module-showcase-card">
+            <img src="${item.src}" alt="${duplicate ? '' : item.alt}" width="960" height="540" loading="lazy" decoding="async" />
+          </figure>
+        `,
+      )
+      .join('')}
+  </div>
+`
+
+const firstModuleShowcaseRow = moduleShowcaseItems.slice(0, 5)
+const secondModuleShowcaseRow = moduleShowcaseItems.slice(5)
+
+const learningSectionMarkup = isSpanishPage
+  ? `
+    <section class="learning-section" data-lansar-section="conteudo" aria-labelledby="learning-title">
+      <div class="learning-header">
+        <span class="learning-kicker">${pageText.learning.kicker}</span>
+        <h2 id="learning-title">${pageText.learning.title}</h2>
+      </div>
+
+      <div class="learning-grid">
+        ${learningCards}
+      </div>
+    </section>
+  `
+  : `
+    <section class="module-showcase" id="modulos" data-lansar-section="conteudo" aria-labelledby="module-showcase-title">
+      <div class="module-showcase-header">
+        <span>MÓDULOS</span>
+        <h2 id="module-showcase-title">
+          Uma formação completa, <em>da técnica à conquista de clientes.</em>
+        </h2>
+        <p>
+          Você aprende as três principais técnicas de Mega Hair e também os pilares que transformam conhecimento em trabalho: acabamento, cuidados, precificação, anúncios, inteligência artificial e atendimento.
+        </p>
+      </div>
+
+      <div class="module-showcase-marquee" aria-label="Primeira fileira de módulos">
+        <div class="module-showcase-track">
+          ${moduleShowcaseSet(firstModuleShowcaseRow)}
+          ${moduleShowcaseSet(firstModuleShowcaseRow, true)}
+        </div>
+      </div>
+
+      <div class="module-showcase-marquee module-showcase-marquee--reverse" aria-label="Segunda fileira de módulos">
+        <div class="module-showcase-track">
+          ${moduleShowcaseSet(secondModuleShowcaseRow)}
+          ${moduleShowcaseSet(secondModuleShowcaseRow, true)}
+        </div>
+      </div>
+    </section>
+  `
 
 const benefitItems = pageText.benefitItems
 
@@ -879,18 +975,6 @@ const listItems = (items, icon) =>
       (item) => `
         <li>
           <span aria-hidden="true">${icon}</span>
-          <p>${item}</p>
-        </li>
-      `,
-    )
-    .join('')
-
-const heroOfferItems = (items) =>
-  items
-    .map(
-      (item) => `
-        <li>
-          <span aria-hidden="true">✓</span>
           <p>${item}</p>
         </li>
       `,
@@ -958,6 +1042,82 @@ const conversionCta = (cta) => `
   </section>
 `
 
+const professionalJourneySectionMarkup = isSpanishPage
+  ? conversionCta(conversionText.ctas[1])
+  : `
+    <section class="professional-journey" data-lansar-section="caminho-profissional" aria-labelledby="professional-journey-title">
+      <div class="professional-journey-shell">
+        <div class="professional-journey-heading">
+          <span>SEU CAMINHO PROFISSIONAL</span>
+          <h2 id="professional-journey-title">
+            Não existe atalho para se tornar profissional, mas existe um <em>caminho mais seguro.</em>
+          </h2>
+        </div>
+
+        <div class="professional-journey-content">
+          <figure class="professional-journey-visual">
+            <img src="${professionalJourneyImg}" alt="Mulher caminhando em direção a uma meta profissional" width="900" height="900" loading="lazy" decoding="async" />
+          </figure>
+
+          <div class="professional-journey-copy">
+            <h3>Começar com direção muda tudo.</h3>
+            <p>
+              Você não precisa aprender sozinha, testar sem segurança ou depender de uma única técnica para atender suas clientes.
+            </p>
+            <p>
+              A formação organiza Ponto Americano, Fita Adesiva e Microcápsula de Queratina em um caminho prático — da avaliação ao acabamento — para você entender qual solução indicar em cada atendimento.
+            </p>
+            <p>
+              Além da técnica, você encontra conteúdos para cuidar do resultado, cobrar com mais clareza, divulgar seu trabalho e conduzir conversas com possíveis clientes.
+            </p>
+            <a class="professional-journey-cta js-scroll-offer" href="#comprar" data-cta-position="caminho-profissional">
+              <span>QUERO COMEÇAR COM MAIS SEGURANÇA</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  `
+
+const studentProofSectionMarkup = isSpanishPage
+  ? ''
+  : `
+    <section class="student-proof" id="depoimentos" data-lansar-section="depoimentos-alunas" aria-labelledby="student-proof-title">
+      <div class="student-proof-shell">
+        <header class="student-proof-header">
+          <span>ALUNAS REAIS · CONQUISTAS REAIS</span>
+          <h2 id="student-proof-title">O próximo certificado pode ter o seu nome.</h2>
+          <p>
+            Registros de mulheres que decidiram aprender, praticar e transformar o Mega Hair em uma nova possibilidade profissional.
+          </p>
+        </header>
+
+        <div class="student-proof-grid">
+          <figure class="student-proof-card student-proof-card-certificate">
+            <img src="${studentProofCertifiedImg}" alt="Aluna certificada ao lado de Anna Schossig" width="940" height="1670" loading="lazy" decoding="async" />
+          </figure>
+
+          <figure class="student-proof-card student-proof-card-students">
+            <img src="${studentProofStudentsImg}" alt="Anna Schossig com alunas segurando seus certificados" width="1000" height="1778" loading="lazy" decoding="async" />
+          </figure>
+
+          <figure class="student-proof-card student-proof-card-class">
+            <img src="${studentProofClassImg}" alt="Turma de alunas formadas com Anna Schossig" width="940" height="1670" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+
+        <div class="student-proof-footer">
+          <p><strong>Você também pode começar.</strong> O primeiro passo é escolher aprender com direção.</p>
+          <a class="student-proof-cta js-scroll-offer" href="#comprar" data-cta-position="depoimentos-alunas">
+            <span>QUERO SER A PRÓXIMA ALUNA</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  `
+
 const methodItems = conversionText.method.items
   .map(
     (item) => `
@@ -997,6 +1157,36 @@ const faqItems = conversionText.faq.items
 const offerTrustItems = conversionText.offerTrust
   .map((item) => `<span><b aria-hidden="true">✓</b>${item}</span>`)
   .join('')
+
+const heroLearningCards = [
+  heroCard01Img,
+  heroCard04Img,
+  heroCard07Img,
+  heroCard02Img,
+  heroCard05Img,
+  heroCard08Img,
+  heroCard03Img,
+  heroCard06Img,
+  heroCard04Img,
+]
+
+const heroLearningSet = (cards, duplicate = false) => `
+  <div class="hero-learning-set"${duplicate ? ' aria-hidden="true"' : ''}>
+    ${cards
+      .map(
+        (image) => `
+          <article class="hero-learning-card hero-learning-card--artwork">
+            <img src="${image}" alt="" width="512" height="768" ${duplicate ? 'loading="lazy"' : ''} />
+          </article>
+        `,
+      )
+      .join('')}
+  </div>
+`
+
+const firstHeroCardColumn = heroLearningCards.slice(0, 3)
+const secondHeroCardColumn = heroLearningCards.slice(3, 6)
+const thirdHeroCardColumn = heroLearningCards.slice(6)
 
 const renderFreeClassPage = () => {
   document.documentElement.lang = 'pt-BR'
@@ -1088,147 +1278,214 @@ if (isFreeClassPage) {
   renderFreeClassPage()
 } else {
 document.querySelector('#app').innerHTML = `
+  <nav class="floating-student-menu" aria-label="Acesso rápido à oferta">
+    <div class="floating-student-menu__brand" aria-label="Anna Schossig Mega Hair">
+      <span class="floating-student-menu__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 40" focusable="false">
+          <path d="M19.5 2.5C11.2 7.9 8.9 15.6 12.4 23.8c2.5 5.8 1.8 10.2-2.2 13.7" />
+          <path d="M23.8 5.8c-6 5.1-7.4 11.2-4.2 18.4 2 4.5 1.4 8.2-1.8 11.1" />
+          <path d="M27.2 10.4c-3.7 4.2-4.4 8.9-2 14.2 1.3 3 1 5.8-.9 8.3" />
+        </svg>
+      </span>
+      <span class="floating-student-menu__brand-copy">
+        <strong>Anna Schossig</strong>
+        <small>Mega Hair</small>
+      </span>
+    </div>
+    <a
+      class="floating-student-menu__button js-scroll-offer"
+      href="#comprar"
+      data-cta-position="menu-fixo"
+    >
+      ${isSpanishPage ? 'QUIERO SER ALUMNA' : 'QUERO SER ALUNO'}
+    </a>
+  </nav>
+
   <main class="page-shell">
     <section class="hero-section" data-lansar-section="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="hero-online-badge">
-          <span class="hero-online-badge-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false">
-              <rect x="3" y="4" width="18" height="13" rx="2"></rect>
-              <path d="M9 21h6M12 17v4"></path>
-              <path class="hero-online-badge-play" d="m10 8 5 2.5-5 2.5Z"></path>
-            </svg>
-          </span>
-          <span>${pageText.hero.onlineBadge}</span>
-        </div>
-
         <h1 id="hero-title">
-          <span>${pageText.hero.titleIntro}</span>
-          <span class="hero-techniques">
-            <strong>${pageText.techniques.cards[0].title}</strong>, <strong>${pageText.techniques.cards[1].title}</strong> ${isSpanishPage ? 'y' : 'e'} <strong>${pageText.techniques.cards[2].title}</strong>
-          </span>
+          <span class="hero-title-line">${isSpanishPage ? 'Domina' : 'Domine'}</span>
+          <span class="hero-title-line">${isSpanishPage ? 'Extensiones' : 'Mega Hair'}</span>
         </h1>
 
         <p class="hero-subtitle">
-          ${pageText.hero.subtitle}
+          ${isSpanishPage
+            ? 'Aprende Punto Americano, Extensiones Adhesivas y Cápsula de Queratina para empezar a ofrecer un servicio valorizado, incluso si eres principiante.'
+            : 'Aprenda Ponto Americano, Fita Adesiva e Cápsula de Queratina — os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês e que você pode começar a oferecer mesmo sendo iniciante.'}
+        </p>
+
+        <div class="hero-proof-pill">
+          <div class="hero-proof-images" aria-hidden="true">
+            <img src="${aluna1Img}" alt="" width="64" height="64" />
+            <img src="${aluna3Img}" alt="" width="64" height="64" />
+            <img src="${aluno2Img}" alt="" width="64" height="64" />
+            <img src="${aluno4Img}" alt="" width="64" height="64" />
+          </div>
+          <strong>${isSpanishPage ? '+ de mil' : '+ de 1 mil'}</strong>
+          <span>${isSpanishPage ? 'alumnas ya aprendieron extensiones de cabello con Anna Schossig.' : 'alunas já aprenderam Mega Hair com Anna Schossig.'}</span>
+        </div>
+
+        <p class="hero-closing-line">
+          <strong>${isSpanishPage ? 'Llegó tu momento' : 'Chegou a sua hora'}</strong>
+          ${isSpanishPage ? ' de empezar con extensiones de cabello con más seguridad.' : ' de começar no Mega Hair com mais segurança.'}
         </p>
       </div>
 
-      <div class="hero-media-wrap" aria-label="${pageText.hero.mediaLabel}">
-        <div class="hero-visual-card">
-          <picture>
-            <source media="(max-width: 700px)" srcset="${heroTechCompositeMobileImg}" />
-            <img
-              class="hero-visual"
-              src="${heroTechCompositeImg}"
-              alt="${pageText.hero.mediaLabel}"
-              width="1672"
-              height="941"
-              fetchpriority="high"
-            />
-          </picture>
+      <div class="hero-learning-wall" aria-label="${isSpanishPage ? 'Contenidos incluidos en la formación' : 'Conteúdos incluídos no treinamento'}">
+        <div class="hero-learning-rail hero-learning-rail--one">
+          <div class="hero-learning-track">
+            ${heroLearningSet(firstHeroCardColumn)}
+            ${heroLearningSet(firstHeroCardColumn, true)}
+          </div>
         </div>
-      </div>
-
-      <div class="hero-cta hero-offer">
-        <div class="hero-offer-price">
-          <p class="hero-old-price">De <span>${pageText.hero.oldPrice}</span></p>
-          <p class="hero-price-kicker">${pageText.hero.priceKicker}</p>
-          <strong>${pageText.hero.price}</strong>
-          ${!isSpanishPage ? `<span class="hero-installments-subtle">ou ${pageText.hero.installments}</span>` : ''}
-          ${isSpanishPage && pageText.hero.paymentTitle ? `
-            <div class="hero-payment-details">
-              <p>${pageText.hero.installments}</p>
-              <span>${pageText.hero.fullPrice}</span>
-              <small><b>${pageText.hero.paymentTitle}</b> ${pageText.hero.paymentNote}</small>
-            </div>
-          ` : ''}
-          ${isSpanishPage ? `
-            <p class="hero-risk">${pageText.hero.risk}</p>
-            <p class="hero-urgency">${pageText.hero.urgency}</p>
-          ` : ''}
+        <div class="hero-learning-rail hero-learning-rail--two">
+          <div class="hero-learning-track">
+            ${heroLearningSet(secondHeroCardColumn)}
+            ${heroLearningSet(secondHeroCardColumn, true)}
+          </div>
         </div>
-
-        ${isSpanishPage ? `
-          <ul class="hero-offer-list">
-            ${heroOfferItems([...pageText.hero.bonuses, ...pageText.hero.includes])}
-          </ul>
-        ` : ''}
-
-        <a
-          class="hero-button${!isSpanishPage ? ' hero-button-prominent' : ''} js-scroll-offer"
-          href="#comprar"
-          data-cta-position="hero"
-        >
-          ${pageText.hero.button}
-        </a>
-        <p class="hero-microcopy">${pageText.hero.limited}</p>
+        <div class="hero-learning-rail hero-learning-rail--three">
+          <div class="hero-learning-track">
+            ${heroLearningSet(thirdHeroCardColumn)}
+            ${heroLearningSet(thirdHeroCardColumn, true)}
+          </div>
+        </div>
       </div>
 
     </section>
 
-    <section class="techniques-section" data-lansar-section="tecnicas" aria-labelledby="techniques-title">
+    <section
+      class="hero-ticker"
+      aria-label="${isSpanishPage ? 'Domina las tres técnicas más buscadas de extensiones de cabello' : 'Domine as três técnicas mais procuradas de Mega Hair'}"
+    >
+      <div class="hero-ticker__track">
+        ${[false, true].map((duplicate) => `
+          <div class="hero-ticker__set"${duplicate ? ' aria-hidden="true"' : ''}>
+            ${Array.from({ length: 4 }, () => `
+              <strong>${isSpanishPage ? 'Domina las 3 técnicas más buscadas' : 'Domine as 3 técnicas mais procuradas'}</strong>
+              <span aria-hidden="true">✦</span>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+    </section>
+
+    <section class="story-video-section" id="apresentacao" aria-labelledby="story-video-title">
+      <div class="story-video-header">
+        <h2 id="story-video-title">
+          ${isSpanishPage ? 'Mira el video y descubre cómo' : 'Assista ao vídeo e veja como'}
+          <em>${isSpanishPage ? '3 técnicas de extensiones' : '3 técnicas de Mega Hair'}</em>
+          ${isSpanishPage ? 'pueden transformar tus ingresos.' : 'podem transformar sua renda.'}
+        </h2>
+      </div>
+
+      <div class="story-video-stage" style="--story-video-poster: url('${annaResultadosPoster}')">
+        <video
+          class="story-video-player"
+          poster="${annaResultadosPoster}"
+          preload="metadata"
+          playsinline
+          controls
+          width="720"
+          height="1280"
+          aria-label="${isSpanishPage ? 'Video de Anna sobre la formación profesional en extensiones de cabello' : 'Vídeo de Anna sobre a formação profissional em Mega Hair'}"
+        >
+          <source src="${annaResultadosVideo}" type="video/mp4" />
+        </video>
+        <button class="story-video-play" type="button" aria-label="${isSpanishPage ? 'Reproducir video' : 'Reproduzir vídeo'}">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="video">
+        <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h13M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </section>
+
+    <section class="techniques-section" id="metodo" data-lansar-section="tecnicas" aria-labelledby="techniques-title">
       <div class="techniques-header">
         <div class="section-ornament" aria-hidden="true">
           <span></span>
           <i>✦</i>
           <span></span>
         </div>
-        <h2 id="techniques-title">${pageText.techniques.title}</h2>
-        <p>${pageText.techniques.subtitle}</p>
+        <h2 id="techniques-title">
+          ${isSpanishPage ? 'Un método,' : 'Um método,'}
+          <em>${isSpanishPage ? 'tres técnicas' : 'três técnicas'}</em>
+          ${isSpanishPage ? 'y más posibilidades de atender y facturar' : 'e mais possibilidades de atender e faturar'}
+        </h2>
       </div>
 
-      <div class="technique-grid">
-        <article class="technique-card">
-          <div class="technique-image">
-            <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
-            <span>01</span>
-          </div>
-          <div class="technique-content">
-            <h3>${pageText.techniques.cards[0].title}</h3>
-            <p>${pageText.techniques.cards[0].text}</p>
-          </div>
-        </article>
+      <div class="technique-carousel-shell">
+        <div class="technique-grid">
+          <article class="technique-card">
+            <div class="technique-image">
+              <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
+              <span>01</span>
+            </div>
+            <div class="technique-content">
+              <small>${isSpanishPage ? 'TÉCNICA 01' : 'TÉCNICA 01'}</small>
+              <h3>${pageText.techniques.cards[0].title}</h3>
+              <p>${pageText.techniques.cards[0].text}</p>
+            </div>
+          </article>
 
-        <article class="technique-card">
-          <div class="technique-image">
-            <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="480" height="640" loading="lazy" decoding="async" fetchpriority="low" />
-            <span>02</span>
-          </div>
-          <div class="technique-content">
-            <h3>${pageText.techniques.cards[1].title}</h3>
-            <p>${pageText.techniques.cards[1].text}</p>
-          </div>
-        </article>
+          <article class="technique-card">
+            <div class="technique-image">
+              <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="480" height="640" loading="lazy" decoding="async" fetchpriority="low" />
+              <span>02</span>
+            </div>
+            <div class="technique-content">
+              <small>${isSpanishPage ? 'TÉCNICA 02' : 'TÉCNICA 02'}</small>
+              <h3>${pageText.techniques.cards[1].title}</h3>
+              <p>${pageText.techniques.cards[1].text}</p>
+            </div>
+          </article>
 
-        <article class="technique-card">
-          <div class="technique-image">
-            <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
-            <span>03</span>
-          </div>
-          <div class="technique-content">
-            <h3>${pageText.techniques.cards[2].title}</h3>
-            <p>${pageText.techniques.cards[2].text}</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="technique-carousel-controls" aria-label="${pageText.techniques.controls}">
-        <button class="technique-arrow" type="button" data-technique-prev aria-label="${pageText.techniques.prev}">‹</button>
-        <div class="technique-dots" aria-hidden="true">
-          <span class="is-active"></span>
-          <span></span>
-          <span></span>
+          <article class="technique-card">
+            <div class="technique-image">
+              <img src="${capsulaImg}" alt="${pageText.techniques.cards[2].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
+              <span>03</span>
+            </div>
+            <div class="technique-content">
+              <small>${isSpanishPage ? 'TÉCNICA 03' : 'TÉCNICA 03'}</small>
+              <h3>${pageText.techniques.cards[2].title}</h3>
+              <p>${pageText.techniques.cards[2].text}</p>
+            </div>
+          </article>
         </div>
-        <button class="technique-arrow" type="button" data-technique-next aria-label="${pageText.techniques.next}">›</button>
+
+        <div class="technique-carousel-controls" aria-label="${pageText.techniques.controls}">
+          <button class="technique-arrow" type="button" data-technique-prev aria-label="${pageText.techniques.prev}">‹</button>
+          <div class="technique-dots" aria-hidden="true">
+            <span class="is-active"></span>
+            <span></span>
+            <span></span>
+          </div>
+          <button class="technique-arrow" type="button" data-technique-next aria-label="${pageText.techniques.next}">›</button>
+        </div>
       </div>
 
-      <div class="technique-strip" aria-label="${isSpanishPage ? 'Beneficios de la sección' : 'Benefícios da seção'}">
-        <span>${pageText.techniques.strip[0]}</span>
-        <b aria-hidden="true"></b>
-        <span>${pageText.techniques.strip[1]}</span>
-        <b aria-hidden="true"></b>
-        <span>${pageText.techniques.strip[2]}</span>
+      <div class="method-conclusion">
+        <h3>${isSpanishPage
+          ? 'Tu diferencial no es conocer una técnica. Es saber cuál usar en cada clienta.'
+          : 'Seu diferencial não é conhecer uma técnica. É saber qual usar em cada cliente.'}</h3>
+        <p>${isSpanishPage
+          ? 'Cada cabello, rutina y objetivo necesita una solución diferente. Por eso, el Método de las 3 Técnicas reúne opciones complementarias para que puedas evaluar, indicar y ejecutar el procedimiento más adecuado.'
+          : 'Cada cabelo, rotina e objetivo pede uma solução diferente. Por isso, o Método das 3 Técnicas reúne opções complementares para você avaliar, indicar e executar o procedimento mais adequado.'}</p>
+        <p>${isSpanishPage
+          ? 'En lugar de depender de un solo servicio, amplías tus posibilidades de atención y te conviertes en una profesional más completa.'
+          : 'Em vez de depender de um único serviço, você amplia suas possibilidades de atendimento e se torna uma profissional mais completa.'}</p>
+        <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="metodo-3-tecnicas">
+          <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" />
+          </svg>
+        </a>
       </div>
     </section>
 
@@ -1256,19 +1513,100 @@ document.querySelector('#app').innerHTML = `
       <p class="results-note">${conversionText.resultsNote}</p>
     </section>
 
-    ${conversionCta(conversionText.ctas[0])}
-
-    <section class="learning-section" data-lansar-section="conteudo" aria-labelledby="learning-title">
-      <div class="learning-header">
-        <span class="learning-kicker">${pageText.learning.kicker}</span>
-        <h2 id="learning-title">${pageText.learning.title}</h2>
+    <section class="challenge-section" id="desafios" data-lansar-section="desafios" aria-labelledby="challenge-title">
+      <div class="challenge-heading">
+        <h2 id="challenge-title">
+          ${isSpanishPage
+            ? '¿Cuál es el principal desafío que te impide <em>empezar hoy?</em>'
+            : 'Qual é o principal desafio que impede você de <em>começar hoje?</em>'}
+        </h2>
       </div>
 
-      <div class="learning-grid">
-        ${learningCards}
+      <div class="challenge-map">
+        <div class="challenge-grid">
+          <article class="challenge-card">
+            <span>01</span>
+            <h3>${isSpanishPage
+              ? '¿Quieres empezar, pero todavía te sientes insegura por ser principiante?'
+              : 'Quer começar, mas ainda se sente insegura por ser iniciante?'}</h3>
+            <p>${isSpanishPage
+              ? 'Sigue un camino práctico para aprender la base y avanzar con más confianza.'
+              : 'Siga um caminho prático para aprender a base e avançar com mais confiança.'}</p>
+          </article>
+
+          <article class="challenge-card">
+            <span>02</span>
+            <h3>${isSpanishPage
+              ? '¿Tus ingresos están ajustados y buscas un servicio más valorado?'
+              : 'Sua renda está apertada e você procura um serviço mais valorizado?'}</h3>
+            <p>${isSpanishPage
+              ? 'Aprende tres técnicas que amplían tus posibilidades de atención.'
+              : 'Aprenda três técnicas que ampliam suas possibilidades de atendimento.'}</p>
+          </article>
+
+          <article class="challenge-card">
+            <span>03</span>
+            <h3>${isSpanishPage
+              ? '¿Ya trabajas en belleza, pero te falta un nicho con más posibilidades?'
+              : 'Já trabalha com beleza, mas sente que falta um nicho com mais possibilidades?'}</h3>
+            <p>${isSpanishPage
+              ? 'Incluye Mega Hair en tu portafolio y ofrece más soluciones a tus clientas.'
+              : 'Inclua Mega Hair no seu portfólio e ofereça mais soluções às suas clientes.'}</p>
+          </article>
+        </div>
+
+        <div class="challenge-connectors" aria-hidden="true">
+          <i></i><i></i><i></i><span></span><b></b>
+        </div>
+      </div>
+
+      <div class="challenge-bridge">
+        <h3>${isSpanishPage
+          ? '¿PRINCIPIANTE? ¿INSEGURA? ¿BUSCANDO MEJORES INGRESOS?'
+          : 'INICIANTE? INSEGURA? BUSCANDO UMA RENDA MELHOR?'}</h3>
+        <p>${isSpanishPage
+          ? 'No necesitas empezar sabiéndolo todo. Necesitas un camino claro para aprender, practicar y conquistar la seguridad para atender.'
+          : 'Você não precisa começar sabendo tudo. Precisa de um caminho claro para aprender, praticar e conquistar segurança para atender.'}</p>
+      </div>
+
+      <div class="challenge-paths" aria-label="${isSpanishPage ? 'Caminos posibles con la formación' : 'Caminhos possíveis com a formação'}">
+        <button class="challenge-arrow challenge-arrow--prev" type="button" aria-label="${isSpanishPage ? 'Ver tarjeta anterior' : 'Ver card anterior'}" data-challenge-prev>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+
+        <div class="challenge-path-viewport">
+          <div class="challenge-path-track">
+            <article class="challenge-path-card">
+              <img src="${heroCard05Img}" alt="${isSpanishPage ? 'Cómo evaluar el cabello de la clienta' : 'Como avaliar o cabelo da cliente'}" width="1024" height="1536" loading="lazy" decoding="async" />
+            </article>
+            <article class="challenge-path-card">
+              <img src="${heroCard01Img}" alt="${isSpanishPage ? 'Técnica de punto americano' : 'Técnica de Ponto Americano'}" width="1024" height="1536" loading="lazy" decoding="async" />
+            </article>
+            <article class="challenge-path-card">
+              <img src="${heroCard02Img}" alt="${isSpanishPage ? 'Técnica de cinta adhesiva' : 'Técnica de Fita Adesiva'}" width="1024" height="1536" loading="lazy" decoding="async" />
+            </article>
+            <article class="challenge-path-card">
+              <img src="${heroCard03Img}" alt="${isSpanishPage ? 'Técnica de microcápsula de queratina' : 'Técnica de Microcápsula de Queratina'}" width="1024" height="1536" loading="lazy" decoding="async" />
+            </article>
+            <article class="challenge-path-card">
+              <img src="${heroCard04Img}" alt="${isSpanishPage ? 'Acabado perfecto de Mega Hair' : 'Acabamento perfeito de Mega Hair'}" width="1024" height="1536" loading="lazy" decoding="async" />
+            </article>
+          </div>
+        </div>
+
+        <button class="challenge-arrow challenge-arrow--next" type="button" aria-label="${isSpanishPage ? 'Ver próxima tarjeta' : 'Ver próximo card'}" data-challenge-next>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+
+      <div class="challenge-dots" aria-hidden="true">
+        <span class="is-active"></span><span></span><span></span><span></span><span></span>
       </div>
     </section>
 
+    ${learningSectionMarkup}
+
+    ${isSpanishPage ? `
     <section class="benefits-section" data-lansar-section="beneficios" aria-labelledby="benefits-title">
       <div class="benefits-header">
         <span class="benefits-kicker">${pageText.benefits.kicker}</span>
@@ -1302,8 +1640,11 @@ document.querySelector('#app').innerHTML = `
         </article>
       </div>
     </section>
+    ` : ''}
 
-    ${conversionCta(conversionText.ctas[1])}
+    ${professionalJourneySectionMarkup}
+
+    ${studentProofSectionMarkup}
 
     <section class="mentor-section" data-lansar-section="mentora" aria-labelledby="mentor-title">
       <div class="mentor-content">
@@ -1468,6 +1809,15 @@ document.querySelector('#app').innerHTML = `
   </main>
 `
 
+if (!isSpanishPage) {
+  const studentProofSection = document.querySelector('.student-proof')
+  const offerSection = document.querySelector('.offer-section')
+
+  if (studentProofSection && offerSection) {
+    studentProofSection.insertAdjacentElement('afterend', offerSection)
+  }
+}
+
 const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) => {
   const fbp = identifiers?.fbp ?? getCookie('_fbp')
   const fbc = identifiers?.fbc ?? getCookie('_fbc')
@@ -1578,6 +1928,27 @@ document.querySelectorAll('.offer-button').forEach((button) => {
   });
 });
 
+const storyVideo = document.querySelector('.story-video-player')
+const storyVideoStage = document.querySelector('.story-video-stage')
+const storyVideoPlay = document.querySelector('.story-video-play')
+
+if (storyVideo && storyVideoStage && storyVideoPlay) {
+  storyVideoPlay.addEventListener('click', () => {
+    storyVideo.play().catch(() => {})
+  })
+
+  storyVideo.addEventListener('play', () => {
+    storyVideoStage.classList.add('is-playing')
+  })
+
+  const revealStoryVideoPlay = () => {
+    storyVideoStage.classList.remove('is-playing')
+  }
+
+  storyVideo.addEventListener('pause', revealStoryVideoPlay)
+  storyVideo.addEventListener('ended', revealStoryVideoPlay)
+}
+
 const resultsMarquee = document.querySelector('.results-marquee')
 
 if (resultsMarquee) {
@@ -1597,7 +1968,7 @@ const techniqueCards = [...document.querySelectorAll('.technique-card')]
 const techniqueDots = [...document.querySelectorAll('.technique-dots span')]
 const techniquePrev = document.querySelector('[data-technique-prev]')
 const techniqueNext = document.querySelector('[data-technique-next]')
-const techniqueMedia = window.matchMedia('(max-width: 1100px)')
+const techniqueMedia = window.matchMedia('(min-width: 0px)')
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 let techniqueIndex = 0
 let techniqueAutoTimer
@@ -1658,4 +2029,47 @@ if ('IntersectionObserver' in window && techniqueCarousel) {
 }
 
 startTechniqueAuto()
+
+const challengeTrack = document.querySelector('.challenge-path-track')
+const challengePrev = document.querySelector('[data-challenge-prev]')
+const challengeNext = document.querySelector('[data-challenge-next]')
+const challengeDots = [...document.querySelectorAll('.challenge-dots span')]
+let challengeScrollFrame
+
+const updateChallengePosition = () => {
+  if (!challengeTrack || !challengeDots.length) return
+
+  const maxScroll = Math.max(0, challengeTrack.scrollWidth - challengeTrack.clientWidth)
+  const progress = maxScroll ? challengeTrack.scrollLeft / maxScroll : 0
+  const activeIndex = Math.round(progress * (challengeDots.length - 1))
+
+  challengeDots.forEach((dot, index) => {
+    dot.classList.toggle('is-active', index === activeIndex)
+  })
+}
+
+const moveChallengeCarousel = (direction) => {
+  if (!challengeTrack) return
+
+  const firstCard = challengeTrack.querySelector('.challenge-path-card')
+  const styles = window.getComputedStyle(challengeTrack)
+  const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0
+  const cardStep = (firstCard?.getBoundingClientRect().width || challengeTrack.clientWidth * 0.72) + gap
+
+  challengeTrack.scrollBy({
+    left: direction * cardStep,
+    behavior: reduceMotion.matches ? 'auto' : 'smooth',
+  })
+}
+
+challengePrev?.addEventListener('click', () => moveChallengeCarousel(-1))
+challengeNext?.addEventListener('click', () => moveChallengeCarousel(1))
+
+challengeTrack?.addEventListener('scroll', () => {
+  window.cancelAnimationFrame(challengeScrollFrame)
+  challengeScrollFrame = window.requestAnimationFrame(updateChallengePosition)
+}, { passive: true })
+
+window.addEventListener('resize', updateChallengePosition)
+updateChallengePosition()
 }
