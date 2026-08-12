@@ -53,10 +53,10 @@ import freeMembersLessonVideo from './assets/aula-gratuita-mapa-decisao.mp4'
 const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
 const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
 const isBrazilSalesPage = window.location.pathname.split('/').filter(Boolean).length === 0
-if (isBrazilSalesPage) initializeMetaTracking()
+if (isBrazilSalesPage || isFreeClassPage) initializeMetaTracking()
 capturePurchaseSession(
   isSpanishPage ? 'anna-es' : 'anna',
-  isBrazilSalesPage ? resolveMetaIdentifiers() : undefined,
+  isBrazilSalesPage || isFreeClassPage ? resolveMetaIdentifiers() : undefined,
 )
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
@@ -1400,7 +1400,21 @@ const renderFreeClassPage = () => {
     if (event.key === 'Escape') closeUnlockModal()
   })
   document.querySelectorAll('.free-members-modal a[data-lansar-event]').forEach((button) => {
-    button.addEventListener('click', () => trackFunnel('InitiateCheckout'))
+    button.addEventListener('click', (event) => {
+      event.preventDefault()
+      trackFunnel('InitiateCheckout')
+
+      const targetUrl = button.getAttribute('href') || checkoutUrl
+      try {
+        const identifiers = resolveMetaIdentifiers()
+        const enrichedUrl = new URL(targetUrl)
+        if (identifiers.fbp) enrichedUrl.searchParams.set('src', identifiers.fbp)
+        if (identifiers.fbc) enrichedUrl.searchParams.set('sck', identifiers.fbc)
+        window.location.href = enrichedUrl.toString()
+      } catch {
+        window.location.href = targetUrl
+      }
+    })
   })
 }
 
