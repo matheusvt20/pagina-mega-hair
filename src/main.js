@@ -6,8 +6,8 @@ import {
   initializeMetaTracking,
   resolveMetaIdentifiers,
 } from '@/lib/purchaseTracking'
-import pontoAmericanoImg from './assets/1.webp'
-import fitaAdesivaImg from './assets/fita-adesiva.webp'
+import pontoAmericanoImg from './assets/ponto-americano-dobra3.webp'
+import fitaAdesivaImg from './assets/fita-adesiva-dobra3.webp'
 import capsulaImg from './assets/3.webp'
 import resultado01Img from './assets/resultado-01.webp'
 import resultado02Img from './assets/resultado-02.webp'
@@ -66,10 +66,13 @@ const essentialCheckoutUrl = isSpanishPage
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
-  : { value: 97.00, currency: 'BRL' }
+  : { value: 197.00, currency: 'BRL' }
 const essentialCheckoutTracking = isSpanishPage
   ? checkoutTracking
   : { value: 59.00, currency: 'BRL' }
+const whatsappSupportMessage = 'Olá, preciso de ajuda sobre o curso de Mega Hair.'
+const whatsappSupportUrl = `https://wa.me/5521990481222?text=${encodeURIComponent(whatsappSupportMessage)}`
+
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
   ? 'Anna Schossig - Guía Práctica de Extensiones de Cabello'
@@ -580,12 +583,13 @@ const pageText = isSpanishPage
         visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
         couponLabel: 'Cupom liberado',
         couponTitle: 'Você ganhou um cupom de desconto',
-        couponText: 'Sua condição especial já está aplicada: 12x de R$ 10,03 ou R$ 97,00 à vista.',
+        couponText: 'Sua condição especial já está aplicada: 12x de R$ 20,37 ou R$ 197,00 à vista.',
         summaryLabel: 'Resumo',
         summaryText: 'Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.',
         bonusLabel: 'Bônus liberados no acesso',
         bonuses: [
           'Curso de Acabamento Perfeito',
+          'Curso de Tráfego Pago',
           'IA para Profissionais de Mega Hair',
           'Pack de Prompts Prontos',
           'Lista de Fornecedores Confiáveis',
@@ -605,12 +609,12 @@ const pageText = isSpanishPage
         essentialPrice: '12x de R$ 6,10',
         essentialCashPrice: 'ou R$ 59,00 à vista',
         essentialAccess: '',
-        price: '12x de R$ 10,03',
-        priceText: 'ou R$ 97,00 à vista',
+        price: '12x de R$ 20,37',
+        priceText: 'ou R$ 197,00 à vista',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
         essentialButton: 'Quero essa opção',
-        button: 'Garantir acesso completo por R$97,00',
+        button: 'Garantir acesso completo por R$ 197,00',
         warning: 'Aproveite agora: você não vai encontrar essa condição depois.',
         timer: 'Essa condição termina em',
         essentialFeatures: [
@@ -630,11 +634,12 @@ const pageText = isSpanishPage
           { included: true, text: 'Garantia por 7 dias' },
           { included: true, text: 'Certificado de conclusão' },
           { included: true, text: 'Bônus 1: Curso de Acabamento Perfeito' },
-          { included: true, text: 'Bônus 2: IA para Profissionais de Mega Hair' },
-          { included: true, text: 'Bônus 3: Pack de Prompts Prontos' },
-          { included: true, text: 'Bônus 4: Lista de Fornecedores Confiáveis' },
-          { included: true, text: 'Bônus 5: Mentoria em Grupo' },
-          { included: true, text: 'Bônus 6: Grupo de Alunas' },
+          { included: true, text: 'Bônus 2: Curso de Tráfego Pago' },
+          { included: true, text: 'Bônus 3: IA para Profissionais de Mega Hair' },
+          { included: true, text: 'Bônus 4: Pack de Prompts Prontos' },
+          { included: true, text: 'Bônus 5: Lista de Fornecedores Confiáveis' },
+          { included: true, text: 'Bônus 6: Mentoria em Grupo' },
+          { included: true, text: 'Bônus 7: Grupo de Alunas' },
           { included: true, extra: true, text: 'Bônus extra: Guia para Cobrar Certo e Lucrar Mais' },
           {
             included: true,
@@ -1158,6 +1163,22 @@ const offerTrustItems = conversionText.offerTrust
   .map((item) => `<span><b aria-hidden="true">✓</b>${item}</span>`)
   .join('')
 
+const whatsappSupportButton = () => `
+  <a
+    class="whatsapp-support"
+    href="${whatsappSupportUrl}"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Falar no WhatsApp sobre o curso de Mega Hair"
+  >
+    <span class="whatsapp-support-icon" aria-hidden="true">
+      <svg viewBox="0 0 32 32" role="img">
+        <path d="M16.03 3.2A12.74 12.74 0 0 0 5.2 22.64L3.5 28.8l6.3-1.65A12.75 12.75 0 1 0 16.03 3.2Zm0 22.96a10.2 10.2 0 0 1-5.2-1.42l-.37-.22-3.74.98 1-3.64-.24-.38a10.2 10.2 0 1 1 8.55 4.68Zm5.6-7.64c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.15-.7.16-.2.3-.79 1-1 1.2-.18.2-.36.23-.67.08-.3-.16-1.3-.48-2.47-1.53a9.27 9.27 0 0 1-1.7-2.12c-.18-.3-.02-.47.14-.62.14-.14.3-.36.46-.54.15-.18.2-.3.3-.51.1-.2.05-.39-.02-.54-.08-.15-.7-1.68-.95-2.3-.25-.6-.51-.52-.7-.53h-.6c-.2 0-.54.08-.82.39-.28.3-1.08 1.05-1.08 2.57s1.1 2.98 1.26 3.19c.15.2 2.18 3.33 5.28 4.67.74.32 1.31.5 1.76.65.74.23 1.42.2 1.95.12.6-.09 1.82-.75 2.08-1.47.25-.72.25-1.34.18-1.47-.08-.13-.28-.2-.59-.36Z" />
+      </svg>
+    </span>
+  </a>
+`
+
 const heroLearningCards = [
   heroCard01Img,
   heroCard04Img,
@@ -1396,6 +1417,13 @@ document.querySelector('#app').innerHTML = `
         <button class="story-video-play" type="button" aria-label="${isSpanishPage ? 'Reproducir video' : 'Reproduzir vídeo'}">
           <span aria-hidden="true"></span>
         </button>
+        <button class="story-video-sound" type="button" aria-label="${isSpanishPage ? 'Activar sonido del video' : 'Ativar som do vídeo'}">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 9v6h4l5 4V5L9 9H5Z" />
+            <path d="M17 9.5c.8.7 1.2 1.5 1.2 2.5s-.4 1.8-1.2 2.5" />
+          </svg>
+          <span>${isSpanishPage ? 'ACTIVAR SONIDO' : 'ATIVAR SOM'}</span>
+        </button>
       </div>
 
       <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="video">
@@ -1424,7 +1452,7 @@ document.querySelector('#app').innerHTML = `
         <div class="technique-grid">
           <article class="technique-card">
             <div class="technique-image">
-              <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="900" height="650" loading="lazy" decoding="async" fetchpriority="low" />
+              <img src="${pontoAmericanoImg}" alt="${pageText.techniques.cards[0].alt}" width="1000" height="1508" loading="lazy" decoding="async" fetchpriority="low" />
               <span>01</span>
             </div>
             <div class="technique-content">
@@ -1436,7 +1464,7 @@ document.querySelector('#app').innerHTML = `
 
           <article class="technique-card">
             <div class="technique-image">
-              <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="480" height="640" loading="lazy" decoding="async" fetchpriority="low" />
+              <img src="${fitaAdesivaImg}" alt="${pageText.techniques.cards[1].alt}" width="1200" height="900" loading="lazy" decoding="async" fetchpriority="low" />
               <span>02</span>
             </div>
             <div class="technique-content">
@@ -1807,6 +1835,7 @@ document.querySelector('#app').innerHTML = `
       </div>
     </section>
   </main>
+  ${whatsappSupportButton()}
 `
 
 if (!isSpanishPage) {
@@ -1826,6 +1855,7 @@ const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) =>
     client: isSpanishPage ? 'anna-es' : 'anna',
     eventName: 'InitiateCheckout',
     eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
+    ...(isBrazilSalesPage ? { eventSourceUrl: window.location.href } : {}),
     ...(fbp ? { fbp } : {}),
     ...(fbc ? { fbc } : {}),
     ...(externalId ? { external_id: externalId } : {}),
@@ -1931,14 +1961,34 @@ document.querySelectorAll('.offer-button').forEach((button) => {
 const storyVideo = document.querySelector('.story-video-player')
 const storyVideoStage = document.querySelector('.story-video-stage')
 const storyVideoPlay = document.querySelector('.story-video-play')
+const storyVideoSound = document.querySelector('.story-video-sound')
 
-if (storyVideo && storyVideoStage && storyVideoPlay) {
+if (storyVideo && storyVideoStage && storyVideoPlay && storyVideoSound) {
+  let storyVideoIsVisible = false
+
   storyVideoPlay.addEventListener('click', () => {
+    storyVideo.muted = false
+    storyVideo.defaultMuted = false
+    storyVideoStage.classList.remove('needs-sound')
+    storyVideo.play().catch(() => {})
+  })
+
+  storyVideoSound.addEventListener('click', () => {
+    storyVideo.muted = false
+    storyVideo.defaultMuted = false
+    storyVideo.volume = 1
+    storyVideoStage.classList.remove('needs-sound')
     storyVideo.play().catch(() => {})
   })
 
   storyVideo.addEventListener('play', () => {
     storyVideoStage.classList.add('is-playing')
+  })
+
+  storyVideo.addEventListener('volumechange', () => {
+    if (!storyVideo.muted && storyVideo.volume > 0) {
+      storyVideoStage.classList.remove('needs-sound')
+    }
   })
 
   const revealStoryVideoPlay = () => {
@@ -1947,6 +1997,36 @@ if (storyVideo && storyVideoStage && storyVideoPlay) {
 
   storyVideo.addEventListener('pause', revealStoryVideoPlay)
   storyVideo.addEventListener('ended', revealStoryVideoPlay)
+
+  if ('IntersectionObserver' in window) {
+    const storyVideoObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+        storyVideoIsVisible = true
+        storyVideo.muted = false
+        storyVideo.defaultMuted = false
+
+        storyVideo.play().then(() => {
+          storyVideoStage.classList.remove('needs-sound')
+        }).catch(() => {
+          if (!storyVideoIsVisible) return
+
+          storyVideo.muted = true
+          storyVideo.defaultMuted = true
+          storyVideo.play().then(() => {
+            storyVideoStage.classList.add('needs-sound')
+          }).catch(() => {})
+        })
+        return
+      }
+
+      storyVideoIsVisible = false
+      if (!storyVideo.paused) {
+        storyVideo.pause()
+      }
+    }, { threshold: [0, 0.45, 0.7] })
+
+    storyVideoObserver.observe(storyVideoStage)
+  }
 }
 
 const resultsMarquee = document.querySelector('.results-marquee')

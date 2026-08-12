@@ -1,4 +1,5 @@
 import type { EventContext } from "@cloudflare/workers-types";
+import { resolveBrowserEventSourceUrl } from "./meta-event-source.ts";
 
 interface Env {
   META_CAPI_TOKEN: string;
@@ -17,6 +18,7 @@ interface MetaEventBody {
   fbp?: string;
   fbc?: string;
   external_id?: string;
+  eventSourceUrl?: string;
   eventData?: Record<string, unknown>;
 }
 
@@ -27,10 +29,33 @@ export async function onRequestPost(
 
   try {
     const body = await request.json() as MetaEventBody;
-    const { client, eventName, eventId, fbp, fbc, external_id, eventData } = body;
+    const {
+      client,
+      eventName,
+      eventId,
+      fbp,
+      fbc,
+      external_id,
+      eventSourceUrl: providedEventSourceUrl,
+      eventData,
+    } = body;
 
     if (!eventName || !eventId) {
       return new Response(JSON.stringify({ error: "Missing eventName or eventId" }), {
+        status: 400,
+        headers: corsHeaders,
+      });
+    }
+
+    const eventSourceUrl = client === "anna-es"
+      ? null
+      : resolveBrowserEventSourceUrl(
+        request.url,
+        providedEventSourceUrl,
+        request.headers.get("Referer"),
+      );
+    if (client !== "anna-es" && !eventSourceUrl) {
+      return new Response(JSON.stringify({ error: "Missing or invalid eventSourceUrl" }), {
         status: 400,
         headers: corsHeaders,
       });
@@ -71,6 +96,7 @@ export async function onRequestPost(
           event_time: Math.floor(Date.now() / 1000),
           event_id: eventId,
           action_source: "website",
+          ...(eventSourceUrl ? { event_source_url: eventSourceUrl } : {}),
           user_data: userData,
           ...(eventData ? { custom_data: eventData } : {}),
         },
