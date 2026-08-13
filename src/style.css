@@ -4533,6 +4533,11 @@ h1 span {
   align-items: start;
 }
 
+.offer-comparison.is-single {
+  grid-template-columns: minmax(0, 700px);
+  justify-content: center;
+}
+
 .offer-card {
   position: relative;
   width: 100%;
@@ -8549,6 +8554,11 @@ body:has(.free-members-page) {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   margin-top: 30px;
+}
+
+.free-members-plan-grid.is-single {
+  grid-template-columns: minmax(0, 500px);
+  justify-content: center;
 }
 
 .free-members-plan {

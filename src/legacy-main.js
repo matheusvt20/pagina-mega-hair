@@ -40,16 +40,12 @@ capturePurchaseSession(
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/DajNPtI'
-const essentialCheckoutUrl = isSpanishPage
-  ? checkoutUrl
-  : 'https://pay.kiwify.com.br/UruirxE'
+const essentialCheckoutUrl = checkoutUrl
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 97.00, currency: 'BRL' }
-const essentialCheckoutTracking = isSpanishPage
-  ? checkoutTracking
-  : { value: 59.00, currency: 'BRL' }
+const essentialCheckoutTracking = checkoutTracking
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
   ? 'Anna Schossig - Guía Práctica de Extensiones de Cabello'
@@ -468,8 +464,8 @@ const pageText = isSpanishPage
         subtitle:
           'Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.',
         button: 'EU QUERO APRENDER!',
-        installments: '12x de R$ 6,10',
-        fullPrice: 'ou R$ 59,00 à vista',
+        installments: '12x de R$ 10,03',
+        fullPrice: 'ou R$ 97,00 à vista',
         paymentTitle: 'Não é mensalidade.',
         paymentNote: 'Pague uma única vez e receba 3 cursos.',
         microcopy: 'Acesso online por 1 ano com certificado',
@@ -477,7 +473,7 @@ const pageText = isSpanishPage
           'Anna Schossig com demonstrações profissionais de técnicas de Mega Hair',
         oldPrice: 'R$397,00',
         priceKicker: 'Por apenas',
-        price: 'R$59',
+        price: 'R$97',
         risk: 'Risco zero!',
         urgency: 'Mas você precisa agir rápido!',
         bonuses: [
@@ -546,15 +542,15 @@ const pageText = isSpanishPage
       },
       offer: {
         kicker: 'O que está incluído',
-        title: 'Escolha a melhor oferta para você',
+        title: 'Garanta sua oferta',
         headline: 'Inscreva-se agora e ganhe:',
         essentialTitle: 'Oferta essencial',
-        completeTitle: 'Oferta completa',
-        completeSubtitle: '(melhor negócio)',
-        bestSeller: 'Mais vendido',
+        completeTitle: 'Mega Hair 3 em 1',
+        completeSubtitle: '(acesso completo)',
+        bestSeller: 'Oferta especial',
         stars: '★★★★★',
         ribbon: 'Oferta completa',
-        badge: 'Mais escolhido',
+        badge: 'Oferta especial',
         label: 'Completo',
         name: 'Mega Hair 3 em 1',
         visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
@@ -582,8 +578,8 @@ const pageText = isSpanishPage
         total: 'Valor total:',
         today: '',
         essentialPayment: '',
-        essentialPrice: '12x de R$ 6,10',
-        essentialCashPrice: 'ou R$ 59,00 à vista',
+        essentialPrice: '12x de R$ 10,03',
+        essentialCashPrice: 'ou R$ 97,00 à vista',
         essentialAccess: '',
         price: '12x de R$ 10,03',
         priceText: 'ou R$ 97,00 à vista',
@@ -737,14 +733,14 @@ const conversionText = isSpanishPage
           kicker: 'Seu próximo passo',
           title: 'Aprenda as 3 técnicas em um único treinamento',
           text: 'Comece pela base, entenda quando indicar cada técnica e avance com mais segurança nas aplicações.',
-          button: 'Ver opções de acesso',
+          button: 'Garantir meu acesso',
           position: 'resultados',
         },
         {
           kicker: 'Se identificou?',
           title: 'Comece agora, mesmo que você ainda seja iniciante',
           text: 'Tenha aulas práticas, material de apoio e certificado para organizar seu aprendizado passo a passo.',
-          button: 'Quero conhecer as ofertas',
+          button: 'Quero garantir minha oferta',
           position: 'perfil',
         },
       ],
@@ -789,9 +785,9 @@ const conversionText = isSpanishPage
               'O acesso é liberado após a confirmação do pagamento e enviado para o e-mail informado na compra.',
           },
           {
-            question: 'Qual é a diferença entre as duas ofertas?',
+            question: 'O que está incluído na oferta?',
             answer:
-              'A oferta essencial inclui as 3 técnicas, certificado e acesso por 1 ano. A oferta completa acrescenta acesso vitalício e materiais para acabamento, captação de clientes, vendas e gestão.',
+              'A oferta inclui as 3 técnicas, acesso vitalício, certificado e os materiais complementares para acabamento, captação de clientes, vendas e gestão.',
           },
           {
             question: 'Como funciona a garantia?',
@@ -814,8 +810,8 @@ const conversionText = isSpanishPage
       finalCta: {
         kicker: 'Pronta para começar',
         title: 'Dê o próximo passo no Mega Hair',
-        text: 'Escolha sua opção de acesso e comece a estudar as 3 técnicas.',
-        button: 'Ver opções de acesso',
+        text: 'Garanta seu acesso e comece a estudar as 3 técnicas.',
+        button: 'Garantir meu acesso',
       },
     }
 
@@ -1360,7 +1356,8 @@ document.querySelector('#app').innerHTML = `
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
-        <div class="offer-comparison">
+        <div class="offer-comparison${isSpanishPage ? '' : ' is-single'}">
+          ${isSpanishPage ? `
           <article class="offer-card offer-card-essential">
             <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
             ${pageText.offer.essentialPayment ? `<span class="offer-payment">${pageText.offer.essentialPayment}</span>` : ''}
@@ -1380,6 +1377,7 @@ document.querySelector('#app').innerHTML = `
               data-checkout-currency="${essentialCheckoutTracking.currency}"
             >${pageText.offer.essentialButton}</a>
           </article>
+          ` : ''}
 
           <article class="offer-card offer-card-complete">
             <div class="offer-bestseller">${pageText.offer.bestSeller}</div>
@@ -1414,7 +1412,7 @@ document.querySelector('#app').innerHTML = `
               ${offerTrustItems}
             </div>
 
-            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Escolha a opção que faz mais sentido para o seu momento.'}</p>
+            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Oferta única com acesso completo ao treinamento e aos bônus.'}</p>
           </article>
         </div>
       </div>
@@ -1499,26 +1497,51 @@ if (isBrazilSalesPage) {
   })
 }
 
-const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) => {
+const checkoutContentId = isSpanishPage ? 'guia-extensiones-3-em-1' : 'mega-hair-3-em-1'
+
+const checkoutEventData = (tracking = checkoutTracking) => ({
+  content_name: pageText.checkoutContentName,
+  content_ids: [checkoutContentId],
+  content_type: 'product',
+  num_items: 1,
+  value: tracking.value,
+  currency: tracking.currency,
+})
+
+const createCheckoutEventId = () =>
+  `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`
+
+const sendInitiateCheckout = async (eventId, identifiers, tracking = checkoutTracking) => {
   const fbp = identifiers?.fbp ?? getCookie('_fbp')
   const fbc = identifiers?.fbc ?? getCookie('_fbc')
   const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
   const payload = JSON.stringify({
     client: isSpanishPage ? 'anna-es' : 'anna',
     eventName: 'InitiateCheckout',
-    eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
-    ...(isBrazilSalesPage ? { eventSourceUrl: window.location.href } : {}),
+    eventId,
+    ...(!isSpanishPage ? { eventSourceUrl: window.location.href } : {}),
     ...(fbp ? { fbp } : {}),
     ...(fbc ? { fbc } : {}),
     ...(externalId ? { external_id: externalId } : {}),
-    eventData: {
-      content_name: pageText.checkoutContentName,
-      value: tracking.value,
-      currency: tracking.currency,
-    },
+    eventData: checkoutEventData(tracking),
   })
 
   return sendMetaEvent(payload)
+}
+
+const trackBrowserInitiateCheckout = (eventId, tracking = checkoutTracking) => {
+  if (typeof fbq === 'undefined') return
+  fbq('track', 'InitiateCheckout', checkoutEventData(tracking), { eventID: eventId })
+}
+
+const resolveCheckoutIdentifiers = async () => {
+  if (!isBrazilSalesPage) return undefined
+  const readyIdentifiers = await metaIdentifiersReady
+  const currentIdentifiers = resolveMetaIdentifiers()
+  return {
+    fbp: currentIdentifiers.fbp || readyIdentifiers?.fbp || '',
+    fbc: currentIdentifiers.fbc || readyIdentifiers?.fbc || '',
+  }
 }
 
 const sha256 = async (value) => {
@@ -1579,6 +1602,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     const eventValue = Number(button.dataset.checkoutValue || checkoutTracking.value)
     const eventCurrency = button.dataset.checkoutCurrency || checkoutTracking.currency
     const tracking = { value: eventValue, currency: eventCurrency }
+    const eventId = createCheckoutEventId()
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
@@ -1587,13 +1611,14 @@ document.querySelectorAll('.offer-button').forEach((button) => {
         currency: eventCurrency
       });
     }
+    trackBrowserInitiateCheckout(eventId, tracking)
 
     if (isBrazilSalesPage) {
-      const identifiers = resolveMetaIdentifiers()
+      const identifiers = await resolveCheckoutIdentifiers()
       trackFunnel('InitiateCheckout')
 
       await Promise.race([
-        sendInitiateCheckout(identifiers, tracking).catch(() => {}),
+        sendInitiateCheckout(eventId, identifiers, tracking).catch(() => {}),
         new Promise((resolve) => window.setTimeout(resolve, 180)),
       ])
 
@@ -1603,7 +1628,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
 
     trackFunnel('InitiateCheckout')
     await Promise.race([
-      sendInitiateCheckout(undefined, tracking).catch(() => {}),
+      sendInitiateCheckout(eventId, undefined, tracking).catch(() => {}),
       new Promise((resolve) => window.setTimeout(resolve, 180)),
     ])
     window.location.href = getCheckoutUrl(targetUrl)

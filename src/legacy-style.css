@@ -3886,6 +3886,11 @@ h1 span {
   align-items: start;
 }
 
+.offer-comparison.is-single {
+  grid-template-columns: minmax(0, 700px);
+  justify-content: center;
+}
+
 .offer-card {
   position: relative;
   width: 100%;

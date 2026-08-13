@@ -119,3 +119,29 @@ Deno.test("does not invent fbc when the visit has neither _fbc nor fbclid", () =
   assertEquals(identifiers.fbc, "")
   assertEquals(checkout.searchParams.has("sck"), false)
 })
+
+Deno.test("preserves s1 and sends Meta identifiers plus every UTM to Kiwify", () => {
+  const expectedS1 = "728080eb-9a10-49b1-b65e-1638917973db"
+  const fbclid = "IwY2xJAW-AbC_9~CaseSensitive"
+  const search =
+    `?fbclid=${fbclid}&utm_source=meta&utm_medium=cpc&utm_campaign=mega_hair&utm_content=video_01&utm_term=alongamento`
+  const browser = installBrowserState(search)
+  const expectedFbp = "fb.1.1780381651887.446288221811905838"
+  browser.setCookie(`_fbp=${expectedFbp}`)
+
+  initializeMetaTracking()
+  const identifiers = resolveMetaIdentifiers()
+  const checkout = new URL(buildCheckoutUrl(
+    `https://pay.kiwify.com.br/DajNPtI?s1=${expectedS1}`,
+    identifiers,
+  ))
+
+  assertEquals(checkout.searchParams.get("s1"), expectedS1)
+  assertEquals(checkout.searchParams.get("src"), expectedFbp)
+  assertEquals(checkout.searchParams.get("sck"), identifiers.fbc)
+  assertEquals(checkout.searchParams.get("utm_source"), "meta")
+  assertEquals(checkout.searchParams.get("utm_medium"), "cpc")
+  assertEquals(checkout.searchParams.get("utm_campaign"), "mega_hair")
+  assertEquals(checkout.searchParams.get("utm_content"), "video_01")
+  assertEquals(checkout.searchParams.get("utm_term"), "alongamento")
+})

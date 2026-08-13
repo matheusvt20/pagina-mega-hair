@@ -5,6 +5,7 @@ import {
   capturePurchaseSession,
   initializeMetaTracking,
   resolveMetaIdentifiers,
+  resolveMetaIdentifiersAfterFbp,
 } from '@/lib/purchaseTracking'
 import pontoAmericanoImg from './assets/ponto-americano-dobra3.webp'
 import fitaAdesivaImg from './assets/fita-adesiva-dobra3.webp'
@@ -50,26 +51,36 @@ import annaResultadosVideo from './assets/anna-resultados-meta.mp4'
 import annaResultadosPoster from './assets/anna-resultados-meta-poster.jpg'
 import freeMembersLessonVideo from './assets/aula-gratuita-mapa-decisao.mp4'
 
-const isSpanishPage = window.location.pathname.split('/').filter(Boolean)[0] === 'es'
-const isFreeClassPage = window.location.pathname.split('/').filter(Boolean)[0] === 'aula-gratuita'
-const isBrazilSalesPage = window.location.pathname.split('/').filter(Boolean).length === 0
-if (isBrazilSalesPage || isFreeClassPage) initializeMetaTracking()
+const pathSegments = window.location.pathname.split('/').filter(Boolean)
+const isSpanishPage = pathSegments[0] === 'es'
+const isFreeClassPage = pathSegments[0] === 'aula-gratuita'
+const isBrazilSalesPage = pathSegments.length === 0
+const isBrazilTrackingPage = isBrazilSalesPage || isFreeClassPage
+if (isBrazilTrackingPage) initializeMetaTracking()
+const initialMetaIdentifiers = isBrazilTrackingPage ? resolveMetaIdentifiers() : undefined
+const metaIdentifiersReady = isBrazilTrackingPage
+  ? resolveMetaIdentifiersAfterFbp()
+  : Promise.resolve(undefined)
 capturePurchaseSession(
   isSpanishPage ? 'anna-es' : 'anna',
-  isBrazilSalesPage || isFreeClassPage ? resolveMetaIdentifiers() : undefined,
+  initialMetaIdentifiers,
 )
+void metaIdentifiersReady.then((identifiers) => {
+  if (
+    identifiers &&
+    (identifiers.fbp !== initialMetaIdentifiers?.fbp || identifiers.fbc !== initialMetaIdentifiers?.fbc)
+  ) {
+    capturePurchaseSession('anna', identifiers)
+  }
+})
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
-  : 'https://pay.kiwify.com.br/TR0aS19'
-const essentialCheckoutUrl = isSpanishPage
-  ? checkoutUrl
-  : 'https://pay.kiwify.com.br/UruirxE'
+  : 'https://pay.kiwify.com.br/DajNPtI'
+const essentialCheckoutUrl = checkoutUrl
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
-  : { value: 197.00, currency: 'BRL' }
-const essentialCheckoutTracking = isSpanishPage
-  ? checkoutTracking
-  : { value: 59.00, currency: 'BRL' }
+  : { value: 97.00, currency: 'BRL' }
+const essentialCheckoutTracking = checkoutTracking
 const whatsappSupportMessage = 'Olá, preciso de ajuda sobre o curso de Mega Hair.'
 const whatsappSupportUrl = `https://wa.me/5521990481222?text=${encodeURIComponent(whatsappSupportMessage)}`
 
@@ -491,8 +502,8 @@ const pageText = isSpanishPage
         subtitle:
           'Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.',
         button: 'EU QUERO APRENDER!',
-        installments: '12x de R$ 6,10',
-        fullPrice: 'ou R$ 59,00 à vista',
+        installments: '12x de R$ 10,03',
+        fullPrice: 'ou R$ 97,00 à vista',
         paymentTitle: 'Não é mensalidade.',
         paymentNote: 'Pague uma única vez e receba 3 cursos.',
         microcopy: 'Acesso online por 1 ano com certificado',
@@ -500,7 +511,7 @@ const pageText = isSpanishPage
           'Anna Schossig com demonstrações profissionais de técnicas de Mega Hair',
         oldPrice: 'R$397,00',
         priceKicker: 'Por apenas',
-        price: 'R$59',
+        price: 'R$97',
         risk: 'Risco zero!',
         urgency: 'Mas você precisa agir rápido!',
         bonuses: [
@@ -569,21 +580,21 @@ const pageText = isSpanishPage
       },
       offer: {
         kicker: 'O que está incluído',
-        title: 'Escolha a melhor oferta para você',
+        title: 'Garanta sua oferta',
         headline: 'Inscreva-se agora e ganhe:',
         essentialTitle: 'Oferta essencial',
-        completeTitle: 'Oferta completa',
-        completeSubtitle: '(melhor negócio)',
-        bestSeller: 'Mais vendido',
+        completeTitle: 'Mega Hair 3 em 1',
+        completeSubtitle: '(acesso completo)',
+        bestSeller: 'Oferta especial',
         stars: '★★★★★',
         ribbon: 'Oferta completa',
-        badge: 'Mais escolhido',
+        badge: 'Oferta especial',
         label: 'Completo',
         name: 'Mega Hair 3 em 1',
         visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
         couponLabel: 'Cupom liberado',
         couponTitle: 'Você ganhou um cupom de desconto',
-        couponText: 'Sua condição especial já está aplicada: 12x de R$ 20,37 ou R$ 197,00 à vista.',
+        couponText: 'Sua condição especial já está aplicada: 12x de R$ 10,03 ou R$ 97,00 à vista.',
         summaryLabel: 'Resumo',
         summaryText: 'Treinamento online Mega Hair 3 em 1 com aulas práticas, certificado e bônus liberados.',
         bonusLabel: 'Bônus liberados no acesso',
@@ -606,11 +617,11 @@ const pageText = isSpanishPage
         total: 'Valor total:',
         today: '',
         essentialPayment: '',
-        essentialPrice: '12x de R$ 6,10',
-        essentialCashPrice: 'ou R$ 59,00 à vista',
+        essentialPrice: '12x de R$ 10,03',
+        essentialCashPrice: 'ou R$ 97,00 à vista',
         essentialAccess: '',
-        price: '12x de R$ 20,37',
-        priceText: 'ou R$ 197,00 à vista',
+        price: '12x de R$ 10,03',
+        priceText: 'ou R$ 97,00 à vista',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
         essentialButton: 'Comprar agora — clique aqui',
@@ -760,14 +771,14 @@ const conversionText = isSpanishPage
           kicker: 'Seu próximo passo',
           title: 'Aprenda as 3 técnicas em um único treinamento',
           text: 'Comece pela base, entenda quando indicar cada técnica e avance com mais segurança nas aplicações.',
-          button: 'Ver opções de acesso',
+          button: 'Garantir meu acesso',
           position: 'resultados',
         },
         {
           kicker: 'Se identificou?',
           title: 'Comece agora, mesmo que você ainda seja iniciante',
           text: 'Tenha aulas práticas, material de apoio e certificado para organizar seu aprendizado passo a passo.',
-          button: 'Quero conhecer as ofertas',
+          button: 'Quero garantir minha oferta',
           position: 'perfil',
         },
       ],
@@ -812,9 +823,9 @@ const conversionText = isSpanishPage
               'O acesso é liberado após a confirmação do pagamento e enviado para o e-mail informado na compra.',
           },
           {
-            question: 'Qual é a diferença entre as duas ofertas?',
+            question: 'O que está incluído na oferta?',
             answer:
-              'A oferta essencial inclui as 3 técnicas, certificado e acesso por 1 ano. A oferta completa acrescenta acesso vitalício e materiais para acabamento, captação de clientes, vendas e gestão.',
+              'A oferta inclui as 3 técnicas, acesso vitalício, certificado e os materiais complementares para acabamento, captação de clientes, vendas e gestão.',
           },
           {
             question: 'Como funciona a garantia?',
@@ -837,8 +848,8 @@ const conversionText = isSpanishPage
       finalCta: {
         kicker: 'Pronta para começar',
         title: 'Dê o próximo passo no Mega Hair',
-        text: 'Escolha sua opção de acesso e comece a estudar as 3 técnicas.',
-        button: 'Ver opções de acesso',
+        text: 'Garanta seu acesso e comece a estudar as 3 técnicas.',
+        button: 'Garantir meu acesso',
       },
     }
 
@@ -1207,6 +1218,82 @@ const firstHeroCardColumn = heroLearningCards.slice(0, 3)
 const secondHeroCardColumn = heroLearningCards.slice(3, 6)
 const thirdHeroCardColumn = heroLearningCards.slice(6)
 
+const checkoutContentId = isSpanishPage ? 'guia-extensiones-3-em-1' : 'mega-hair-3-em-1'
+
+const checkoutEventData = (tracking = checkoutTracking) => ({
+  content_name: pageText.checkoutContentName,
+  content_ids: [checkoutContentId],
+  content_type: 'product',
+  num_items: 1,
+  value: tracking.value,
+  currency: tracking.currency,
+})
+
+const createCheckoutEventId = () =>
+  `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`
+
+const sha256 = async (value) => {
+  if (typeof crypto === 'undefined' || !crypto.subtle) return ''
+
+  const data = new TextEncoder().encode(value)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  return Array.from(new Uint8Array(hashBuffer))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+const sendMetaEvent = (payload) => {
+  if (navigator.sendBeacon) {
+    const blob = new Blob([payload], { type: 'application/json' })
+    navigator.sendBeacon('/api/meta-event', blob)
+    return
+  }
+
+  fetch('/api/meta-event', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: payload,
+    keepalive: true,
+  }).catch(() => {})
+}
+
+const sendInitiateCheckout = async (
+  eventId,
+  identifiers,
+  tracking = checkoutTracking,
+) => {
+  const fbp = identifiers?.fbp ?? getCookie('_fbp')
+  const fbc = identifiers?.fbc ?? getCookie('_fbc')
+  const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
+  const payload = JSON.stringify({
+    client: isSpanishPage ? 'anna-es' : 'anna',
+    eventName: 'InitiateCheckout',
+    eventId,
+    ...(!isSpanishPage ? { eventSourceUrl: window.location.href } : {}),
+    ...(fbp ? { fbp } : {}),
+    ...(fbc ? { fbc } : {}),
+    ...(externalId ? { external_id: externalId } : {}),
+    eventData: checkoutEventData(tracking),
+  })
+
+  return sendMetaEvent(payload)
+}
+
+const trackBrowserInitiateCheckout = (eventId, tracking = checkoutTracking) => {
+  if (typeof fbq === 'undefined') return
+  fbq('track', 'InitiateCheckout', checkoutEventData(tracking), { eventID: eventId })
+}
+
+const resolveCheckoutIdentifiers = async () => {
+  if (!isBrazilTrackingPage) return undefined
+  const readyIdentifiers = await metaIdentifiersReady
+  const currentIdentifiers = resolveMetaIdentifiers()
+  return {
+    fbp: currentIdentifiers.fbp || readyIdentifiers?.fbp || '',
+    fbc: currentIdentifiers.fbc || readyIdentifiers?.fbc || '',
+  }
+}
+
 const renderFreeClassPage = () => {
   document.documentElement.lang = 'pt-BR'
   document.title = 'Aula Gratuita | Mega Hair 3 em 1 - Anna Schossig'
@@ -1334,45 +1421,32 @@ const renderFreeClassPage = () => {
 
       <section class="free-members-bottom-cta" aria-labelledby="free-members-bottom-title">
         <span>QUER CONTINUAR APRENDENDO?</span>
-        <h2 id="free-members-bottom-title">Escolha como quer liberar a sua formação.</h2>
-        <p>Você já começou. Agora, escolha a oferta que faz mais sentido para o seu momento e tenha acesso às próximas aulas.</p>
-        <button type="button" data-open-unlock>Ver opções de acesso <span aria-hidden="true">→</span></button>
+        <h2 id="free-members-bottom-title">Libere agora a sua formação completa.</h2>
+        <p>Você já começou. Garanta a oferta de R$ 97,00 e tenha acesso às próximas aulas e a todos os bônus.</p>
+        <button type="button" data-open-unlock>Ver oferta completa <span aria-hidden="true">→</span></button>
       </section>
     </main>
 
     <div class="free-members-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="free-members-modal-title">
       <div class="free-members-modal-backdrop" data-close-unlock></div>
       <div class="free-members-modal-card">
-        <button class="free-members-modal-close" type="button" aria-label="Fechar opções de acesso" data-close-unlock>×</button>
+        <button class="free-members-modal-close" type="button" aria-label="Fechar oferta" data-close-unlock>×</button>
         <span class="free-members-modal-kicker">CONTEÚDO BLOQUEADO</span>
-        <h2 id="free-members-modal-title">Escolha como quer desbloquear sua formação.</h2>
-        <p>As próximas aulas, materiais e técnicas estão prontas para você. Escolha uma das opções abaixo para liberar seu acesso.</p>
-        <div class="free-members-plan-grid">
-          <article class="free-members-plan">
-            <span>OFERTA ESSENCIAL</span>
-            <h3>Comece pelas 3 técnicas</h3>
-            <ul>
-              <li>✓ Ponto Americano</li>
-              <li>✓ Fita Adesiva</li>
-              <li>✓ Microcápsula de Queratina</li>
-              <li>✓ 1 ano de acesso + certificado</li>
-            </ul>
-            <strong>12x de R$ 6,10</strong>
-            <small>ou R$ 59,00 à vista</small>
-            <a href="${essentialCheckoutUrl}" data-lansar-event="checkout-essencial" data-checkout-value="${essentialCheckoutTracking.value}" data-checkout-currency="${essentialCheckoutTracking.currency}">Escolher essencial</a>
-          </article>
+        <h2 id="free-members-modal-title">Desbloqueie sua formação completa.</h2>
+        <p>As próximas aulas, materiais, técnicas e bônus estão prontos para você. Garanta agora seu acesso completo.</p>
+        <div class="free-members-plan-grid is-single">
           <article class="free-members-plan is-featured">
-            <span>OFERTA COMPLETA · MAIS ESCOLHIDA</span>
+            <span>OFERTA ESPECIAL</span>
             <h3>Acesse tudo e os bônus</h3>
             <ul>
               <li>✓ As 3 técnicas completas</li>
               <li>✓ Acesso vitalício + certificado</li>
-              <li>✓ 7 bônus, incluindo Tráfego Pago</li>
-              <li>✓ Bônus extras de vendas e gestão</li>
+              <li>✓ Todos os bônus da formação</li>
+              <li>✓ Materiais de vendas e gestão</li>
             </ul>
-            <strong>12x de R$ 20,37</strong>
-            <small>ou R$ 197,00 à vista</small>
-            <a href="${checkoutUrl}" data-lansar-event="checkout-completo" data-checkout-value="${checkoutTracking.value}" data-checkout-currency="${checkoutTracking.currency}">Quero acesso completo</a>
+            <strong>12x de R$ 10,03</strong>
+            <small>ou R$ 97,00 à vista</small>
+            <a href="${checkoutUrl}" data-lansar-event="checkout-completo" data-checkout-value="${checkoutTracking.value}" data-checkout-currency="${checkoutTracking.currency}">Garantir acesso por R$ 97,00</a>
           </article>
         </div>
         <small class="free-members-modal-trust">Pagamento seguro · 7 dias de garantia · acesso após o pagamento</small>
@@ -1400,20 +1474,24 @@ const renderFreeClassPage = () => {
     if (event.key === 'Escape') closeUnlockModal()
   })
   document.querySelectorAll('.free-members-modal a[data-lansar-event]').forEach((button) => {
-    button.addEventListener('click', (event) => {
+    button.addEventListener('click', async (event) => {
       event.preventDefault()
+      if (button.dataset.navigating === 'true') return
+
+      button.dataset.navigating = 'true'
       trackFunnel('InitiateCheckout')
 
       const targetUrl = button.getAttribute('href') || checkoutUrl
-      try {
-        const identifiers = resolveMetaIdentifiers()
-        const enrichedUrl = new URL(targetUrl)
-        if (identifiers.fbp) enrichedUrl.searchParams.set('src', identifiers.fbp)
-        if (identifiers.fbc) enrichedUrl.searchParams.set('sck', identifiers.fbc)
-        window.location.href = enrichedUrl.toString()
-      } catch {
-        window.location.href = targetUrl
-      }
+      const identifiers = await resolveCheckoutIdentifiers()
+      const eventId = createCheckoutEventId()
+      trackBrowserInitiateCheckout(eventId, checkoutTracking)
+
+      await Promise.race([
+        sendInitiateCheckout(eventId, identifiers, checkoutTracking).catch(() => {}),
+        new Promise((resolve) => window.setTimeout(resolve, 180)),
+      ])
+
+      window.location.href = getCheckoutUrl(targetUrl, identifiers)
     })
   })
 }
@@ -1846,7 +1924,8 @@ document.querySelector('#app').innerHTML = `
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
-        <div class="offer-comparison">
+        <div class="offer-comparison${isSpanishPage ? '' : ' is-single'}">
+          ${isSpanishPage ? `
           <article class="offer-card offer-card-essential">
             <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
             ${pageText.offer.essentialPayment ? `<span class="offer-payment">${pageText.offer.essentialPayment}</span>` : ''}
@@ -1866,6 +1945,7 @@ document.querySelector('#app').innerHTML = `
               data-checkout-currency="${essentialCheckoutTracking.currency}"
             >${pageText.offer.essentialButton}</a>
           </article>
+          ` : ''}
 
           <article class="offer-card offer-card-complete">
             <div class="offer-bestseller">${pageText.offer.bestSeller}</div>
@@ -1900,7 +1980,7 @@ document.querySelector('#app').innerHTML = `
               ${offerTrustItems}
             </div>
 
-            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Escolha a opção que faz mais sentido para o seu momento.'}</p>
+            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Oferta única com acesso completo ao treinamento e aos bônus.'}</p>
           </article>
         </div>
       </div>
@@ -1970,53 +2050,6 @@ if (!isSpanishPage) {
   }
 }
 
-const sendInitiateCheckout = async (identifiers, tracking = checkoutTracking) => {
-  const fbp = identifiers?.fbp ?? getCookie('_fbp')
-  const fbc = identifiers?.fbc ?? getCookie('_fbc')
-  const externalId = fbp ? await sha256(fbp).catch(() => '') : ''
-  const payload = JSON.stringify({
-    client: isSpanishPage ? 'anna-es' : 'anna',
-    eventName: 'InitiateCheckout',
-    eventId: `InitiateCheckout.${Date.now()}.${Math.random().toString(36).slice(2)}`,
-    ...(isBrazilSalesPage ? { eventSourceUrl: window.location.href } : {}),
-    ...(fbp ? { fbp } : {}),
-    ...(fbc ? { fbc } : {}),
-    ...(externalId ? { external_id: externalId } : {}),
-    eventData: {
-      content_name: pageText.checkoutContentName,
-      value: tracking.value,
-      currency: tracking.currency,
-    },
-  })
-
-  return sendMetaEvent(payload)
-}
-
-const sha256 = async (value) => {
-  if (typeof crypto === 'undefined' || !crypto.subtle) return ''
-
-  const data = new TextEncoder().encode(value)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, '0'))
-    .join('')
-}
-
-const sendMetaEvent = (payload) => {
-  if (navigator.sendBeacon) {
-    const blob = new Blob([payload], { type: 'application/json' })
-    navigator.sendBeacon('/api/meta-event', blob)
-    return
-  }
-
-  fetch('/api/meta-event', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: payload,
-    keepalive: true,
-  }).catch(() => {})
-}
-
 document.querySelectorAll('.js-scroll-offer').forEach((button) => {
   button.addEventListener('click', function(event) {
     event.preventDefault()
@@ -2050,6 +2083,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
     const eventValue = Number(button.dataset.checkoutValue || checkoutTracking.value)
     const eventCurrency = button.dataset.checkoutCurrency || checkoutTracking.currency
     const tracking = { value: eventValue, currency: eventCurrency }
+    const eventId = createCheckoutEventId()
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueOferta', {
@@ -2058,13 +2092,14 @@ document.querySelectorAll('.offer-button').forEach((button) => {
         currency: eventCurrency
       });
     }
+    trackBrowserInitiateCheckout(eventId, tracking)
 
     if (isBrazilSalesPage) {
-      const identifiers = resolveMetaIdentifiers()
+      const identifiers = await resolveCheckoutIdentifiers()
       trackFunnel('InitiateCheckout')
 
       await Promise.race([
-        sendInitiateCheckout(identifiers, tracking).catch(() => {}),
+        sendInitiateCheckout(eventId, identifiers, tracking).catch(() => {}),
         new Promise((resolve) => window.setTimeout(resolve, 180)),
       ])
 
@@ -2074,7 +2109,7 @@ document.querySelectorAll('.offer-button').forEach((button) => {
 
     trackFunnel('InitiateCheckout')
     await Promise.race([
-      sendInitiateCheckout(undefined, tracking).catch(() => {}),
+      sendInitiateCheckout(eventId, undefined, tracking).catch(() => {}),
       new Promise((resolve) => window.setTimeout(resolve, 180)),
     ])
     window.location.href = getCheckoutUrl(targetUrl)

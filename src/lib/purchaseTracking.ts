@@ -203,7 +203,9 @@ export function buildCheckoutUrl(
       const tracking = identifiers || resolveMetaIdentifiers()
       if (tracking.fbp) url.searchParams.set("src", tracking.fbp)
       if (tracking.fbc) url.searchParams.set("sck", tracking.fbc)
-      url.searchParams.set("s1", getPurchaseSessionId())
+      if (!url.searchParams.has("s1")) {
+        url.searchParams.set("s1", getPurchaseSessionId())
+      }
       for (const [key, value] of Object.entries(attribution())) {
         if (value) url.searchParams.set(key, value)
       }
