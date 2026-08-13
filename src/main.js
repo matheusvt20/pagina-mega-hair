@@ -314,8 +314,8 @@ const pageText = isSpanishPage
         priceText: 'Últimas plazas a un precio especial',
         access: 'Con certificado · 1 año de acceso',
         oldPrice: 'Precio regular',
-        essentialButton: 'Quiero esta opción',
-        button: 'Garantizar acceso ahora',
+        essentialButton: 'Comprar ahora — haz clic aquí',
+        button: 'Comprar ahora — haz clic aquí',
         warning: 'Aprovecha ahora: no encontrarás esta condición después.',
         timer: 'Esta condición termina en',
         essentialFeatures: [
@@ -613,8 +613,8 @@ const pageText = isSpanishPage
         priceText: 'ou R$ 197,00 à vista',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
-        essentialButton: 'Quero essa opção',
-        button: 'Garantir acesso completo por R$ 197,00',
+        essentialButton: 'Comprar agora — clique aqui',
+        button: 'Comprar agora — clique aqui',
         warning: 'Aproveite agora: você não vai encontrar essa condição depois.',
         timer: 'Essa condição termina em',
         essentialFeatures: [
