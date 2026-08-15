@@ -5704,6 +5704,35 @@ h1 span {
   text-align: left;
 }
 
+.hero-price-note {
+  max-width: 575px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 10px;
+  margin-top: 22px;
+  color: rgba(255, 250, 240, 0.68);
+}
+
+.hero-price-note > span {
+  color: #c9a64f;
+  font-size: 0.61rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-price-note > strong {
+  color: #fff4d7;
+  font-size: 1.12rem;
+  font-weight: 850;
+}
+
+.hero-price-note > small {
+  font-size: 0.71rem;
+  font-weight: 580;
+}
+
 .hero-proof-pill {
   width: min(100%, 610px);
   min-height: 72px;
@@ -6550,6 +6579,13 @@ h1 span {
     color: rgba(255, 250, 240, 0.82);
     font-size: clamp(0.9rem, 4vw, 1rem);
     line-height: 1.45;
+    text-align: center;
+  }
+
+  .hero-price-note {
+    max-width: 440px;
+    justify-content: center;
+    margin: 18px auto 0;
     text-align: center;
   }
 

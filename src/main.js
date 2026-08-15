@@ -1537,6 +1537,14 @@ document.querySelector('#app').innerHTML = `
             : 'Aprenda Ponto Americano, Fita Adesiva e Cápsula de Queratina — os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês e que você pode começar a oferecer mesmo sendo iniciante.'}
         </p>
 
+        ${!isSpanishPage ? `
+          <div class="hero-price-note" aria-label="Investimento: 12 vezes de R$ 10,03 ou R$ 97,00 à vista">
+            <span>Investimento</span>
+            <strong>12x de R$ 10,03</strong>
+            <small>ou R$ 97,00 à vista · parcelamento com acréscimo</small>
+          </div>
+        ` : ''}
+
         <div class="hero-proof-pill">
           <div class="hero-proof-images" aria-hidden="true">
             <img src="${aluna1Img}" alt="" width="64" height="64" />
