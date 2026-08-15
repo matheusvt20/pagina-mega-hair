@@ -39,7 +39,7 @@ capturePurchaseSession(
 )
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
-  : 'https://pay.kiwify.com.br/DajNPtI'
+  : 'https://pay.kiwify.com.br/KXitA3M'
 const essentialCheckoutUrl = checkoutUrl
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage

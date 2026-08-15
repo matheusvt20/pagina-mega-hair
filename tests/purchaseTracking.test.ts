@@ -132,7 +132,7 @@ Deno.test("preserves s1 and sends Meta identifiers plus every UTM to Kiwify", ()
   initializeMetaTracking()
   const identifiers = resolveMetaIdentifiers()
   const checkout = new URL(buildCheckoutUrl(
-    `https://pay.kiwify.com.br/DajNPtI?s1=${expectedS1}`,
+    `https://pay.kiwify.com.br/KXitA3M?s1=${expectedS1}`,
     identifiers,
   ))
 

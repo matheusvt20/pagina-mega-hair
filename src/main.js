@@ -75,7 +75,7 @@ void metaIdentifiersReady.then((identifiers) => {
 })
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
-  : 'https://pay.kiwify.com.br/DajNPtI'
+  : 'https://pay.kiwify.com.br/KXitA3M'
 const essentialCheckoutUrl = checkoutUrl
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
