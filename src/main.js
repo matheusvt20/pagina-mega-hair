@@ -1541,7 +1541,7 @@ document.querySelector('#app').innerHTML = `
           <div class="hero-price-note" aria-label="Investimento: 12 vezes de R$ 10,03 ou R$ 97,00 à vista">
             <span>Investimento</span>
             <strong>12x de R$ 10,03</strong>
-            <small>ou R$ 97,00 à vista · parcelamento com acréscimo</small>
+            <small>ou R$ 97,00 à vista</small>
           </div>
         ` : ''}
 
