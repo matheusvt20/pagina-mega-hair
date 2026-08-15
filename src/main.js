@@ -1047,8 +1047,8 @@ const conversionCta = (cta) => `
       <h2>${cta.title}</h2>
       <p>${cta.text}</p>
       <a
-        class="conversion-cta-button js-scroll-offer"
-        href="#comprar"
+        class="conversion-cta-button js-direct-checkout"
+        href="${checkoutUrl}"
         data-cta-position="${cta.position}"
       >${cta.button}</a>
       <small>${conversionText.offerTrust.join(' · ')}</small>
@@ -1084,7 +1084,7 @@ const professionalJourneySectionMarkup = isSpanishPage
             <p>
               Além da técnica, você encontra conteúdos para cuidar do resultado, cobrar com mais clareza, divulgar seu trabalho e conduzir conversas com possíveis clientes.
             </p>
-            <a class="professional-journey-cta js-scroll-offer" href="#comprar" data-cta-position="caminho-profissional">
+            <a class="professional-journey-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="caminho-profissional">
               <span>QUERO COMEÇAR COM MAIS SEGURANÇA</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
             </a>
@@ -1123,7 +1123,7 @@ const studentProofSectionMarkup = isSpanishPage
 
         <div class="student-proof-footer">
           <p><strong>Você também pode começar.</strong> O primeiro passo é escolher aprender com direção.</p>
-          <a class="student-proof-cta js-scroll-offer" href="#comprar" data-cta-position="depoimentos-alunas">
+          <a class="student-proof-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="depoimentos-alunas">
             <span>QUERO SER A PRÓXIMA ALUNA</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
           </a>
@@ -1515,8 +1515,8 @@ document.querySelector('#app').innerHTML = `
       </span>
     </div>
     <a
-      class="floating-student-menu__button js-scroll-offer"
-      href="#comprar"
+      class="floating-student-menu__button js-direct-checkout"
+      href="${checkoutUrl}"
       data-cta-position="menu-fixo"
     >
       ${isSpanishPage ? 'QUIERO SER ALUMNA' : 'QUERO SER ALUNO'}
@@ -1627,7 +1627,7 @@ document.querySelector('#app').innerHTML = `
         </button>
       </div>
 
-      <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="video">
+      <a class="story-video-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="video">
         <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 12h13M13 6l6 6-6 6" />
@@ -1709,7 +1709,7 @@ document.querySelector('#app').innerHTML = `
         <p>${isSpanishPage
           ? 'En lugar de depender de un solo servicio, amplías tus posibilidades de atención y te conviertes en una profesional más completa.'
           : 'Em vez de depender de um único serviço, você amplia suas possibilidades de atendimento e se torna uma profissional mais completa.'}</p>
-        <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="metodo-3-tecnicas">
+        <a class="story-video-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="metodo-3-tecnicas">
           <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12h13M13 6l6 6-6 6" />
@@ -1913,7 +1913,7 @@ document.querySelector('#app').innerHTML = `
           <h2 id="guarantee-title">${conversionText.guarantee.title}</h2>
           <p>${conversionText.guarantee.text}</p>
           <ul>${guaranteeItems}</ul>
-          <a class="guarantee-button js-scroll-offer" href="#comprar" data-cta-position="garantia">
+          <a class="guarantee-button js-direct-checkout" href="${checkoutUrl}" data-cta-position="garantia">
             ${conversionText.guarantee.button}
           </a>
         </div>
@@ -2031,7 +2031,7 @@ document.querySelector('#app').innerHTML = `
         <span>${conversionText.finalCta.kicker}</span>
         <h2 id="final-cta-title">${conversionText.finalCta.title}</h2>
         <p>${conversionText.finalCta.text}</p>
-        <a class="final-cta-button js-scroll-offer" href="#comprar" data-cta-position="final">
+        <a class="final-cta-button js-direct-checkout" href="${checkoutUrl}" data-cta-position="final">
           ${conversionText.finalCta.button}
         </a>
         <small>${conversionText.offerTrust.join(' · ')}</small>
@@ -2050,11 +2050,18 @@ if (!isSpanishPage) {
   }
 }
 
-document.querySelectorAll('.js-scroll-offer').forEach((button) => {
-  button.addEventListener('click', function(event) {
+document.querySelectorAll('.js-direct-checkout').forEach((button) => {
+  button.addEventListener('click', async function(event) {
     event.preventDefault()
-    const offerSection = document.querySelector('#comprar')
+    if (button.dataset.navigating === 'true') return
+
+    button.dataset.navigating = 'true'
+    button.classList.add('is-loading')
+    button.setAttribute('aria-busy', 'true')
+
     const position = button.dataset.ctaPosition || 'pagina'
+    const targetUrl = button.getAttribute('href') || checkoutUrl
+    const eventId = createCheckoutEventId()
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueCTA', {
@@ -2064,8 +2071,28 @@ document.querySelectorAll('.js-scroll-offer').forEach((button) => {
         currency: checkoutTracking.currency
       });
     }
+    trackBrowserInitiateCheckout(eventId, checkoutTracking)
 
-    offerSection?.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    if (isBrazilSalesPage) {
+      const identifiers = await resolveCheckoutIdentifiers()
+      trackFunnel('InitiateCheckout')
+
+      await Promise.race([
+        sendInitiateCheckout(eventId, identifiers, checkoutTracking).catch(() => {}),
+        new Promise((resolve) => window.setTimeout(resolve, 180)),
+      ])
+
+      window.location.href = getCheckoutUrl(targetUrl, identifiers)
+      return
+    }
+
+    trackFunnel('InitiateCheckout')
+    await Promise.race([
+      sendInitiateCheckout(eventId, undefined, checkoutTracking).catch(() => {}),
+      new Promise((resolve) => window.setTimeout(resolve, 180)),
+    ])
+
+    window.location.href = getCheckoutUrl(targetUrl)
   });
 });
 
