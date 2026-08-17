@@ -81,7 +81,7 @@ Deno.test("waits for the Meta Pixel to expose _fbp before building the checkout 
 
   assertEquals(identifiers.fbp, expectedFbp)
   assertEquals(checkout.searchParams.get("src"), expectedFbp)
-  assertEquals(Boolean(checkout.searchParams.get("s1")), true)
+  assertEquals(Boolean(checkout.searchParams.get("s3")), true)
 })
 
 Deno.test("preserves a long case-sensitive fbclid exactly in fbc and sck", () => {
@@ -120,7 +120,7 @@ Deno.test("does not invent fbc when the visit has neither _fbc nor fbclid", () =
   assertEquals(checkout.searchParams.has("sck"), false)
 })
 
-Deno.test("preserves s1 and sends Meta identifiers plus every UTM to Kiwify", () => {
+Deno.test("preserves an existing s1 and sends the session in s3", () => {
   const expectedS1 = "728080eb-9a10-49b1-b65e-1638917973db"
   const fbclid = "IwY2xJAW-AbC_9~CaseSensitive"
   const search =
@@ -137,6 +137,7 @@ Deno.test("preserves s1 and sends Meta identifiers plus every UTM to Kiwify", ()
   ))
 
   assertEquals(checkout.searchParams.get("s1"), expectedS1)
+  assertEquals(Boolean(checkout.searchParams.get("s3")), true)
   assertEquals(checkout.searchParams.get("src"), expectedFbp)
   assertEquals(checkout.searchParams.get("sck"), identifiers.fbc)
   assertEquals(checkout.searchParams.get("utm_source"), "meta")

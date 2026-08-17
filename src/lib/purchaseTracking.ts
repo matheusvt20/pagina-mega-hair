@@ -11,9 +11,11 @@ const UTM_KEYS = [
   "utm_term",
 ] as const
 
-const endpoint = ((import.meta as ImportMeta & {
+const configuredEndpoint = ((import.meta as ImportMeta & {
   env?: Record<string, string | undefined>
 }).env?.VITE_TRACKING_SESSION_ENDPOINT || "").trim()
+const endpoint = configuredEndpoint ||
+  "https://dugqmsclhybfxvrljemx.supabase.co/functions/v1/tracking-session"
 
 export interface MetaTrackingSnapshot {
   fbp: string
@@ -203,8 +205,8 @@ export function buildCheckoutUrl(
       const tracking = identifiers || resolveMetaIdentifiers()
       if (tracking.fbp) url.searchParams.set("src", tracking.fbp)
       if (tracking.fbc) url.searchParams.set("sck", tracking.fbc)
-      if (!url.searchParams.has("s1")) {
-        url.searchParams.set("s1", getPurchaseSessionId())
+      if (!url.searchParams.has("s3")) {
+        url.searchParams.set("s3", getPurchaseSessionId())
       }
       for (const [key, value] of Object.entries(attribution())) {
         if (value) url.searchParams.set(key, value)
