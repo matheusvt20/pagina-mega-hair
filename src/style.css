@@ -4554,6 +4554,11 @@ h1 span {
   margin-top: 20px;
 }
 
+.offer-card-essential .offer-feature-list p {
+  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  line-height: 1.4;
+}
+
 .offer-card-complete {
   border: 3px solid #efd34d;
   box-shadow:
@@ -4988,6 +4993,11 @@ h1 span {
   .offer-feature-list p {
     font-size: 0.84rem;
     line-height: 1.28;
+  }
+
+  .offer-card-essential .offer-feature-list p {
+    font-size: 0.94rem;
+    line-height: 1.36;
   }
 
   .offer-plan-price {

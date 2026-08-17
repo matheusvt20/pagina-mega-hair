@@ -76,11 +76,15 @@ void metaIdentifiersReady.then((identifiers) => {
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/KXitA3M'
-const essentialCheckoutUrl = checkoutUrl
+const essentialCheckoutUrl = isSpanishPage
+  ? checkoutUrl
+  : 'https://pay.kiwify.com.br/UruirxE'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 97.00, currency: 'BRL' }
-const essentialCheckoutTracking = checkoutTracking
+const essentialCheckoutTracking = isSpanishPage
+  ? checkoutTracking
+  : { value: 59.00, currency: 'BRL' }
 const whatsappSupportMessage = 'Olá, preciso de ajuda sobre o curso de Mega Hair.'
 const whatsappSupportUrl = `https://wa.me/5521990481222?text=${encodeURIComponent(whatsappSupportMessage)}`
 
@@ -617,15 +621,15 @@ const pageText = isSpanishPage
         total: 'Valor total:',
         today: '',
         essentialPayment: '',
-        essentialPrice: '12x de R$ 10,03',
-        essentialCashPrice: 'ou R$ 97,00 à vista',
-        essentialAccess: '',
+        essentialPrice: '12x de R$ 6,10',
+        essentialCashPrice: 'ou R$ 59,00 à vista',
+        essentialAccess: 'Pagamento único · 1 ano de acesso',
         price: '12x de R$ 10,03',
         priceText: 'ou R$ 97,00 à vista',
         access: 'Pagamento único · 1 ano de acesso',
         oldPrice: 'R$ 529',
-        essentialButton: 'Comprar agora — clique aqui',
-        button: 'Comprar agora — clique aqui',
+        essentialButton: 'Garantir acesso por R$ 59,00',
+        button: 'Garantir acesso completo por R$ 97,00',
         warning: 'Aproveite agora: você não vai encontrar essa condição depois.',
         timer: 'Essa condição termina em',
         essentialFeatures: [
@@ -636,6 +640,7 @@ const pageText = isSpanishPage
           { included: true, text: 'Garantia por 7 dias' },
           { included: true, text: 'Certificado de conclusão' },
           { included: true, text: 'Lista de Fornecedores Confiáveis' },
+          { included: true, text: 'Grupo de Alunas' },
         ],
         completeFeatures: [
           { included: true, text: 'Curso de Ponto Americano' },
@@ -1047,8 +1052,8 @@ const conversionCta = (cta) => `
       <h2>${cta.title}</h2>
       <p>${cta.text}</p>
       <a
-        class="conversion-cta-button js-direct-checkout"
-        href="${checkoutUrl}"
+        class="conversion-cta-button js-scroll-offer"
+        href="#comprar"
         data-cta-position="${cta.position}"
       >${cta.button}</a>
       <small>${conversionText.offerTrust.join(' · ')}</small>
@@ -1084,7 +1089,7 @@ const professionalJourneySectionMarkup = isSpanishPage
             <p>
               Além da técnica, você encontra conteúdos para cuidar do resultado, cobrar com mais clareza, divulgar seu trabalho e conduzir conversas com possíveis clientes.
             </p>
-            <a class="professional-journey-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="caminho-profissional">
+            <a class="professional-journey-cta js-scroll-offer" href="#comprar" data-cta-position="caminho-profissional">
               <span>QUERO COMEÇAR COM MAIS SEGURANÇA</span>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
             </a>
@@ -1123,7 +1128,7 @@ const studentProofSectionMarkup = isSpanishPage
 
         <div class="student-proof-footer">
           <p><strong>Você também pode começar.</strong> O primeiro passo é escolher aprender com direção.</p>
-          <a class="student-proof-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="depoimentos-alunas">
+          <a class="student-proof-cta js-scroll-offer" href="#comprar" data-cta-position="depoimentos-alunas">
             <span>QUERO SER A PRÓXIMA ALUNA</span>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" /></svg>
           </a>
@@ -1515,8 +1520,8 @@ document.querySelector('#app').innerHTML = `
       </span>
     </div>
     <a
-      class="floating-student-menu__button js-direct-checkout"
-      href="${checkoutUrl}"
+      class="floating-student-menu__button js-scroll-offer"
+      href="#comprar"
       data-cta-position="menu-fixo"
     >
       ${isSpanishPage ? 'QUIERO SER ALUMNA' : 'QUERO SER ALUNO'}
@@ -1635,7 +1640,7 @@ document.querySelector('#app').innerHTML = `
         </button>
       </div>
 
-      <a class="story-video-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="video">
+      <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="video">
         <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 12h13M13 6l6 6-6 6" />
@@ -1717,7 +1722,7 @@ document.querySelector('#app').innerHTML = `
         <p>${isSpanishPage
           ? 'En lugar de depender de un solo servicio, amplías tus posibilidades de atención y te conviertes en una profesional más completa.'
           : 'Em vez de depender de um único serviço, você amplia suas possibilidades de atendimento e se torna uma profissional mais completa.'}</p>
-        <a class="story-video-cta js-direct-checkout" href="${checkoutUrl}" data-cta-position="metodo-3-tecnicas">
+        <a class="story-video-cta js-scroll-offer" href="#comprar" data-cta-position="metodo-3-tecnicas">
           <span>${isSpanishPage ? 'LIBERAR ACCESO' : 'LIBERAR ACESSO'}</span>
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M5 12h13M13 6l6 6-6 6" />
@@ -1921,7 +1926,7 @@ document.querySelector('#app').innerHTML = `
           <h2 id="guarantee-title">${conversionText.guarantee.title}</h2>
           <p>${conversionText.guarantee.text}</p>
           <ul>${guaranteeItems}</ul>
-          <a class="guarantee-button js-direct-checkout" href="${checkoutUrl}" data-cta-position="garantia">
+          <a class="guarantee-button js-scroll-offer" href="#comprar" data-cta-position="garantia">
             ${conversionText.guarantee.button}
           </a>
         </div>
@@ -1932,8 +1937,7 @@ document.querySelector('#app').innerHTML = `
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
-        <div class="offer-comparison${isSpanishPage ? '' : ' is-single'}">
-          ${isSpanishPage ? `
+        <div class="offer-comparison">
           <article class="offer-card offer-card-essential">
             <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
             ${pageText.offer.essentialPayment ? `<span class="offer-payment">${pageText.offer.essentialPayment}</span>` : ''}
@@ -1953,7 +1957,6 @@ document.querySelector('#app').innerHTML = `
               data-checkout-currency="${essentialCheckoutTracking.currency}"
             >${pageText.offer.essentialButton}</a>
           </article>
-          ` : ''}
 
           <article class="offer-card offer-card-complete">
             <div class="offer-bestseller">${pageText.offer.bestSeller}</div>
@@ -1988,7 +1991,7 @@ document.querySelector('#app').innerHTML = `
               ${offerTrustItems}
             </div>
 
-            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Oferta única com acesso completo ao treinamento e aos bônus.'}</p>
+            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Escolha a opção que faz mais sentido para o seu momento.'}</p>
           </article>
         </div>
       </div>
@@ -2039,7 +2042,7 @@ document.querySelector('#app').innerHTML = `
         <span>${conversionText.finalCta.kicker}</span>
         <h2 id="final-cta-title">${conversionText.finalCta.title}</h2>
         <p>${conversionText.finalCta.text}</p>
-        <a class="final-cta-button js-direct-checkout" href="${checkoutUrl}" data-cta-position="final">
+        <a class="final-cta-button js-scroll-offer" href="#comprar" data-cta-position="final">
           ${conversionText.finalCta.button}
         </a>
         <small>${conversionText.offerTrust.join(' · ')}</small>
@@ -2058,18 +2061,11 @@ if (!isSpanishPage) {
   }
 }
 
-document.querySelectorAll('.js-direct-checkout').forEach((button) => {
-  button.addEventListener('click', async function(event) {
+document.querySelectorAll('.js-scroll-offer').forEach((button) => {
+  button.addEventListener('click', function(event) {
     event.preventDefault()
-    if (button.dataset.navigating === 'true') return
-
-    button.dataset.navigating = 'true'
-    button.classList.add('is-loading')
-    button.setAttribute('aria-busy', 'true')
-
+    const offerSection = document.querySelector('#comprar')
     const position = button.dataset.ctaPosition || 'pagina'
-    const targetUrl = button.getAttribute('href') || checkoutUrl
-    const eventId = createCheckoutEventId()
 
     if (typeof fbq !== 'undefined') {
       fbq('trackCustom', 'CliqueCTA', {
@@ -2079,28 +2075,8 @@ document.querySelectorAll('.js-direct-checkout').forEach((button) => {
         currency: checkoutTracking.currency
       });
     }
-    trackBrowserInitiateCheckout(eventId, checkoutTracking)
 
-    if (isBrazilSalesPage) {
-      const identifiers = await resolveCheckoutIdentifiers()
-      trackFunnel('InitiateCheckout')
-
-      await Promise.race([
-        sendInitiateCheckout(eventId, identifiers, checkoutTracking).catch(() => {}),
-        new Promise((resolve) => window.setTimeout(resolve, 180)),
-      ])
-
-      window.location.href = getCheckoutUrl(targetUrl, identifiers)
-      return
-    }
-
-    trackFunnel('InitiateCheckout')
-    await Promise.race([
-      sendInitiateCheckout(eventId, undefined, checkoutTracking).catch(() => {}),
-      new Promise((resolve) => window.setTimeout(resolve, 180)),
-    ])
-
-    window.location.href = getCheckoutUrl(targetUrl)
+    offerSection?.scrollIntoView({ block: 'start', behavior: 'smooth' })
   });
 });
 
