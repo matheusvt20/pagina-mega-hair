@@ -40,12 +40,16 @@ capturePurchaseSession(
 const checkoutUrl = isSpanishPage
   ? 'https://pay.hotmart.com/M106369269V'
   : 'https://pay.kiwify.com.br/KXitA3M'
-const essentialCheckoutUrl = checkoutUrl
+const essentialCheckoutUrl = isSpanishPage
+  ? checkoutUrl
+  : 'https://pay.kiwify.com.br/UruirxE'
 const freeClassCtaUrl = 'https://chat.whatsapp.com/E1ssAsnS8GmJ603ChKCJIn?mode=gi_t'
 const checkoutTracking = isSpanishPage
   ? { value: 4.00, currency: 'USD' }
   : { value: 97.00, currency: 'BRL' }
-const essentialCheckoutTracking = checkoutTracking
+const essentialCheckoutTracking = isSpanishPage
+  ? checkoutTracking
+  : { value: 59.00, currency: 'BRL' }
 document.documentElement.lang = isSpanishPage ? 'es' : 'pt-BR'
 document.title = isSpanishPage
   ? 'Anna Schossig - Guía Práctica de Extensiones de Cabello'
@@ -464,8 +468,8 @@ const pageText = isSpanishPage
         subtitle:
           'Os mesmos serviços que hoje me fazem faturar mais de R$15 mil por mês — e que você pode começar a oferecer no seu estúdio ainda essa semana, mesmo você sendo iniciante.',
         button: 'EU QUERO APRENDER!',
-        installments: '12x de R$ 10,03',
-        fullPrice: 'ou R$ 97,00 à vista',
+        installments: '12x de R$ 6,10',
+        fullPrice: 'ou R$ 59,00 à vista',
         paymentTitle: 'Não é mensalidade.',
         paymentNote: 'Pague uma única vez e receba 3 cursos.',
         microcopy: 'Acesso online por 1 ano com certificado',
@@ -473,7 +477,7 @@ const pageText = isSpanishPage
           'Anna Schossig com demonstrações profissionais de técnicas de Mega Hair',
         oldPrice: 'R$397,00',
         priceKicker: 'Por apenas',
-        price: 'R$97',
+        price: 'R$59,00',
         risk: 'Risco zero!',
         urgency: 'Mas você precisa agir rápido!',
         bonuses: [
@@ -542,15 +546,15 @@ const pageText = isSpanishPage
       },
       offer: {
         kicker: 'O que está incluído',
-        title: 'Garanta sua oferta',
+        title: 'Escolha a melhor oferta para você',
         headline: 'Inscreva-se agora e ganhe:',
         essentialTitle: 'Oferta essencial',
-        completeTitle: 'Mega Hair 3 em 1',
-        completeSubtitle: '(acesso completo)',
-        bestSeller: 'Oferta especial',
+        completeTitle: 'Oferta completa',
+        completeSubtitle: '(melhor negócio)',
+        bestSeller: 'Mais vendido',
         stars: '★★★★★',
         ribbon: 'Oferta completa',
-        badge: 'Oferta especial',
+        badge: 'Mais escolhido',
         label: 'Completo',
         name: 'Mega Hair 3 em 1',
         visualAlt: 'Materiais do treinamento Mega Hair 3 em 1',
@@ -578,8 +582,8 @@ const pageText = isSpanishPage
         total: 'Valor total:',
         today: '',
         essentialPayment: '',
-        essentialPrice: '12x de R$ 10,03',
-        essentialCashPrice: 'ou R$ 97,00 à vista',
+        essentialPrice: '12x de R$ 6,10',
+        essentialCashPrice: 'ou R$ 59,00 à vista',
         essentialAccess: '',
         price: '12x de R$ 10,03',
         priceText: 'ou R$ 97,00 à vista',
@@ -733,14 +737,14 @@ const conversionText = isSpanishPage
           kicker: 'Seu próximo passo',
           title: 'Aprenda as 3 técnicas em um único treinamento',
           text: 'Comece pela base, entenda quando indicar cada técnica e avance com mais segurança nas aplicações.',
-          button: 'Garantir meu acesso',
+          button: 'Ver opções de acesso',
           position: 'resultados',
         },
         {
           kicker: 'Se identificou?',
           title: 'Comece agora, mesmo que você ainda seja iniciante',
           text: 'Tenha aulas práticas, material de apoio e certificado para organizar seu aprendizado passo a passo.',
-          button: 'Quero garantir minha oferta',
+          button: 'Quero conhecer as ofertas',
           position: 'perfil',
         },
       ],
@@ -785,9 +789,9 @@ const conversionText = isSpanishPage
               'O acesso é liberado após a confirmação do pagamento e enviado para o e-mail informado na compra.',
           },
           {
-            question: 'O que está incluído na oferta?',
+            question: 'Qual é a diferença entre as duas ofertas?',
             answer:
-              'A oferta inclui as 3 técnicas, acesso vitalício, certificado e os materiais complementares para acabamento, captação de clientes, vendas e gestão.',
+              'A oferta essencial inclui as 3 técnicas, certificado e acesso por 1 ano. A oferta completa acrescenta acesso vitalício e materiais para acabamento, captação de clientes, vendas e gestão.',
           },
           {
             question: 'Como funciona a garantia?',
@@ -810,8 +814,8 @@ const conversionText = isSpanishPage
       finalCta: {
         kicker: 'Pronta para começar',
         title: 'Dê o próximo passo no Mega Hair',
-        text: 'Garanta seu acesso e comece a estudar as 3 técnicas.',
-        button: 'Garantir meu acesso',
+        text: 'Escolha sua opção de acesso e comece a estudar as 3 técnicas.',
+        button: 'Ver opções de acesso',
       },
     }
 
@@ -1356,8 +1360,7 @@ document.querySelector('#app').innerHTML = `
       <div class="offer-shell">
         <h2 id="offer-title" class="offer-title">${pageText.offer.headline}</h2>
 
-        <div class="offer-comparison${isSpanishPage ? '' : ' is-single'}">
-          ${isSpanishPage ? `
+        <div class="offer-comparison">
           <article class="offer-card offer-card-essential">
             <div class="offer-plan-title">${pageText.offer.essentialTitle}</div>
             ${pageText.offer.essentialPayment ? `<span class="offer-payment">${pageText.offer.essentialPayment}</span>` : ''}
@@ -1377,7 +1380,6 @@ document.querySelector('#app').innerHTML = `
               data-checkout-currency="${essentialCheckoutTracking.currency}"
             >${pageText.offer.essentialButton}</a>
           </article>
-          ` : ''}
 
           <article class="offer-card offer-card-complete">
             <div class="offer-bestseller">${pageText.offer.bestSeller}</div>
@@ -1412,7 +1414,7 @@ document.querySelector('#app').innerHTML = `
               ${offerTrustItems}
             </div>
 
-            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Oferta única com acesso completo ao treinamento e aos bônus.'}</p>
+            <p class="offer-warning">${isSpanishPage ? 'Elige la opción que mejor se ajusta a tu momento.' : 'Escolha a opção que faz mais sentido para o seu momento.'}</p>
           </article>
         </div>
       </div>
@@ -1579,8 +1581,8 @@ document.querySelectorAll('.js-scroll-offer').forEach((button) => {
       fbq('trackCustom', 'CliqueCTA', {
         content_name: pageText.checkoutContentName,
         position,
-        value: checkoutTracking.value,
-        currency: checkoutTracking.currency
+        value: essentialCheckoutTracking.value,
+        currency: essentialCheckoutTracking.currency
       });
     }
 
